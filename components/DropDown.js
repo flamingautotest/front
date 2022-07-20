@@ -8,7 +8,7 @@ function classNames(...classes) {
 }
 
 
-export default function DropDowns(props) {
+export default function DropDown(props) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
