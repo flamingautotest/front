@@ -17,7 +17,14 @@ export default function Home() {
 			<p className="text-gray-500">
 				(dont worry this page will change)
 			</p>
-			<Button>Click me</Button>
+			<Button
+				type="primary"
+				size="m"
+				// rounded
+				onClick={() => console.log('click salope')}
+			>
+				Wesh le bouton
+			</Button>
 			<DropDown
 				items={ddItems}
 				onChange={(item) => console.log(item)}
