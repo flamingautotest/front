@@ -1,3 +1,5 @@
+import { Button } from "~/components"
+
 export default function Home() {
 	return (
 		<div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
@@ -10,6 +12,7 @@ export default function Home() {
 			<p className="text-gray-500">
 				(dont worry this page will change)
 			</p>
+			<Button>Click me</Button>
 		</div>
 	)
 }
