@@ -18,10 +18,9 @@ export default function Home() {
 				(dont worry this page will change)
 			</p>
 			<Button
-				type="primary"
-				size="m"
-				// rounded
-				onClick={() => console.log('click salope')}
+				type={'secondary'}
+				rounded={true}
+				onClick={() => console.log('click clack')}
 			>
 				Wesh le bouton
 			</Button>
