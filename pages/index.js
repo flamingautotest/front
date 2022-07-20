@@ -1,4 +1,4 @@
-import { Button, DropDown } from "~/components"
+import { Button, DropDown, Checkbox} from "~/components"
 
 export default function Home() {
 	const ddItems = [
@@ -28,6 +28,10 @@ export default function Home() {
 				items={ddItems}
 				onChange={(item) => console.log(item)}
 			/>
+			<Checkbox
+				id="checkbox" 
+				label="Test checkbox" 
+			/> 
 		</div>
 	)
 }
