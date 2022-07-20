@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import '../styles/globals.css'
+import '~/styles/globals.css'
 
 function Main({ Component, pageProps }) {
 	return (
@@ -9,7 +9,9 @@ function Main({ Component, pageProps }) {
 				<meta name="description" content="Create automated integration tests based on swagger" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Component {...pageProps} />
+			<div className="container mx-auto">
+				<Component {...pageProps} />
+			</div>
 		</>
 	)
 }
