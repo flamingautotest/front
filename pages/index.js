@@ -1,4 +1,9 @@
-import { Button } from "~/components"
+import { Button,DropDowns } from "~/components"
+/**test pour Dropdowns */
+const links = [
+    {label:"Account", to:"/"},
+    {label:"dd", to:"/"}
+]
 
 export default function Home() {
 	return (
@@ -13,6 +18,8 @@ export default function Home() {
 				(dont worry this page will change)
 			</p>
 			<Button>Click me</Button>
+			<DropDowns links={links} ></DropDowns>
+
 		</div>
 	)
 }
