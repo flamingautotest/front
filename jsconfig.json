@@ -6,6 +6,7 @@
             "~/hooks": ["hooks/index"],
             "~/stores": ["stores/index"],
             "~/utils": ["utils/index"],
+            "~/styles/*": ["styles/*"],
         }
     }
 }
