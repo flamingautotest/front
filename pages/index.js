@@ -1,11 +1,11 @@
 import { Button, DropDown } from "~/components"
-/**test pour Dropdowns */
-const links = [
-    { label:"Account", to:"/" },
-    { label:"dd", to:"/" }
-]
 
 export default function Home() {
+	const ddItems = [
+		{ label: 'Test', value: 'test' },
+		{ label: 'Items', value: 'items' },
+	]
+
 	return (
 		<div className="bg-gray-200 rounded-xl shadow border p-8 m-10">
 			<p className="text-3xl text-gray-700 font-bold mb-5">
@@ -18,7 +18,10 @@ export default function Home() {
 				(dont worry this page will change)
 			</p>
 			<Button>Click me</Button>
-			<DropDown links={links}></DropDown>
+			<DropDown
+				items={ddItems}
+				onChange={(item) => console.log(item)}
+			/>
 		</div>
 	)
 }
