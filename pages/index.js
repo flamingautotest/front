@@ -1,13 +1,15 @@
+import { useState } from "react"
 import { Button, DropDown, Checkbox} from "~/components"
 
 export default function Home() {
+	const [checked, setChecked] = useState(false)
 	const ddItems = [
 		{ label: 'Test', value: 'test' },
 		{ label: 'Items', value: 'items' },
 	]
 
 	return (
-		<div className="bg-gray-200 rounded-xl shadow border p-8 m-10">
+		<div className="rounded-xl m-10 flex flex-col items-start">
 			<p className="text-3xl text-gray-700 font-bold mb-5">
 				Welcome to autotest !
 			</p>
@@ -20,6 +22,7 @@ export default function Home() {
 			<Button
 				type={'secondary'}
 				rounded={true}
+				className={'mb-5'}
 				onClick={() => console.log('click clack')}
 			>
 				Wesh le bouton
@@ -29,8 +32,10 @@ export default function Home() {
 				onChange={(item) => console.log(item)}
 			/>
 			<Checkbox
-				id="checkbox" 
-				label="Test checkbox" 
+				label="Test checkbox"
+				content="Test checkbox"
+				onChange={setChecked}
+				checked={checked}
 			/> 
 		</div>
 	)
