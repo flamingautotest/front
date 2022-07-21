@@ -29,12 +29,12 @@ export default function Home() {
 			</Button>
 			<DropDown
 				items={ddItems}
-				width={'56'}
+				width={'14rem'}
 				onChange={(item) => console.log(item)}
 			/>
 			<Checkbox
-				label="Use this checkbox"
-				content="so you can check things"
+				label={'Use this checkbox'}
+				content={'so you can check things'}
 				twoLines={true}
 				onChange={setChecked}
 				checked={checked}
