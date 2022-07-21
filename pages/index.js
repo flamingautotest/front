@@ -29,6 +29,7 @@ export default function Home() {
 			</Button>
 			<DropDown
 				items={ddItems}
+				width={'56'}
 				onChange={(item) => console.log(item)}
 			/>
 			<Checkbox
