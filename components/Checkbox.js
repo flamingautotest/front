@@ -1,4 +1,4 @@
-import checkIcon from '~/assets/check.svg'
+import { CheckIcon } from '@heroicons/react/solid'
 
 export default function Checkbox(props) {
     const {
@@ -31,7 +31,7 @@ export default function Checkbox(props) {
                 checked ? 'bg-indigo-500' : 'bg-transparent border border-gray-400',
             ].join(' ')}>
                 <div className='w-full h-full flex items-center justify-center'>
-                    <img src={checkIcon.src} className='w-2 h-2' />
+                    {checked ? <CheckIcon className='w-3 h-3' color='white' /> : null}
                 </div>
             </div>
             <div
