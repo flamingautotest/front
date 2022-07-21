@@ -4,6 +4,7 @@ export default function Button(props) {
         size = 'm',
         rounded = false,
         fullWidth = false,
+        className = '',
     } = props
 
     return (
@@ -19,6 +20,7 @@ export default function Button(props) {
                 size === 'xl' && 'py-4 px-5 text-xl',
                 rounded ? 'rounded-full' : 'rounded-md',
                 fullWidth ? 'w-full' : 'w-auto',
+                className,
             ].join(' ')
         }>
             {props.children}
