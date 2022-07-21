@@ -7,7 +7,7 @@ export default function Checkbox(props) {
         onChange = () => {},
         className = '',
         reverse = false,
-        twoLine = false,
+        twoLines = false,
         checked = false,
     } = props
 
@@ -16,7 +16,7 @@ export default function Checkbox(props) {
             className={[
                 'relative text-left cursor-pointer flex select-none',
                 reverse ? 'flex-row-reverse' : 'flex-row',
-                twoLine ? 'items-start' : 'items-center',
+                twoLines ? 'items-start' : 'items-center',
             ].join(' ')}
             onClick={() => onChange(!checked)}
         >
@@ -27,7 +27,7 @@ export default function Checkbox(props) {
             />
             <div className={[
                 'relative w-4 h-4 flex items-center justify-center rounded-[4px]',
-                twoLine ? 'mt-1' : '',
+                twoLines ? 'mt-1' : '',
                 checked ? 'bg-indigo-500' : 'bg-transparent border border-gray-400',
             ].join(' ')}>
                 <div className='w-full h-full flex items-center justify-center'>
@@ -37,7 +37,7 @@ export default function Checkbox(props) {
             <div
                 className={[
                     'flex',
-                    twoLine ? 'flex-col' : 'flex-row',
+                    twoLines ? 'flex-col' : 'flex-row',
                     reverse ? 'pr-2' : 'pl-2',
                     className,
                 ].join(' ')}

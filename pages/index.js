@@ -32,8 +32,9 @@ export default function Home() {
 				onChange={(item) => console.log(item)}
 			/>
 			<Checkbox
-				label="Test checkbox"
-				content="Test checkbox"
+				label="Use this checkbox"
+				content="so you can check things"
+				twoLines={true}
 				onChange={setChecked}
 				checked={checked}
 			/> 
