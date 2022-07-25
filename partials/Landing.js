@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button } from '~/components'
+import { Button, Card } from '~/components'
 import HeaderIllustration from '~/assets/header_illustration.png'
 
 export default function Landing() {
@@ -32,6 +32,16 @@ export default function Landing() {
                 </div>
                 <div className='relative py-36 w-1/2 h-full'>
                     <img className='absolute w-full -bottom-1/4 h-full object-contain' src={HeaderIllustration.src} />
+                </div>
+            </div>
+            <div className='relative my-48 w-2/3 m-auto'>
+                <p className='text-3xl text-center'>Discover next generation automated testing like anything else.</p>
+            </div>
+            <div className='relative bg-pink rounded-2xl w-full pl-20 py-10 overflow-hidden'>
+                <h2 className='text-3xl mb-10'>Features</h2>
+                <div className='flex flex-row'>
+                    <Card />
+                    <Card />
                 </div>
             </div>
         </div>
