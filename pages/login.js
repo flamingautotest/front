@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Link from "next/link"
 import { Input, Button } from "~/components"
 
 export default function Login() {
@@ -22,7 +23,7 @@ export default function Login() {
                 placeholder={'Email'}
                 required={true}
                 value={email}
-                className={'w-full'}
+                className={'w-full mt-5'}
                 onChange={(e) => setEmail(e.target.value)}
             />
             <Input
@@ -32,16 +33,29 @@ export default function Login() {
                 placeholder={'Password'}
                 required={true}
                 value={password}
-                className={'w-full'}
+                className={'w-full mt-2'}
                 onChange={(e) => setPassword(e.target.value)}
             />
             <Button
-                className={'mt-4'}
+                className={'mt-5'}
                 onClick={handleSubmit}
+                size={'s'}
                 fullWidth
             >
                 Login
             </Button>
+            <Link href="/register">
+                <a className="w-full">
+                    <Button
+                        className={'mt-2'}
+                        type={'secondary'}
+                        size={'s'}
+                        fullWidth
+                    >
+                        Don't have an account ?
+                    </Button>
+                </a>
+            </Link>
         </form>
     )
 }
