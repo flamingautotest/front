@@ -49,7 +49,6 @@ export default function Register() {
             <Button
                 className={'mt-5'}
                 onClick={handleSubmit}
-                size={'s'}
                 fullWidth
             >
                 Create account
@@ -59,7 +58,6 @@ export default function Register() {
                     <Button
                         className={'mt-2'}
                         type={'secondary'}
-                        size={'s'}
                         fullWidth
                     >
                         Already have an account ?

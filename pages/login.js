@@ -52,7 +52,6 @@ export default function Login() {
             <Button
                 className={'mt-5'}
                 onClick={handleSubmit}
-                size={'s'}
                 fullWidth
             >
                 Login
@@ -62,7 +61,6 @@ export default function Login() {
                     <Button
                         className={'mt-2'}
                         type={'secondary'}
-                        size={'s'}
                         fullWidth
                     >
                         Don't have an account ?
