@@ -1,16 +1,29 @@
-import { useState } from "react"
-import Link from "next/link"
+import { useState, useEffect, useContext } from "react"
+import { useRouter } from 'next/router'
 import { Input, Button } from "~/components"
+import { UserContext } from "~/stores"
+import Link from "next/link"
 
 export default function Login() {
+    const router = useRouter()
+    const [userState, userDispatch] = useContext(UserContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    // TODO: add API call and loggin logic + verification
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submit login. replace with login function')
-        console.log(email, password)
+        if (email.length === 0 || password.length === 0) return
+
+        userDispatch(user => {
+            user.email = email
+            user.isLoggedIn = true
+        })
     }
+
+    useEffect(() => {
+        if (userState.isLoggedIn) router.push('/')
+    }, [userState])
 
     // TODO: add errors, loading, etc.
     return (
