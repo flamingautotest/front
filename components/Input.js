@@ -9,6 +9,7 @@ export default function Input(props) {
         required = false,
         disabled = false,
         className = '',
+        error = false,
     } = props
 
     return (
@@ -33,7 +34,10 @@ export default function Input(props) {
                     placeholder={placeholder}
                     required={required}
                     disabled={disabled}
-                    className='focus:ring-indigo-500 w-full focus-visible:ring-indigo-500 border-2 focus:border-indigo-500 focus-visible:border-indigo-500 block px-4 py-3 sm:text-sm border-gray-300 rounded-md appearance-none'
+                    className={[
+                        'focus:ring-indigo-500 w-full focus-visible:ring-indigo-500 border-2 focus:border-indigo-500 focus-visible:border-indigo-500 block px-4 py-3 sm:text-sm border-gray-300 rounded-md appearance-none',
+                        error ? 'border-red-500' : '',
+                    ].join(' ')}
                 />
             </div>
         </div>

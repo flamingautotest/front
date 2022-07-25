@@ -1,3 +1,4 @@
+import { UserProvider } from "~/stores"
 import Head from 'next/head'
 import '~/styles/globals.css'
 
@@ -10,7 +11,9 @@ function Main({ Component, pageProps }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className="container mx-auto">
-				<Component {...pageProps} />
+				<UserProvider>
+					<Component {...pageProps} />
+				</UserProvider>
 			</div>
 		</>
 	)
