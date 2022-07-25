@@ -1,14 +1,10 @@
-import { Button } from "~/components"
+import { useContext } from "react"
+import { UserContext } from '~/stores'
+import { Landing } from "~/partials"
 
 export default function Home() {
-	return (
-		<div className="rounded-xl mt-10 flex flex-col items-start">
-			<h1 className="text-xl">Welcome to flaming' autotest</h1>
-			<Button
-				className={'mt-5'}
-			>
-				Open app
-			</Button>
-		</div>
-	)
+	const [userState] = useContext(UserContext)
+
+	if (!userState.isLoggedIn) return <Landing />
+	return <div>Hello {userState.email} !</div>
 }

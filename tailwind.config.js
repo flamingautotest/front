@@ -3,9 +3,15 @@ module.exports = {
 	content: [
 		"./pages/**/*.{js,jsx}",
 		"./components/**/*.{js,jsx}",
+		"./partials/**/*.{js,jsx}",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				'cyan': '#ECFEFF',
+				'pink': '#FECDD3',
+			},
+		},
 	},
 	plugins: [],
 }
