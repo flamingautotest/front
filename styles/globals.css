@@ -10,6 +10,11 @@ html, body {
   line-height: 1.5;
 }
 
+h1, h2, h3 {
+  font-family: 'PT Serif', serif;
+  font-weight: 700;
+}
+
 * {
 	box-sizing: border-box;
 }
