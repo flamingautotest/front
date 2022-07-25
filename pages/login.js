@@ -14,7 +14,7 @@ export default function Login() {
     // TODO: add errors, loading, etc.
     return (
         <form className="flex flex-col pt-28 items-center justify-center w-60 mx-auto">
-            <h1 className="text-xl font-bold mb-4">Login to AutoTest</h1>
+            <h1 className="text-xl w-full text-center font-bold mb-4">Login to AutoTest</h1>
             <Input
                 label={'Email'}
                 name={'email'}
@@ -22,6 +22,7 @@ export default function Login() {
                 placeholder={'Email'}
                 required={true}
                 value={email}
+                className={'w-full'}
                 onChange={(e) => setEmail(e.target.value)}
             />
             <Input
@@ -31,6 +32,7 @@ export default function Login() {
                 placeholder={'Password'}
                 required={true}
                 value={password}
+                className={'w-full'}
                 onChange={(e) => setPassword(e.target.value)}
             />
             <Button
