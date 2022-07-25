@@ -1,7 +1,7 @@
 export default function Button(props) {
     const {
         type = 'primary',
-        size = 'm',
+        size = 's',
         rounded = false,
         fullWidth = false,
         className = '',
