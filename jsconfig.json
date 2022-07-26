@@ -4,6 +4,7 @@
         "paths": {
             "~/components": ["components/index"],
             "~/hooks": ["hooks/index"],
+            "~/partials": ["partials/index"],
             "~/stores": ["stores/index"],
             "~/utils": ["utils/index"],
             "~/assets/*": ["assets/*"],
