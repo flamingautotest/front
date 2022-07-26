@@ -23,7 +23,7 @@ export default function Login() {
 
     useEffect(() => {
         if (userState.isLoggedIn) router.push('/')
-    }, [userState])
+    }, [userState, router])
 
     // TODO: add errors, loading, etc.
     return (
@@ -63,7 +63,7 @@ export default function Login() {
                         type={'secondary'}
                         fullWidth
                     >
-                        Don't have an account ?
+                        {'Don\'t have an account ?'}
                     </Button>
                 </a>
             </Link>
