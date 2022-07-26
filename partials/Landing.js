@@ -18,7 +18,6 @@ export default function Landing() {
                                 <Button
                                     type={'primary'}
                                     className={'mr-5'}
-                                    rounded={true}
                                     size={'m'}
                                 >
                                     Get Started
