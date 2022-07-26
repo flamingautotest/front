@@ -1,3 +1,5 @@
+import { joinClassNames } from '~/utils'
+
 export default function Button(props) {
     const {
         type = 'primary',
@@ -13,7 +15,7 @@ export default function Button(props) {
         <button
             onClick={onClick}
             className={
-                [
+                joinClassNames(
                     'font-medium ease-in-out duration-200 select-none',
                     type === 'primary' ? 'bg-indigo-500 hover:bg-indigo-700 text-white' : '',
                     type === 'secondary' ? 'bg-indigo-200 hover:bg-indigo-300 text-violet-800' : '',
@@ -25,7 +27,7 @@ export default function Button(props) {
                     rounded ? 'rounded-full' : 'rounded-md',
                     fullWidth ? 'w-full' : 'w-auto',
                     className,
-                ].join(' ')
+                )
             }
         >
             {children}

@@ -1,3 +1,5 @@
+import { joinClassNames } from '~/utils'
+
 export default function InputFile(props) {
     const {
         label = '',
@@ -10,7 +12,7 @@ export default function InputFile(props) {
     } = props
 
     return (
-        <div className={['flex flex-col justify-start items-start', className].join(' ')}>
+        <div className={joinClassNames('flex flex-col justify-start items-start', className)}>
             {
                 label.length ?
                     <label
@@ -29,10 +31,10 @@ export default function InputFile(props) {
                     onChange={onChange}
                     required={required}
                     disabled={disabled}
-                    className={[
+                    className={joinClassNames(
                         'focus:ring-indigo-500 w-full focus-visible:ring-indigo-500 border-2 focus:border-indigo-500 focus-visible:border-indigo-500 block px-4 py-3 sm:text-sm border-gray-300 rounded-md appearance-none',
                         error ? 'border-red-500' : '',
-                    ].join(' ')}
+                    )}
                 />
             </div>
         </div>
