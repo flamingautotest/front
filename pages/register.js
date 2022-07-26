@@ -1,6 +1,6 @@
-import { useState } from "react"
-import Link from "next/link"
-import { Input, Button } from "~/components"
+import { useState } from 'react'
+import Link from 'next/link'
+import { Input, Button } from '~/components'
 
 export default function Register() {
     const [email, setEmail] = useState('')
@@ -14,8 +14,8 @@ export default function Register() {
     }
     // TODO: add errors, loading, etc.
     return (
-        <form className="flex flex-col pt-28 items-center justify-center w-60 mx-auto">
-            <h1 className="text-xl w-full text-center font-bold mb-4">Register to AutoTest</h1>
+        <form className='flex flex-col pt-28 items-center justify-center w-60 mx-auto'>
+            <h1 className='text-xl w-full text-center font-bold mb-4'>Register to AutoTest</h1>
             <Input
                 label={'Email'}
                 name={'email'}
@@ -54,7 +54,7 @@ export default function Register() {
                 Create account
             </Button>
             <Link href='/login'>
-                <a className="w-full">
+                <a className='w-full'>
                     <Button
                         className={'mt-2'}
                         type={'secondary'}

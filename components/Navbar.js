@@ -23,7 +23,7 @@ export default function Navbar() {
             <div className='flex flex-row items-center'>
                 {!userState.isLoggedIn ? (
                     <div className='flex flex-row items-center'>
-                        <Link href="/login">
+                        <Link href='/login'>
                             <a>
                                 <Button
                                     type={'secondary'}
@@ -34,7 +34,7 @@ export default function Navbar() {
                                 </Button>
                             </a>
                         </Link>
-                        <Link href="/register">
+                        <Link href='/register'>
                             <a>
                                 <Button
                                     type={'primary'}

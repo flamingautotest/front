@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
-import { Input, Button } from "~/components"
-import { UserContext } from "~/stores"
-import Link from "next/link"
+import { Input, Button } from '~/components'
+import { UserContext } from '~/stores'
+import Link from 'next/link'
 
 export default function Login() {
     const router = useRouter()
@@ -27,8 +27,8 @@ export default function Login() {
 
     // TODO: add errors, loading, etc.
     return (
-        <form className="flex flex-col pt-28 items-center justify-center w-60 mx-auto">
-            <h1 className="text-xl w-full text-center font-bold mb-4">Login to AutoTest</h1>
+        <form className='flex flex-col pt-28 items-center justify-center w-60 mx-auto'>
+            <h1 className='text-xl w-full text-center font-bold mb-4'>Login to AutoTest</h1>
             <Input
                 label={'Email'}
                 name={'email'}
@@ -56,8 +56,8 @@ export default function Login() {
             >
                 Login
             </Button>
-            <Link href="/register">
-                <a className="w-full">
+            <Link href='/register'>
+                <a className='w-full'>
                     <Button
                         className={'mt-2'}
                         type={'secondary'}
