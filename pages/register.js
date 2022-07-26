@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { Input, Button } from '~/components'
 
 export default function Register() {
+    const [firstName, setfirstName] = useState('')
+    const [lastName, setlastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
@@ -14,8 +16,28 @@ export default function Register() {
     }
     // TODO: add errors, loading, etc.
     return (
-        <form className='flex flex-col pt-28 items-center justify-center w-60 mx-auto'>
+        <form className='flex flex-col pt-11 items-center justify-center w-60 mx-auto'>
             <h1 className='text-xl w-full text-center font-bold mb-4'>Register to AutoTest</h1>
+            <Input
+                label={'First name'}
+                name={'first name'}
+                type={'text'}
+                placeholder={'First name'}
+                required={true}
+                value={firstName}
+                className={'w-full mt-5'}
+                onChange={(e) => setfirstName(e.target.value)}
+            />
+            <Input
+                label={'Last name'}
+                name={'last name'}
+                type={'text'}
+                placeholder={'Last name'}
+                required={true}
+                value={lastName}
+                className={'w-full mt-2'}
+                onChange={(e) => setlastName(e.target.value)}
+            />
             <Input
                 label={'Email'}
                 name={'email'}
@@ -23,7 +45,7 @@ export default function Register() {
                 placeholder={'Email'}
                 required={true}
                 value={email}
-                className={'w-full mt-5'}
+                className={'w-full mt-2'}
                 onChange={(e) => setEmail(e.target.value)}
             />
             <Input
