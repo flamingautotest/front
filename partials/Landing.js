@@ -35,7 +35,7 @@ export default function Landing() {
                 </div>
             </div>
             <div className='relative my-48 w-2/3 m-auto'>
-                <p className='text-3xl text-center'>Discover next generation automated testing like anything else.</p>
+                <h1 className='text-3xl text-center'>Discover next generation automated testing unlike anything else.</h1>
             </div>
             <div className='relative bg-pink rounded-2xl w-full pl-20 py-10 overflow-hidden'>
                 <h2 className='text-3xl mb-10'>Features</h2>
