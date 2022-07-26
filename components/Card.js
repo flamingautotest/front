@@ -9,7 +9,13 @@ export default function Card(props) {
     } = props
 
     return (
-        <div className='min-w-fit flex rounded-2xl bg-white overflow-hidden mr-4'>
+        <div className={
+                [
+                    'min-w-fit flex rounded-2xl bg-white overflow-hidden mr-4',
+                    className
+                ].join(' ')
+            }
+        >
             {/* <img src={image} alt='' className='w-32 object-contain'/> */}
             <div className='w-52 h-auto bg-zinc-500'></div>
             <div className='flex-col p-6'>
