@@ -12,7 +12,7 @@ function Main({ Component, pageProps }) {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<Navbar />
-			<div className='max-w-screen-lg px-4 w-full mx-auto'>
+			<div className='max-w-screen-xl px-4 w-full mx-auto'>
 				<Component {...pageProps} />
 			</div>
 		</UserProvider>

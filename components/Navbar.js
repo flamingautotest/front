@@ -14,7 +14,7 @@ export default function Navbar() {
 	}
 
     return (
-        <div className='flex flex-row justify-between max-w-screen-lg w-full mx-auto items-center p-4'>
+        <div className='flex flex-row justify-between max-w-screen-xl w-full mx-auto items-center p-4'>
             <Link href='/'>
                 <a>
                     <h1 className='text-xl'>Flaming-Autotest</h1>
