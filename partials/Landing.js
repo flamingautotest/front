@@ -18,6 +18,7 @@ export default function Landing() {
                                 <Button
                                     type={'primary'}
                                     className={'mr-5'}
+                                    size={'m'}
                                 >
                                     Get Started
                                 </Button>

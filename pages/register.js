@@ -1,21 +1,75 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Input, Button } from '~/components'
+import { Input, Button, Notification } from '~/components'
+import { Requests } from '~/utils'
 
 export default function Register() {
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
+    const [firstName, setfirstName] = useState('')
+    const [lastName, setlastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('submit register. replace with register function')
-        console.log(email, password)
+
+        setError('')
+        setSuccess('')
+
+        if (password !== repeatPassword) {
+            setError('Passwords do not match')
+            return
+        }
+
+        const req = new Requests()
+
+        try {
+            const res = await req.post('/users/register', {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password
+            })
+
+            setSuccess('Successfully registered')
+        } catch (err) {
+            setError('Something went wrong')
+            console.log(err)
+        }
     }
-    // TODO: add errors, loading, etc.
+
     return (
-        <form className='flex flex-col pt-28 items-center justify-center w-60 mx-auto'>
+        <form className='flex flex-col pt-11 items-center justify-center w-60 mx-auto'>
             <h1 className='text-xl w-full text-center font-bold mb-4'>Register to AutoTest</h1>
+            <Notification
+                text={error}
+                isError
+            />
+            <Notification
+                text={success}
+            />
+            <Input
+                label={'First name'}
+                name={'first name'}
+                type={'text'}
+                placeholder={'First name'}
+                required={true}
+                value={firstName}
+                className={'w-full mt-5'}
+                onChange={(e) => setfirstName(e.target.value)}
+            />
+            <Input
+                label={'Last name'}
+                name={'last name'}
+                type={'text'}
+                placeholder={'Last name'}
+                required={true}
+                value={lastName}
+                className={'w-full mt-2'}
+                onChange={(e) => setlastName(e.target.value)}
+            />
             <Input
                 label={'Email'}
                 name={'email'}
@@ -23,7 +77,7 @@ export default function Register() {
                 placeholder={'Email'}
                 required={true}
                 value={email}
-                className={'w-full mt-5'}
+                className={'w-full mt-2'}
                 onChange={(e) => setEmail(e.target.value)}
             />
             <Input

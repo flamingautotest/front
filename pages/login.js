@@ -1,24 +1,71 @@
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
-import { Input, Button } from '~/components'
+import { Input, Button, Notification } from '~/components'
 import { UserContext } from '~/stores'
+import { Requests, jwt } from '~/utils'
 import Link from 'next/link'
 
 export default function Login() {
     const router = useRouter()
     const [userState, userDispatch] = useContext(UserContext)
+    const [error, setError] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     // TODO: add API call and loggin logic + verification
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        if (email.length === 0 || password.length === 0) return
 
-        userDispatch(user => {
-            user.email = email
-            user.isLoggedIn = true
-        })
+        setError('')
+
+        if (email.length === 0 || password.length === 0) {
+            setError('Please fill in all fields')
+            return
+        }
+
+        const req = new Requests()
+
+        try {
+            const res = await req.post('/users/login', {
+                email: email,
+                password: password
+            })
+
+            if (res.data.length) {
+                jwt.setJWT(res.data)
+                loginUser()
+            } else {
+                setError('Email or password is incorrect')
+            }
+        } catch (err) {
+            setError('Email or password is incorrect')
+            console.log(err)
+        }
+    }
+
+    const loginUser = async () => {
+        const req = new Requests()
+
+        try {
+            const res = await req.get('/users')
+
+            if (res.data) {
+                userDispatch(user => {
+                    user.isLoggedIn = true
+                    user.id = res.data.id
+                    user.email = res.data.email
+                    user.firstName = res.data.first_name
+                    user.lastName = res.data.last_name
+                    user.fileUrl = res.data.file_url
+                })
+            } else {
+                setError('Something went wrong')
+            }
+
+        } catch (err) {
+            setError('Something went wrong')
+            console.log(err)
+        }
     }
 
     useEffect(() => {
@@ -29,6 +76,10 @@ export default function Login() {
     return (
         <form className='flex flex-col pt-28 items-center justify-center w-60 mx-auto'>
             <h1 className='text-xl w-full text-center font-bold mb-4'>Login to AutoTest</h1>
+            <Notification
+                text={error}
+                isError
+            />
             <Input
                 label={'Email'}
                 name={'email'}
