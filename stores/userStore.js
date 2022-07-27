@@ -3,7 +3,11 @@ import { useImmer } from 'use-immer'
 
 const defaultState = {
     isLoggedIn: false,
+    id: '',
     email: '',
+    firstName: '',
+    lastName: '',
+    fileUrl: '',
     errors: [],
 }
 

@@ -1,23 +1,62 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Input, Button } from '~/components'
+import { Requests } from '~/utils'
 
 export default function Register() {
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
     const [firstName, setfirstName] = useState('')
     const [lastName, setlastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('submit register. replace with register function')
-        console.log(email, password)
+
+        setError('')
+        setSuccess('')
+
+        if (password !== repeatPassword) {
+            setError('Passwords do not match')
+            return
+        }
+
+        const req = new Requests()
+
+        try {
+            const res = await req.post('/users/register', {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password
+            })
+            console.log(res)
+            setSuccess('Successfully registered')
+        } catch (err) {
+            setError('Something went wrong')
+            console.log(err)
+        }
     }
-    // TODO: add errors, loading, etc.
+
     return (
         <form className='flex flex-col pt-11 items-center justify-center w-60 mx-auto'>
             <h1 className='text-xl w-full text-center font-bold mb-4'>Register to AutoTest</h1>
+            {error.length ?
+                <div className='w-full p-5 bg-red-500'>
+                    {error}
+                </div>
+            :
+                null
+            }
+            {success.length ?
+                <div className='w-full p-5 bg-green-500'>
+                    {success}
+                </div>
+            :
+                null
+            }
             <Input
                 label={'First name'}
                 name={'first name'}
