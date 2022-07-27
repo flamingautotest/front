@@ -12,7 +12,7 @@ export default function InputFile(props) {
     } = props
 
     return (
-        <div className={joinClassNames('flex flex-col justify-start items-start', className)}>
+        <div className={joinClassNames('flex flex-col text-center w-auto', className)}>
             {
                 label.length ?
                     <label
@@ -24,7 +24,7 @@ export default function InputFile(props) {
                 :
                     null
             }
-            <div className='mt-1 relative rounded-md shadow-sm w-full'>
+            <div className='mt-2 relative rounded-md shadow-sm'>
                 <input
                     type={'file'}
                     name={name}
@@ -32,7 +32,7 @@ export default function InputFile(props) {
                     required={required}
                     disabled={disabled}
                     className={joinClassNames(
-                        'focus:ring-indigo-500 w-full focus-visible:ring-indigo-500 border-2 focus:border-indigo-500 focus-visible:border-indigo-500 block px-4 py-3 sm:text-sm border-gray-300 rounded-md appearance-none',
+                        'focus:ring-indigo-500 focus-visible:ring-indigo-500 border-2 focus:border-indigo-500 focus-visible:border-indigo-500 block px-4 py-3 sm:text-sm border-gray-300 rounded-md appearance-none',
                         error ? 'border-red-500' : '',
                     )}
                 />

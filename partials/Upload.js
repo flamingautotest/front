@@ -11,7 +11,7 @@ export default function Upload() {
             <p>Hello {userState.email} !</p>
             <form className='flex flex-col pt-28 items-center justify-center w-60 mx-auto'>
                 <InputFile
-                    label={'Upload File'}
+                    label={'Choose the test to upload'}
                     name={'upload'}
                     required={true}
                     className={'w-full mt-5'}
