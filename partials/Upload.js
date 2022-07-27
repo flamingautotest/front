@@ -7,6 +7,8 @@ export default function Upload() {
     const [file, setFile] = useState({})
     const [userState] = useContext(UserContext)
 
+    console.log(userState);
+
     return (
         <>
             <p>Hello {userState.email} !</p>

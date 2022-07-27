@@ -8,7 +8,7 @@ const defaultState = {
     email: '',
     firstName: '',
     lastName: '',
-    fileUrl: '',
+    fileUrl: 'zzerzer',
     errors: [],
 }
 
