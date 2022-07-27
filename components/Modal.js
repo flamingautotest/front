@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import Link from 'next/link'
 import joinClassNames from 'utils/joinClassNames'
 import { Button } from '~/components'
 
@@ -6,7 +6,8 @@ export default function Modal(props) {
     const {
         title = 'Test',
         content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis',
-        close = () => {}
+        close = () => {},
+        link = '',
     } = props
 
     return (
@@ -32,13 +33,17 @@ export default function Modal(props) {
                 >
                     Cancel
                 </Button>
-                <Button
-                    type={'primary'}
-                    size={'m'}
-                    onClick={close}
-                >
-                    Save
-                </Button>
+                <Link href={link}>
+                    <a>
+                        <Button
+                            type={'primary'}
+                            size={'m'}
+                            onClick={close}
+                        >
+                            Save
+                        </Button>
+                    </a>
+                </Link>
             </footer>
         </div>
     )

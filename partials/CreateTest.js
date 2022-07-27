@@ -38,13 +38,14 @@ export default function CreateTest() {
             {showModal ?
                 <Modal
                     close={closeModal}
+                    link={'test/' + projects.name}
                 />
             : null}
             <div>
                 <ul>
                     {projects.map((project, index) =>(
                         <li>
-                            <Link href={'test/'+project.id}>
+                            <Link href={'test/' + project.id}>
                                 <a>
                                     {project.name}
                                 </a>
