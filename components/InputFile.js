@@ -17,14 +17,14 @@ export default function InputFile(props) {
                 label.length ?
                     <label
                         htmlFor={name}
-                        className='block text-sm font-medium text-gray-700'
+                        className='block font-medium text-gray-700 text-xl'
                     >
                         {label}
                     </label>
                 :
                     null
             }
-            <div className='mt-2 relative rounded-md shadow-sm'>
+            <div className='mt-4 relative rounded-md shadow-sm'>
                 <input
                     type={'file'}
                     name={name}
