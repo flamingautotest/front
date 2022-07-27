@@ -24,6 +24,7 @@ export default function Upload() {
                             className={'mt-4'}
                             type={'primary'}
                             size={'m'}
+                            disabled={file.name?false:true}
                         >
                             {'Next step'}
                         </Button>
