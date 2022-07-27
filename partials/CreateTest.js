@@ -1,8 +1,17 @@
 import { useState } from 'react'
+import Link from 'next/link'
 import { Button, Modal } from '~/components'
 
 export default function CreateTest() {
     const [showModal, setShowModal] = useState(false)
+
+    const projects = [{
+        id : '1',
+        name : 'test1',
+    }, {
+        id: '2',
+        name: 'test2',
+    }]
 
     const closeModal = () => {
         setShowModal(false)
@@ -23,7 +32,7 @@ export default function CreateTest() {
                     type={'white'}
                     onClick={onClick}
                 >
-                    {'+'}
+                    {'Add your test'}
                 </Button>
             </div>
             {showModal ?
@@ -31,6 +40,21 @@ export default function CreateTest() {
                     close={closeModal}
                 />
             : null}
+            <div>
+                <ul>
+                    {projects.map((project, index) =>(
+                        <li>
+                            <Link href={'test/'+project.id}>
+                                <a>
+                                    {project.name}
+                                    {index}
+                                </a>
+                            </Link>
+                        </li>
+                    ))
+                    }
+                </ul>
+            </div>
         </div>
     )
 }
