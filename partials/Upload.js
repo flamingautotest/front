@@ -20,18 +20,14 @@ export default function Upload() {
                     className={'w-full mt-5'}
                     onChange={(e) => setFile(e.target.files[0])}
                 />
-                <Link href='/create-test'>
-                    <a>
-                        <Button
-                            className={'mt-4'}
-                            type={'primary'}
-                            size={'m'}
-                            disabled={file.name?false:true}
-                        >
-                            {'Next step'}
-                        </Button>
-                    </a>
-                </Link>
+                <Button
+                    className={'mt-4'}
+                    type={'primary'}
+                    size={'m'}
+                    disabled={file.name ? false : true}
+                >
+                    {'Next step'}
+                </Button>
             </form>
         </>
     )

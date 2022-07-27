@@ -18,7 +18,7 @@ export default function Button(props) {
             className={
                 joinClassNames(
                     'font-medium ease-in-out duration-200 select-none rounded-full',
-                    disabled ? "bg-indigo-200 bg-pink hover:bg-indigo-300":type,
+                    disabled && 'bg-red-50 hover:bg-red-50 hover:shadow-none text-slate-300',
                     type === 'primary' ? 'bg-pink hover:bg-rose-300 text-slate-600 hover:shadow-lg' : '',
                     type === 'secondary' ? 'bg-indigo-200 hover:bg-indigo-300 text-slate-600 hover:shadow-lg' : '',
                     type === 'white' ? 'text-black bg-white border-gray-300 border' : '',

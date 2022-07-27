@@ -47,7 +47,6 @@ export default function CreateTest() {
                             <Link href={'test/'+project.id}>
                                 <a>
                                     {project.name}
-                                    {index}
                                 </a>
                             </Link>
                         </li>
