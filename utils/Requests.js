@@ -27,7 +27,6 @@ export default class Requests {
     }
 
     post(url, data) {
-        console.log(this.axios)
         return this.axios.post(url, data)
     }
 

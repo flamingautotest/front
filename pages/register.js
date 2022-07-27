@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Input, Button } from '~/components'
+import { Input, Button, Notification } from '~/components'
 import { Requests } from '~/utils'
 
 export default function Register() {
@@ -32,7 +32,7 @@ export default function Register() {
                 email: email,
                 password: password
             })
-            console.log(res)
+
             setSuccess('Successfully registered')
         } catch (err) {
             setError('Something went wrong')
@@ -43,20 +43,13 @@ export default function Register() {
     return (
         <form className='flex flex-col pt-11 items-center justify-center w-60 mx-auto'>
             <h1 className='text-xl w-full text-center font-bold mb-4'>Register to AutoTest</h1>
-            {error.length ?
-                <div className='w-full p-5 bg-red-500'>
-                    {error}
-                </div>
-            :
-                null
-            }
-            {success.length ?
-                <div className='w-full p-5 bg-green-500'>
-                    {success}
-                </div>
-            :
-                null
-            }
+            <Notification
+                text={error}
+                isError
+            />
+            <Notification
+                text={success}
+            />
             <Input
                 label={'First name'}
                 name={'first name'}
