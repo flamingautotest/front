@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Link from 'next/link'
 import { Button, Modal } from '~/components'
+import Link from 'next/link'
 
 export default function CreateTest() {
     const [showModal, setShowModal] = useState(false)
@@ -13,15 +13,12 @@ export default function CreateTest() {
         name: 'test2',
     }]
 
-    const closeModal = () => {
-        setShowModal(false)
-    }
+    const closeModal = () => setShowModal(false)
 
     const onClick = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         setShowModal(true)
     }
-
 
     return (
         <div className='w-full mt-10'>
@@ -36,16 +33,13 @@ export default function CreateTest() {
                 </Button>
             </div>
             {showModal ?
-                <Modal
-                    close={closeModal}
-                    link={'test/' + projects.name}
-                />
+                <Modal onClose={closeModal} />
             : null}
             <div>
                 <ul>
                     {projects.map((project, index) =>(
-                        <li>
-                            <Link href={'test/' + project.id}>
+                        <li key={index}>
+                            <Link href={`test/${project.id}`}>
                                 <a>
                                     {project.name}
                                 </a>

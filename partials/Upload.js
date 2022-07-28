@@ -1,13 +1,10 @@
 import { useContext, useState } from 'react'
-import Link from 'next/link'
 import { UserContext } from '~/stores'
 import { InputFile, Button } from '~/components'
 
 export default function Upload() {
     const [file, setFile] = useState({})
     const [userState] = useContext(UserContext)
-
-    console.log(userState);
 
     return (
         <>
