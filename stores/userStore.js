@@ -1,6 +1,6 @@
 import { createContext, useEffect } from 'react'
 import { useImmer } from 'use-immer'
-import { jwt, Requests } from '~/utils'
+import { jwt, Requests, mockData } from '~/utils'
 
 const defaultState = {
     isLoading: false,
@@ -24,12 +24,11 @@ const UserProvider = ({ children }) => {
         if (!jwt.getJWT().length) return
 
         const req = new Requests()
-        const reqMock = new Requests({ mock: true })
 
         try {
             const res = await req.get('/users')
             // TODO: remove this when API is ready
-            const resMock = await reqMock.get('projectsReferences')
+            const resMock = await mockData.get('projectsReferences')
 
             if (res.data) {
                 console.log(res.data)
