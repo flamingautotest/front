@@ -1,8 +1,10 @@
 import axios from 'axios'
-import { constants, jwt } from '~/utils'
+import { constants, jwt, mockData } from '~/utils'
 
 export default class Requests {
-    constructor() {
+    constructor(args = { mock: false }) {
+        this.mock = args.mock
+
         const token = jwt.getJWT()
         const options = {
             baseURL: constants.API_BASE_URL,
@@ -23,6 +25,7 @@ export default class Requests {
     }
 
     get(url) {
+        if (this.mock) return mockData.get(url)
         return this.axios.get(url)
     }
 
