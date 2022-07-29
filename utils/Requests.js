@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { constants, jwt, mockData } from '~/utils'
+import { constants, jwt } from '~/utils'
 
 export default class Requests {
     constructor() {
