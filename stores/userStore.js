@@ -3,12 +3,12 @@ import { useImmer } from 'use-immer'
 import { jwt, Requests } from '~/utils'
 
 const defaultState = {
+    isLoading: false,
     isLoggedIn: false,
     id: '',
     email: '',
     firstName: '',
     lastName: '',
-    fileUrl: 'zzerzer',
     projectsReferences: [],
     errors: [],
 }
@@ -19,26 +19,37 @@ const UserProvider = ({ children }) => {
     const [userState, userDispatch] = useImmer({ ...defaultState })
 
     async function loginUser() {
+        userDispatch(user => { user.isLoading = true })
+
         if (!jwt.getJWT().length) return
 
         const req = new Requests()
+        const reqMock = new Requests({ mock: true })
 
         try {
             const res = await req.get('/users')
+            // TODO: remove this when API is ready
+            const resMock = await reqMock.get('projectsReferences')
 
             if (res.data) {
                 console.log(res.data)
 
                 userDispatch(user => {
                     user.isLoggedIn = true
+                    user.isLoading = false
                     user.id = res.data.id
                     user.email = res.data.email
                     user.firstName = res.data.first_name
                     user.lastName = res.data.last_name
-                    user.fileUrl = res.data.file_url
+                    user.projectsReferences = resMock.data.projectsReferences
+                    user.errors = []
                 })
             }
         } catch (err) {
+            userDispatch(user => {
+                user.isLoading = false
+                user.errors = user.errors.push(err)
+            })
             console.log(err)
         }
     }
@@ -47,11 +58,13 @@ const UserProvider = ({ children }) => {
         jwt.removeJWT()
 		userDispatch(user => {
 			user.isLoggedIn = false
+            user.isLoading = false
             user.id = ''
             user.email = ''
             user.firstName = ''
             user.lastName = ''
-            user.fileUrl = ''
+            user.projectsReferences = []
+            user.errors = []
 		})
 	}
 

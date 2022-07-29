@@ -1,4 +1,11 @@
-const data = []
+const data = [
+    {
+        key: 'projectsReferences',
+        data: {
+            projectsReferences: []
+        }
+    }
+]
 
 const get = (key) => {
     return new Promise((resolve, reject) => {
