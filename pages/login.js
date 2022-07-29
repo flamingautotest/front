@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 export default function Login() {
     const router = useRouter()
-    const [userState, userDispatch] = useContext(UserContext)
+    const { userState, loginUser } = useContext(UserContext)
     const [error, setError] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -39,31 +39,6 @@ export default function Login() {
             }
         } catch (err) {
             setError('Email or password is incorrect')
-            console.log(err)
-        }
-    }
-
-    const loginUser = async () => {
-        const req = new Requests()
-
-        try {
-            const res = await req.get('/users')
-
-            if (res.data) {
-                userDispatch(user => {
-                    user.isLoggedIn = true
-                    user.id = res.data.id
-                    user.email = res.data.email
-                    user.firstName = res.data.first_name
-                    user.lastName = res.data.last_name
-                    user.fileUrl = res.data.file_url
-                })
-            } else {
-                setError('Something went wrong')
-            }
-
-        } catch (err) {
-            setError('Something went wrong')
             console.log(err)
         }
     }

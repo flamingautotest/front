@@ -4,7 +4,7 @@ import { InputFile, Button } from '~/components'
 
 export default function Upload() {
     const [file, setFile] = useState({})
-    const [userState] = useContext(UserContext)
+    const { userState } = useContext(UserContext)
 
     return (
         <>
