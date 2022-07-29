@@ -5,19 +5,7 @@ import { jwt } from '~/utils'
 import Link from 'next/link'
 
 export default function Navbar() {
-    const [userState, userDispatch] = useContext(UserContext)
-
-    const logout = () => {
-        jwt.removeJWT()
-		userDispatch(user => {
-			user.isLoggedIn = false
-            user.id = ''
-            user.email = ''
-            user.firstName = ''
-            user.lastName = ''
-            user.fileUrl = ''
-		})
-	}
+    const { userState, logoutUser } = useContext(UserContext)
 
     return (
         <div className='flex flex-row justify-between max-w-screen-xl w-full mx-auto items-center p-4'>
@@ -56,7 +44,7 @@ export default function Navbar() {
                     <Button
                         type={'secondary'}
                         size={'s'}
-                        onClick={logout}
+                        onClick={logoutUser}
                     >
                         Log out
                     </Button>
