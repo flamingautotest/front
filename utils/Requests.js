@@ -3,8 +3,6 @@ import { constants, jwt, mockData } from '~/utils'
 
 export default class Requests {
     constructor() {
-        this.mock = args.mock
-
         const token = jwt.getJWT()
         const options = {
             baseURL: constants.API_BASE_URL,
