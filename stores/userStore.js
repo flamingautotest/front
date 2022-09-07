@@ -45,11 +45,12 @@ const UserProvider = ({ children }) => {
                 })
             }
         } catch (err) {
+            console.error('[userStore/loginUser]', err)
+
             userDispatch(user => {
                 user.isLoading = false
-                user.errors = user.errors.push(err)
+                user.errors = user.errors.push('Network error: failed to login')
             })
-            console.log(err)
         }
     }
 

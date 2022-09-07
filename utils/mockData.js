@@ -73,7 +73,7 @@ const data = [
                                 secondProperty: "secondValue",
                                 array: [
                                     "yay",
-                                    "yo"    
+                                    "yo"
                                 ]
                             }
                         },
