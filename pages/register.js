@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { UserContext } from '~/stores'
@@ -7,7 +7,7 @@ import { Requests } from '~/utils'
 
 export default function Register() {
     const router = useRouter()
-    const { userState, loginUser } = useContext(UserContext)
+    const { userState } = useContext(UserContext)
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     const [firstName, setfirstName] = useState('')
