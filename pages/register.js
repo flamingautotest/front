@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { UserContext } from '~/stores'
 import { Input, Button, Notification } from '~/components'
 import { Requests } from '~/utils'
 
 export default function Register() {
+    const router = useRouter()
+    const { userState, loginUser } = useContext(UserContext)
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     const [firstName, setfirstName] = useState('')
@@ -26,7 +30,7 @@ export default function Register() {
         const req = new Requests()
 
         try {
-            const res = await req.post('/users/register', {
+            await req.post('/users/register', {
                 first_name: firstName,
                 last_name: lastName,
                 email: email,
@@ -36,9 +40,13 @@ export default function Register() {
             setSuccess('Successfully registered')
         } catch (err) {
             setError('Something went wrong')
-            console.log(err)
+            console.error('[pages/register/handleSubmit]', err)
         }
     }
+
+    useEffect(() => {
+        if (userState.isLoggedIn) router.push('/')
+    }, [userState, router])
 
     return (
         <form className='flex flex-col pt-11 items-center justify-center w-60 mx-auto'>

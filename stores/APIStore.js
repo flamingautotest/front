@@ -19,11 +19,12 @@ const APIProvider = ({ children }) => {
             const response = await requests[method](path, data)
             return response.data
         } catch (err) {
-            console.error('[APIStore/makeRequest]', err)
+            console.error('[stores/APIStore/makeRequest]', err)
 
+            const errors = [...apiState.errors, `Network error: failed to request ${path}`]
             apiDispatch(api => {
                 api.isLoading = false
-                api.errors = api.errors.push(`Network error: failed to request ${path}`)
+                api.errors = errors
             })
         }
 	}

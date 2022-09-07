@@ -15,7 +15,8 @@ export default function Navbar() {
                 </a>
             </Link>
             <div className='flex flex-row items-center'>
-                {!userState.isLoggedIn ? (
+            {!userState.isLoading ?
+                !userState.isLoggedIn ? (
                     <div className='flex flex-row items-center'>
                         <Link href='/login'>
                             <a>
@@ -48,7 +49,8 @@ export default function Navbar() {
                     >
                         Log out
                     </Button>
-                )}
+                )
+            : null}
             </div>
         </div>
     )
