@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { UserContext, APIContext } from '~/stores'
 import { Spinner } from '~/components'
+import { Spinner } from '~/components'
 import { CreateTest, Landing, Upload } from '~/partials'
 
 export default function Home() {
