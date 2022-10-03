@@ -11,7 +11,7 @@ export default function Card(props) {
     return (
         <div className={
                 [
-                    'min-w-fit flex rounded-2xl bg-white overflow-hidden mr-4',
+                    'flex rounded-2xl bg-white overflow-hidden mr-4',
                     className
                 ].join(' ')
             }
