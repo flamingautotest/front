@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Button, Card } from '~/components'
 import HeaderIllustration from '~/assets/header_illustration.png'
+import DotPattern from '~/assets/dot_pattern.png'
 
 export default function Landing() {
     return (
@@ -18,7 +19,7 @@ export default function Landing() {
                                 <Button
                                     type={'primary'}
                                     className={'mr-5'}
-                                    size={'s'}
+                                    size={'m'}
                                 >
                                     Get Started
                                 </Button>
@@ -36,7 +37,9 @@ export default function Landing() {
                 </div>
             </div>
             <div className='relative lg:my-48 my-12 lg:w-2/3 m-auto'>
+                <img className='hidden lg:block lg:absolute w-8/12 opacity-50' style={{ top:'-80%', left: '-20%',zIndex: '-4' }} src={DotPattern.src} />
                 <h1 className='text-3xl text-center'>Discover next generation automated testing unlike anything else.</h1>
+                <img className='hidden lg:block lg:absolute w-8/12 opacity-50' style={{ bottom:'-80%', right: '-20%',zIndex: '-4' }} src={DotPattern.src} />
             </div>
             <div className='relative bg-pink rounded-2xl w-full p-4 py-3 md:pl-12 md:py-6 xl:pl-20 xl:py-10 overflow-hidden'>
                 <h2 className='text-xl xl:text-3xl mb-6 md:mb-10'>Features</h2>
