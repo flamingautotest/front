@@ -1,7 +1,7 @@
 import { UserProvider, APIProvider } from '~/stores'
 import Head from 'next/head'
 import '~/styles/globals.css'
-import { Navbar } from '~/components'
+import { Navbar, Footer } from '~/components'
 
 function Main({ Component, pageProps }) {
 	return (
@@ -16,6 +16,7 @@ function Main({ Component, pageProps }) {
 				<div className='max-w-screen-xl px-4 w-full mx-auto'>
 					<Component {...pageProps} />
 				</div>
+				<Footer />
 			</UserProvider>
 		</APIProvider>
 	)

@@ -14,7 +14,6 @@ export default function Navbar() {
                     <h1 className='text-xl'>Flaming-Autotest</h1>
                 </a>
             </Link>
-            <div className='flex flex-row items-center'>
             {!userState.isLoading ?
                 !userState.isLoggedIn ? (
                     <div className='flex flex-row items-center'>
@@ -23,7 +22,7 @@ export default function Navbar() {
                                 <Button
                                     type={'secondary'}
                                     size={'s'}
-                                    className={'ml-5'}
+                                    className={'ml-5 whitespace-nowrap'}
                                 >
                                     Log in
                                 </Button>
@@ -51,7 +50,6 @@ export default function Navbar() {
                     </Button>
                 )
             : null}
-            </div>
         </div>
     )
 }
