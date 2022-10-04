@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button, Card } from '~/components'
+import { Button, Card, Footer } from '~/components'
 import HeaderIllustration from '~/assets/header_illustration.png'
 import DotPattern from '~/assets/dot_pattern.png'
 
@@ -48,6 +48,7 @@ export default function Landing() {
                     <Card />
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

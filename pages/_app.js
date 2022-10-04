@@ -15,7 +15,6 @@ function Main({ Component, pageProps }) {
 				<Navbar />
 				<div className='max-w-screen-xl px-4 w-full mx-auto'>
 					<Component {...pageProps} />
-					<Footer />
 				</div>
 			</UserProvider>
 		</APIProvider>
