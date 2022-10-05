@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Modal } from '~/components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Modal } from '~/components'
