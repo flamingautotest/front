@@ -32,7 +32,7 @@ export default function CreateTest() {
                 <ul>
                     {projects.map((project, index) =>(
                         <li key={index}>
-                            <Link href={`suite/${project.id}`}>
+                            <Link href={`/suite/${project.id}`}>
                                 <a>
                                     {project.name}
                                 </a>

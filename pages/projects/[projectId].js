@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import { Modal, Footer } from '~/components'
+import { Footer } from '~/components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 export default function ProjectDetail() {
     const router = useRouter()
+    // TODO: use to load test suites
     const { projectId } = router.query
-    const [showModal, setShowModal] = useState(false)
 
-    const projects = [{
+    const testSuites = [{
         id : '1',
         name : 'test1',
         creation_date : 'dateString',
@@ -44,25 +43,15 @@ export default function ProjectDetail() {
             status: 'warning',
             date: 'datestring'
         }
-    },]
-
-    const closeModal = () => setShowModal(false)
-
-    const onClick = (e) => {
-        e.preventDefault()
-        setShowModal(true)
-    }
+    }]
 
     return (
         <div className='w-full mt-10'>
             <div className='flex mb-16'>
                 <div>
-                    <h2 className='text-3xl  font-sans'>TestSuite</h2>
+                    <h2 className='text-3xl  font-sans'>Test suites</h2>
                 </div>
             </div>
-            {showModal ?
-                <Modal onClose={closeModal} />
-            : null}
             <div className="flex items-center w-full mb-8">
                 <div className="flex border border-gray-200 rounded w-full h-12">
                     <input
@@ -82,13 +71,13 @@ export default function ProjectDetail() {
                     </tr>
                 </thead>
                 <tbody>
-                    {projects.map(project => (
-                        <Link key={project.id} href={`projects/${project.id}`}>                
+                    {testSuites.map(testSuite => (
+                        <Link key={testSuite.id} href={`/suite/${testSuite.id}`}>                
                             <tr className='h-16 border-gray-200 border-b text-gray-600' >
-                                <td>{project.name}</td>
-                                <td>{project.creation_date}</td>
-                                <td>{project.frequency}</td>
-                                <td className='flex items-center m-top mt-4'><p className='border-gray-200 border text-xs p-0.5 mr-1.5 rounded'>{project.last_execution.status}</p> {project.last_execution.date}</td>
+                                <td>{testSuite.name}</td>
+                                <td>{testSuite.creation_date}</td>
+                                <td>{testSuite.frequency}</td>
+                                <td className='flex items-center m-top mt-4'><p className='border-gray-200 border text-xs p-0.5 mr-1.5 rounded'>{testSuite.last_execution.status}</p> {project.last_execution.date}</td>
                             </tr>
                         </Link>
                     ))}

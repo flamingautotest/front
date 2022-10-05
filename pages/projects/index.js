@@ -63,7 +63,7 @@ export default function ProjectList() {
                 </thead>
                 <tbody>
                     {apiState.projects && apiState.projects.map(project => (
-                        <Link key={project.id} href={`projects/${project.id}`}>                
+                        <Link key={project.id} href={`/projects/${project.id}`}>                
                             <tr className='h-16 border-gray-200 border-b text-gray-600' >
                                 <td>{project.name}</td>
                                 <td>{project.creation_date}</td>
