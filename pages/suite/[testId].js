@@ -1,4 +1,4 @@
-import { TestItem, TestEditor, Footer } from '~/components'
+import { TestItem, TestEditor, Footer, LoginGuard } from '~/components'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -24,7 +24,7 @@ export default function TestSuite() {
     ]
 
     return (
-        <div>
+        <LoginGuard required={true}>
             <div className='w-full flex flex-row justify-between'>
                 <div className='w-1/2 flex flex-col'>
                     {mockTestList.map(test => (
@@ -41,6 +41,6 @@ export default function TestSuite() {
                 </div>
             </div>
             <Footer className={'bottom-0'}/>
-        </div>
+        </LoginGuard>
     )
 }

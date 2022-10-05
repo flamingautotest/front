@@ -6,10 +6,10 @@ export default function LoginGuard(props) {
     const [lastState, setLastState] = useState(false)
     const { userState } = useContext(UserContext)
 	const router = useRouter()
+    const required = props.required || false
 
     useEffect(() => {
-        console.log('boom')
-        if (lastState !== userState.isLoggedIn) {
+        if (lastState !== userState.isLoggedIn || props.required && !userState.isLoggedIn) {
             setLastState(userState.isLoggedIn)
             router.push('/')
         }
