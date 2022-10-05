@@ -38,7 +38,7 @@ export default function Login() {
                 setError('Email or password is incorrect')
             }
         } catch (err) {
-            setError('Email or password is incorrect')
+            setError('Network error. Try again later.')
             console.log(err)
         }
     }

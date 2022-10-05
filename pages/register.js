@@ -39,7 +39,7 @@ export default function Register() {
 
             setSuccess('Successfully registered')
         } catch (err) {
-            setError('Something went wrong')
+            setError('Network error. Please try again later.')
             console.error('[pages/register/handleSubmit]', err)
         }
     }
