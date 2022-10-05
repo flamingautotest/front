@@ -1,4 +1,4 @@
-import { TestItem, TestEditor } from '~/components'
+import { TestItem, TestEditor, Footer } from '~/components'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -24,20 +24,23 @@ export default function TestSuite() {
     ]
 
     return (
-        <div className='w-full flex flex-row justify-between'>
-            <div className='w-1/2 flex flex-col'>
-                {mockTestList.map(test => (
-                    <TestItem
-                        key={test.id}
-                        name={test.name}
-                        method={test.method}
-                        onClick={() => setCurrentTest(test)}
-                    />
-                ))}
+        <div>
+            <div className='w-full flex flex-row justify-between'>
+                <div className='w-1/2 flex flex-col'>
+                    {mockTestList.map(test => (
+                        <TestItem
+                            key={test.id}
+                            name={test.name}
+                            method={test.method}
+                            onClick={() => setCurrentTest(test)}
+                        />
+                    ))}
+                </div>
+                <div className='w-1/2'>
+                    <TestEditor selected={currentTest} />
+                </div>
             </div>
-            <div className='w-1/2'>
-                <TestEditor selected={currentTest} />
-            </div>
+            <Footer className={'bottom-0'}/>
         </div>
     )
 }

@@ -1,7 +1,14 @@
-export default function Button() {
+export default function Button(props) {
+    const {
+        className = '',
+    } = props
     return (
-        <div className={'mt-8 absolute'}>
-            <span className={'text-center pb-8'}>Flaming-autotest © 2022</span>
+        <div className={[
+            'py-8 absolute',
+            className
+        ].join(' ')
+        }>
+            <span className={'text-center'}>Flaming-autotest © 2022</span>
         </div>
     )
 }

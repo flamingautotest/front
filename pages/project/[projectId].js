@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Modal, Footer } from '~/components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Modal } from '~/components'
@@ -99,6 +100,7 @@ export default function CreateTest() {
                 <p className='mr-12'>1-5 of 13</p>
                 <p className='text-2xl'>{'<   >'}</p>
             </div>
+            <Footer />
         </div>
     )
 }
