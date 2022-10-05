@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Modal } from '~/components'
+import { Modal, Footer } from '~/components'
 import Link from 'next/link'
 
 export default function CreateTest() {
@@ -96,6 +96,7 @@ export default function CreateTest() {
                 <p className='mr-12'>1-5 of 13</p>
                 <p className='text-2xl'>{'<   >'}</p>
             </div>
+            <Footer />
         </div>
     )
 }
