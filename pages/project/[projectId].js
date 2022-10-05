@@ -1,8 +1,11 @@
 import { useState } from 'react'
-import { Button, Modal } from '~/components'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { Modal } from '~/components'
 
 export default function CreateTest() {
+    const router = useRouter()
+    const { projectId } = router.query
     const [showModal, setShowModal] = useState(false)
 
     const projects = [{
