@@ -56,8 +56,9 @@ const APIProvider = ({ children }) => {
 
     async function makeRequest(path, method = 'get', data = {}) {
 		try {
+            const realPath = path.startsWith('/') ? path : `/${path}`
             apiDispatch(api => { api.isLoading = true })
-            const response = await requests[method](path, data)
+            const response = await requests[method](realPath, data)
             return response.data
         } catch (err) {
             console.error('[stores/APIStore/makeRequest]', err)

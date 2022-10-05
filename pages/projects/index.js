@@ -27,7 +27,7 @@ export default function ProjectList() {
                         size={'xl'}
                         type={'white'}
                         onClick={() => setShowModal(true)}
-                        className='text-white bg-blue-900 text-xs'
+                        className='text-white bg-white text-xs'
                     >
                         {'Create new project +'}
                     </Button>
@@ -57,7 +57,7 @@ export default function ProjectList() {
                 <tbody>
                     {apiState.projects && apiState.projects.map(project => (
                         <Link key={project.id} href={`/projects/${project.id}`}>                
-                            <tr className='h-16 border-gray-200 border-b text-gray-600' >
+                            <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600' >
                                 <td>{project.name}</td>
                                 <td>{project.creation_date}</td>
                                 <td>{project.frequency}</td>

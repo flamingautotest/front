@@ -49,6 +49,11 @@ export default function ProjectDetail() {
         <div className='w-full mt-10'>
             <div className='flex mb-16'>
                 <div>
+                    <Link href='/projects'>
+                        <a className='text-blue-500'>
+                            {'< Back'}
+                        </a>
+                    </Link>
                     <h2 className='text-3xl  font-sans'>Test suites</h2>
                 </div>
             </div>
@@ -73,7 +78,7 @@ export default function ProjectDetail() {
                 <tbody>
                     {testSuites.map(testSuite => (
                         <Link key={testSuite.id} href={`/suite/${testSuite.id}`}>                
-                            <tr className='h-16 border-gray-200 border-b text-gray-600' >
+                            <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600' >
                                 <td>{testSuite.name}</td>
                                 <td>{testSuite.creation_date}</td>
                                 <td>{testSuite.frequency}</td>

@@ -12,7 +12,14 @@ export default class Requests {
             }
         }
 
-        if (token.length) options.headers = { ...options.headers, 'Authorization': `Bearer ${token}` }
+        if (token.length) {
+            options.withCredentials = true
+            options.headers = {
+                ...options.headers, 'Authorization': `Bearer ${token}`
+            }
+        } else {
+            options.withCredentials = false
+        }
 
         this.axios = axios.create(options)
 
