@@ -30,7 +30,7 @@ export default function Register() {
         const req = new Requests()
 
         try {
-            await req.post('/users/register', {
+            await req.post('/users/register/', {
                 first_name: firstName,
                 last_name: lastName,
                 email: email,

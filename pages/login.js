@@ -26,7 +26,7 @@ export default function Login() {
         const req = new Requests()
 
         try {
-            const res = await req.post('/users/login', {
+            const res = await req.post('/users/login/', {
                 email: email,
                 password: password
             })

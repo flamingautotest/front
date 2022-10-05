@@ -26,7 +26,7 @@ const UserProvider = ({ children }) => {
         const req = new Requests()
 
         try {
-            const res = await req.get('/users/profile')
+            const res = await req.get('/users/')
             // TODO: remove this when API is ready
             const resMock = await mockData.get('projectsReferences')
 
