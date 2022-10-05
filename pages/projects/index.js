@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import { Button, Modal } from '~/components'
+import { Button, Modal, Footer } from '~/components'
 import Link from 'next/link'
 import { APIContext } from 'stores/APIStore'
 
@@ -79,6 +79,7 @@ export default function ProjectList() {
                 <p className='mr-12'>1-5 of 13</p>
                 <p className='text-2xl'>{'<   >'}</p>
             </div>
+            <Footer />
         </div>
     )
 }
