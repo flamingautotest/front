@@ -1,61 +1,30 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Button, Modal } from '~/components'
 import Link from 'next/link'
+import { APIContext } from 'stores/APIStore'
 
 export default function CreateTest() {
     const [showModal, setShowModal] = useState(false)
+    const [projects, setProjects] = useState([])
 
-    const projects = [{
-        id : '1',
-        name : 'test1',
-        creation_date : 'dateString',
-        frequency: '15 minutes',
-        last_execution : {
-            status: 'success',
-            date: 'datestring'
-        }
-    }, {
-        id : '2',
-        name : 'test2',
-        creation_date : 'dateString',
-        frequency: '15 minutes',
-        last_execution : {
-            status: 'failure',
-            date: 'datestring'
-        }
-    },{
-        id : '3',
-        name : 'test3',
-        creation_date : 'dateString',
-        frequency: '15 minutes',
-        last_execution : {
-            status: 'failure',
-            date: 'datestring'
-        }
-    },{
-        id : '4',
-        name : 'test4',
-        creation_date : 'dateString',
-        frequency: '4 minutes',
-        last_execution : {
-            status: 'warning',
-            date: 'datestring'
-        }
-    },]
-
+    const { apiState, getProjects } = useContext(APIContext)
+    useEffect(() => {
+        getProjects().then((res) => {
+            setProjects(apiState.projects)
+        })
+        
+    })
     const closeModal = () => setShowModal(false)
-
     const onClick = (e) => {
         e.preventDefault()
         setShowModal(true)
     }
-
     return (
         <div className='w-full mt-10'>
             <div className='flex w-full justify-between items-start mb-16'>
                 <div>
                     <h2 className='text-3xl  font-sans'>Projects</h2>
-                    <p className='text-gray-400'>{projects.length} projects</p>
+                    <p className='text-gray-400'>{projects?.length} projects</p>
                 </div>
                 <div>
                     <Button
@@ -90,7 +59,7 @@ export default function CreateTest() {
                 </tr>
               </thead>
               <tbody>
-                {projects.map(project => (
+                { projects && projects.map(project => (
                 <Link key={project.id} href={`project/${project.id}`}>                
                   <tr className='h-16 border-gray-200 border-b text-gray-600' >
                     <td>{project.name}</td>

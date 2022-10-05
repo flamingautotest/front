@@ -2,9 +2,51 @@ import { createContext } from "react"
 import { useImmer } from 'use-immer'
 import { Requests } from '~/utils'
 
+
+const projects = [{
+    id : '1',
+    name : 'test1',
+    creation_date : 'dateString',
+    frequency: '15 minutes',
+    last_execution : {
+        status: 'success',
+        date: 'datestring'
+    }
+}, {
+    id : '2',
+    name : 'test2',
+    creation_date : 'dateString',
+    frequency: '15 minutes',
+    last_execution : {
+        status: 'failure',
+        date: 'datestring'
+    }
+},{
+    id : '3',
+    name : 'test3',
+    creation_date : 'dateString',
+    frequency: '15 minutes',
+    last_execution : {
+        status: 'failure',
+        date: 'datestring'
+    }
+},{
+    id : '4',
+    name : 'test4',
+    creation_date : 'dateString',
+    frequency: '4 minutes',
+    last_execution : {
+        status: 'warning',
+        date: 'datestring'
+    }
+},]
+
+
+
 const defaultState = {
     isLoading: false,
     errors: [],
+    projects: [],
 }
 
 const APIContext = createContext()
@@ -28,9 +70,25 @@ const APIProvider = ({ children }) => {
             })
         }
 	}
+    async function getProjects(path, method = 'get', data = {}) {
+		try {
+            // blablabla make request for projects
+            const response = projects
+            return apiDispatch(api => {
+                api.projects = response
+            })
+        } catch (err) {
+            console.error('[stores/APIStore/makeRequest]', err)
+
+            const errors = [...apiState.errors, `Network error: failed to request ${path}`]
+            apiDispatch(api => {
+                api.errors = errors
+            })
+        }
+	}
 
     return (
-        <APIContext.Provider value={{ apiState, apiDispatch, makeRequest }}>
+        <APIContext.Provider value={{ apiState, apiDispatch, makeRequest, getProjects }}>
             {children}
         </APIContext.Provider>
     )
