@@ -86,6 +86,7 @@ const APIProvider = ({ children }) => {
 
             const errors = [...apiState.errors, `Network error: failed to request ${path}`]
             apiDispatch(api => {
+                api.isLoading = false
                 api.errors = errors
             })
         }
