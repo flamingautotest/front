@@ -13,13 +13,6 @@ export default function CreateTest() {
         name: 'test2',
     }]
 
-    const closeModal = () => setShowModal(false)
-
-    const onClick = (e) => {
-        e.preventDefault()
-        setShowModal(true)
-    }
-
     return (
         <div className='w-full mt-10'>
             <h2 className='text-3xl mb-10'>Create your test</h2>
@@ -27,19 +20,19 @@ export default function CreateTest() {
                 <Button
                     size={'xl'}
                     type={'white'}
-                    onClick={onClick}
+                    onClick={() => setShowModal(true)}
                 >
                     {'Add your test'}
                 </Button>
             </div>
             {showModal ?
-                <Modal onClose={closeModal} />
+                <Modal onClose={() => setShowModal(false)} />
             : null}
             <div>
                 <ul>
                     {projects.map((project, index) =>(
                         <li key={index}>
-                            <Link href={`test/${project.id}`}>
+                            <Link href={`suite/${project.id}`}>
                                 <a>
                                     {project.name}
                                 </a>

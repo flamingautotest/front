@@ -2,7 +2,7 @@ import { createContext } from "react"
 import { useImmer } from 'use-immer'
 import { Requests } from '~/utils'
 
-
+// mockdata
 const projects = [{
     id : '1',
     name : 'test1',
@@ -42,7 +42,6 @@ const projects = [{
 },]
 
 
-
 const defaultState = {
     isLoading: false,
     errors: [],
@@ -70,15 +69,20 @@ const APIProvider = ({ children }) => {
             })
         }
 	}
+
     async function getProjects(path, method = 'get', data = {}) {
 		try {
-            // blablabla make request for projects
-            const response = projects
-            return apiDispatch(api => {
-                api.projects = response
+            apiDispatch(api => { api.isLoading = true })
+
+            // TODO: make request for projects
+            apiDispatch(api => {
+                api.isLoading = false
+                api.projects = projects
             })
+
+            return projects
         } catch (err) {
-            console.error('[stores/APIStore/makeRequest]', err)
+            console.error('[stores/APIStore/getProjects]', err)
 
             const errors = [...apiState.errors, `Network error: failed to request ${path}`]
             apiDispatch(api => {
