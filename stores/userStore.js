@@ -27,12 +27,8 @@ const UserProvider = ({ children }) => {
 
         try {
             const res = await req.get('/users/')
-            // TODO: remove this when API is ready
-            const resMock = await mockData.get('projectsReferences')
 
             if (res.data) {
-                console.log(res.data)
-
                 userDispatch(user => {
                     user.isLoggedIn = true
                     user.isLoading = false
@@ -40,7 +36,7 @@ const UserProvider = ({ children }) => {
                     user.email = res.data.email
                     user.firstName = res.data.first_name
                     user.lastName = res.data.last_name
-                    user.projectsReferences = resMock.data.projectsReferences
+                    user.projectsReferences = res.data.projectsReferences
                     user.errors = []
                 })
             }
