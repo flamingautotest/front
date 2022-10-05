@@ -77,7 +77,7 @@ export default function ProjectDetail() {
                                 <td>{testSuite.name}</td>
                                 <td>{testSuite.creation_date}</td>
                                 <td>{testSuite.frequency}</td>
-                                <td className='flex items-center m-top mt-4'><p className='border-gray-200 border text-xs p-0.5 mr-1.5 rounded'>{testSuite.last_execution.status}</p> {project.last_execution.date}</td>
+                                <td className='flex items-center m-top mt-4'><p className='border-gray-200 border text-xs p-0.5 mr-1.5 rounded'>{testSuite.last_execution.status}</p> {testSuite.last_execution.date}</td>
                             </tr>
                         </Link>
                     ))}

@@ -15,13 +15,6 @@ export default function ProjectList() {
         call()
     }, [])
 
-    const closeModal = () => setShowModal(false)
-
-    const onClick = (e) => {
-        e.preventDefault()
-        setShowModal(true)
-    }
-
     return (
         <div className='w-full mt-10'>
             <div className='flex w-full justify-between items-start mb-16'>
@@ -33,7 +26,7 @@ export default function ProjectList() {
                     <Button
                         size={'xl'}
                         type={'white'}
-                        onClick={onClick}
+                        onClick={() => setShowModal(true)}
                         className='text-white bg-blue-900 text-xs'
                     >
                         {'Create new project +'}
@@ -41,7 +34,7 @@ export default function ProjectList() {
                 </div>
             </div>
             {showModal ?
-                <Modal onClose={closeModal} />
+                <Modal onClose={() => setShowModal(false)} />
             : null}
             <div className="flex items-center w-full mb-8">
                 <div className="flex border border-gray-200 rounded w-full h-12">
