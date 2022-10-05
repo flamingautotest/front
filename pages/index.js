@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import { UserContext, APIContext } from '~/stores'
 import { Spinner } from '~/components'
-import { CreateTest, Landing, Upload } from '~/partials'
+import { Landing } from '~/partials'
+import Router from 'next/router'
 
 export default function Home() {
 	const { userState } = useContext(UserContext)
@@ -13,9 +14,9 @@ export default function Home() {
 		return <Landing />
 	} else {
 		if (userState.projectsReferences.length) {
-			return <CreateTest />
+			Router.push('/projects')
 		} else {
-			return <Upload />
+			Router.push('/upload')
 		}
 	}
 }

@@ -18,14 +18,16 @@ const UserContext = createContext()
 const UserProvider = ({ children }) => {
     const [userState, userDispatch] = useImmer({ ...defaultState })
 
-    async function loginUser() {
-        userDispatch(user => { user.isLoading = true })
-
-        if (!jwt.getJWT().length) return
-
-        const req = new Requests()
-
+    async function loginUser() {        
         try {
+            userDispatch(user => { user.isLoading = true })
+
+            if (!jwt.getJWT().length) {
+                userDispatch(user => { user.isLoading = false })
+                return
+            }
+
+            const req = new Requests()
             const res = await req.get('/users/')
 
             if (res.data) {
