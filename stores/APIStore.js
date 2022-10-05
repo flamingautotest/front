@@ -76,7 +76,8 @@ const APIProvider = ({ children }) => {
 
     async function getProjects(userId) {
 		try {
-            if (!userId) return []
+            // TODO: uncomment when plug api
+            // if (!userId) return []
 
             apiDispatch(api => { api.isLoading = true })
 

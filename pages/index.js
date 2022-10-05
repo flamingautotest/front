@@ -13,7 +13,7 @@ export default function Home() {
 	if (!userState.isLoggedIn) {
 		return <Landing />
 	} else {
-		if (userState.projectsReferences.length) {
+		if (userState.projectsReferences?.length) {
 			Router.push('/projects')
 		} else {
 			Router.push('/upload')

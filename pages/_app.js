@@ -1,7 +1,7 @@
-import { UserProvider, APIProvider } from '~/stores'
 import Head from 'next/head'
+import { UserProvider, APIProvider } from '~/stores'
+import { Navbar, LoginGuard } from '~/components'
 import '~/styles/globals.css'
-import { Navbar, Footer } from '~/components'
 
 function Main({ Component, pageProps }) {
 	return (
@@ -14,7 +14,9 @@ function Main({ Component, pageProps }) {
 				</Head>
 				<Navbar />
 				<div className='max-w-screen-xl px-4 w-full mx-auto'>
-					<Component {...pageProps} />
+					<LoginGuard>
+						<Component {...pageProps} />
+					</LoginGuard>
 				</div>
 			</UserProvider>
 		</APIProvider>

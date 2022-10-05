@@ -22,17 +22,18 @@ export default function Login() {
             setError('Please fill in all fields')
             return
         }
-
-        const req = new Requests()
-
+        
         try {
+            jwt.removeJWT()
+            const req = new Requests()
+
             const res = await req.post('/users/login/', {
                 email: email,
                 password: password
             })
 
-            if (res.data.length) {
-                jwt.setJWT(res.data)
+            if (res.data?.data?.length) {
+                jwt.setJWT(res.data.data)
                 loginUser()
             } else {
                 setError('Email or password is incorrect')
