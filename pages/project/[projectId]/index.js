@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button, Modal } from '~/components'
 import Link from 'next/link'
+import { joinClassNames } from '~/utils'
 
 export default function CreateTest() {
     const [showModal, setShowModal] = useState(false)
@@ -51,8 +52,8 @@ export default function CreateTest() {
     }
 
     return (
-        <div className='w-full mt-10'>
-            <div className='flex mb-16'>
+        <div className='w-full mt-5 sm:mt-10'>
+            <div className='flex mb-8 sm:mb-16'>
                 <div>
                     <h2 className='text-3xl  font-sans'>TestSuite</h2>
                 </div>
@@ -69,9 +70,9 @@ export default function CreateTest() {
                     />
                 </div>
             </div>
-            <table className='w-full m-0 mb-16'>
+            <table className='w-full m-0 mb-8 sm:mb-16'>
               <thead className='h-16 border-gray-200 border-b text-gray-600'>
-                <tr>
+                <tr className='text-xs sm:text-lg'>
                   <th className='text-left'>Name</th>
                   <th className='text-left'>Creation date</th>
                   <th className='text-left'>frequency</th>
@@ -81,17 +82,30 @@ export default function CreateTest() {
               <tbody>
                 {projects.map(project => (
                 <Link key={project.id} href={`project/${project.id}`}>                
-                  <tr className='h-16 border-gray-200 border-b text-gray-600' >
+                  <tr className='h-16 border-gray-200 border-b text-gray-600 text-xs sm:text-lg' >
                     <td>{project.name}</td>
                     <td>{project.creation_date}</td>
                     <td>{project.frequency}</td>
-                    <td className='flex items-center m-top mt-4'><p className='border-gray-200 border text-xs p-0.5 mr-1.5 rounded'>{project.last_execution.status}</p> {project.last_execution.date}</td>
+                    
+                    <td className='flex items-center m-top mt-4'>
+                    <p   className={ 
+                            joinClassNames(
+                                'border-gray-200 border text-xs p-0.5 mr-1.5 rounded',
+                                project.last_execution.status == 'warning' ? 'text-red-900':'',
+                                project.last_execution.status == 'success' ? 'text-sky-900':'',
+                                project.last_execution.status == 'failure' ? 'text-amber-400':'',
+
+                            )
+                        }>
+                        {project.last_execution.status}
+                   </p>
+                        {project.last_execution.date}</td>
                   </tr>
                 </Link>
                 ))}
               </tbody>
             </table>
-            <div className='w-full flex justify-center text-gray-400'>
+            <div className='w-full flex justify-center text-gray-400 text-xs sm:text-base'>
                 <p className='mr-12'>Rows per page:</p>
                 <p className='mr-12'>1-5 of 13</p>
                 <p className='text-2xl'>{'<   >'}</p>
