@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react'
 import { UserContext } from '~/stores'
-import { InputFile, Button } from '~/components'
+import { InputFile, Button, LoginGuard } from '~/components'
 
 export default function Upload() {
     const [file, setFile] = useState({})
     const { userState } = useContext(UserContext)
 
     return (
-        <>
+        <LoginGuard required={true}>
             <form className='flex flex-col pt-28 items-center justify-center w-60 mx-auto'>
                 <h1 className='text-xl mb-10'>Hello {userState.firstName} {userState.lastName} !</h1>
                 <InputFile
@@ -26,6 +26,6 @@ export default function Upload() {
                     {'Next step'}
                 </Button>
             </form>
-        </>
+        </LoginGuard>
     )
 }

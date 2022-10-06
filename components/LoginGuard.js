@@ -9,11 +9,11 @@ export default function LoginGuard(props) {
     const required = props.required || false
 
     useEffect(() => {
-        if (lastState !== userState.isLoggedIn || props.required && !userState.isLoggedIn) {
+        if ((!required && lastState !== userState.isLoggedIn) || required && !userState.isLoggedIn) {
             setLastState(userState.isLoggedIn)
             router.push('/')
         }
-    }, [userState, router])
+    }, [userState])
 
     return props.children
 }
