@@ -19,11 +19,18 @@ const APIProvider = ({ children }) => {
     const [apiState, apiDispatch] = useImmer({ ...defaultState })
     const requests = new Requests()
 
-    async function makeRequest(path, storeKey = '', method = 'get', data = {}) {
+    async function makeRequest({
+        method = 'get',
+        path = '',
+        storeKey = '',
+        modifier = (a) => a,
+        data = {},
+    }) {
 		try {
             if (method !== 'get' || method !== 'post' || method !== 'patch' || method !== 'delete') throw new Error('Invalid method')
             if (!path.length) throw new Error('No path provided')
             if (!storeKey.length) throw new Error('No storeKey provided')
+            if (typeof modifier !== 'function') throw new Error('Invalid modifier')
 
             apiDispatch(api => { api.isLoading = true })
 
@@ -31,9 +38,9 @@ const APIProvider = ({ children }) => {
             const response = await requests[method](realPath, data)
             
             if (response.data?.data) {
+                apiDispatch(modifier)
                 apiDispatch(api => {
                     api.isLoading = false
-                    api[storeKey] = response.data.data
                     api.errors = []
                 })
             } else {
