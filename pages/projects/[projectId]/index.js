@@ -9,13 +9,13 @@ export default function ProjectDetail() {
     const router = useRouter()
     // TODO: use to load test suites
     const { projectId } = router.query
-    const { apiState, getProjects } = useContext(APIContext)
+    const { apiState, getTestSuites } = useContext(APIContext)
     const { userState } = useContext(UserContext)
     const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         if (userState.isLoggedIn) {
-            const call = async () => await getProjects(userState.id)
+            const call = async () => await getTestSuites(userState.id, projectId)
             call()
         }
     }, [userState])

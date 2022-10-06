@@ -19,15 +19,32 @@ const APIProvider = ({ children }) => {
     const [apiState, apiDispatch] = useImmer({ ...defaultState })
     const requests = new Requests()
 
-    async function makeRequest(path, method = 'get', data = {}) {
+    async function makeRequest(path, storeKey = '', method = 'get', data = {}) {
 		try {
-            if (method !== 'get' || method !== 'post' || method !== 'patch' || method !== 'delete') return []
+            if (method !== 'get' || method !== 'post' || method !== 'patch' || method !== 'delete') throw new Error('Invalid method')
+            if (!path.length) throw new Error('No path provided')
+            if (!storeKey.length) throw new Error('No storeKey provided')
 
             apiDispatch(api => { api.isLoading = true })
 
             const realPath = path.startsWith('/') ? path : `/${path}`
             const response = await requests[method](realPath, data)
-            return response.data
+            
+            if (response.data?.data) {
+                apiDispatch(api => {
+                    api.isLoading = false
+                    api[storeKey] = response.data.data
+                    api.errors = []
+                })
+            } else {
+                console.log('[stores/APIStore/makeRequest]', err)
+                const errors = [...apiState.errors, `Network error: failed to request ${path}`]
+
+                apiDispatch(api => {
+                    api.isLoading = false
+                    api.errors = errors
+                })
+            }
         } catch (err) {
             console.error('[stores/APIStore/makeRequest]', err)
 
@@ -39,6 +56,7 @@ const APIProvider = ({ children }) => {
         }
 	}
 
+    // mock function - use makeRequest for prod
     async function getProjects(userId) {
 		try {
             if (!userId) return []
@@ -46,18 +64,12 @@ const APIProvider = ({ children }) => {
             apiDispatch(api => { api.isLoading = true })
 
             const projects = await getMockData('projects')
-            const tests = await getMockData('tests')
-            const endpoints = await getMockData('endpoints')
 
             // TODO: make request for projects
             apiDispatch(api => {
                 api.isLoading = false
                 api.projects = projects
-                api.tests = tests
-                api.endpoints = endpoints
             })
-
-            return projects
         } catch (err) {
             console.error('[stores/APIStore/getProjects]', err)
 
@@ -69,8 +81,38 @@ const APIProvider = ({ children }) => {
         }
 	}
 
+    async function getTestSuites(userId, projectId) {
+		try {
+            if (!userId) return []
+
+            apiDispatch(api => { api.isLoading = true })
+
+            const tests = await getMockData('tests')
+
+            // TODO: make request for test suites using projectId param
+            apiDispatch(api => {
+                api.isLoading = false
+                api.tests = tests
+            })
+        } catch (err) {
+            console.error('[stores/APIStore/getTestSuites]', err)
+
+            const errors = [...apiState.errors, `Network error: failed to request test suites`]
+            apiDispatch(api => {
+                api.isLoading = false
+                api.errors = errors
+            })
+        }
+	}
+
     return (
-        <APIContext.Provider value={{ apiState, apiDispatch, makeRequest, getProjects }}>
+        <APIContext.Provider value={{
+            apiState,
+            apiDispatch,
+            makeRequest,
+            getProjects,
+            getTestSuites
+        }}>
             {children}
         </APIContext.Provider>
     )
