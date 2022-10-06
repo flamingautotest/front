@@ -17,7 +17,6 @@ const APIContext = createContext()
 const APIProvider = ({ children }) => {
     const { getMockData } = useMockData()
     const [apiState, apiDispatch] = useImmer({ ...defaultState })
-    const requests = new Requests()
 
     async function makeRequest({
         method = 'get',
@@ -32,11 +31,12 @@ const APIProvider = ({ children }) => {
 
             apiDispatch(api => { api.isLoading = true })
 
+            const requests = new Requests()
             const realPath = path.startsWith('/') ? path : `/${path}`
             const response = await requests[method](realPath, data)
             
             if (response.data?.data) {
-                apiDispatch(modifier)
+                apiDispatch((state, response) => modifier(state, response))
                 apiDispatch(api => {
                     api.isLoading = false
                     api.errors = []
