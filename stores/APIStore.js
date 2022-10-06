@@ -22,14 +22,12 @@ const APIProvider = ({ children }) => {
     async function makeRequest({
         method = 'get',
         path = '',
-        storeKey = '',
         modifier = (a) => a,
         data = {},
     }) {
 		try {
             if (method !== 'get' || method !== 'post' || method !== 'patch' || method !== 'delete') throw new Error('Invalid method')
             if (!path.length) throw new Error('No path provided')
-            if (!storeKey.length) throw new Error('No storeKey provided')
             if (typeof modifier !== 'function') throw new Error('Invalid modifier')
 
             apiDispatch(api => { api.isLoading = true })
