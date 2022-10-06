@@ -55,7 +55,8 @@ export default function ProjectDetail() {
                                 {'< Back'}
                             </a>
                         </Link>
-                        <h2 className='text-3xl  font-sans'>Test suites</h2>
+                        {/* TODO: make this dynamic */}
+                        <h2 className='text-3xl font-sans'>Project name</h2>
                     </div>
                 </div>
                 <div className="flex items-center w-full mb-8">

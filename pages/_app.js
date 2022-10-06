@@ -12,9 +12,11 @@ function Main({ Component, pageProps }) {
 					<meta name='description' content='Create automated integration tests based on swagger' />
 					<link rel='icon' href='/favicon.ico' />
 				</Head>
-				<Navbar />
-				<div className='max-w-screen-xl px-4 w-full mx-auto'>
-					<Component {...pageProps} />
+				<div className='min-h-screen h-full relative'>
+					<Navbar />
+					<div className='max-w-screen-xl px-4 w-full mx-auto h-full'>
+						<Component {...pageProps} />
+					</div>
 				</div>
 			</UserProvider>
 		</APIProvider>

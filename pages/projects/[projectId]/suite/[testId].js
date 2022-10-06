@@ -47,7 +47,8 @@ export default function TestSuite() {
                                     {'< Back'}
                                 </a>
                             </Link>
-                            <h2 className='text-3xl  font-sans'>Test suites</h2>
+                            {/* TODO: make this dynamic */}
+                            <h2 className='text-3xl  font-sans'>{`Project name > Test suite name`}</h2>
                         </div>
                     </div>
                     {tests.map(test => (

@@ -96,7 +96,7 @@ export default function Login() {
                     </a>
                 </Link>
             </form>
-            <Footer className={'bottom-0'} />
+            <Footer />
         </div>
     )
 }

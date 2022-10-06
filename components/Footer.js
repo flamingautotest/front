@@ -4,7 +4,7 @@ export default function Button(props) {
     } = props
 
     return (
-        <div className={['py-8 w-full mt-4 text-center', className].join(' ')}>
+        <div className={['py-8 w-full mt-4 text-center absolute bottom-0 left-0', className].join(' ')}>
             <span>Flaming-autotest © 2022</span>
         </div>
     )
