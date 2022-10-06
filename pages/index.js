@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { UserContext, APIContext } from '~/stores'
 import { Spinner } from '~/components'
-import { Landing, Upload } from '~/partials'
+import { Landing } from '~/partials'
 import Router from 'next/router'
 
 export default function Home() {
@@ -13,10 +13,6 @@ export default function Home() {
 	if (!userState.isLoggedIn) {
 		return <Landing />
 	} else {
-		if (userState.projectsReferences?.length) {
-			return <Upload />
-		} else {
-			Router.push('/projects')
-		}
+		Router.push('/projects')
 	}
 }

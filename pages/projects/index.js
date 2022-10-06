@@ -1,11 +1,10 @@
-import { useState, useContext, useEffect } from 'react'
-import { Button, Modal, Footer, LoginGuard } from '~/components'
+import { useContext, useEffect } from 'react'
+import { Button, Footer, LoginGuard } from '~/components'
 import Link from 'next/link'
 import { APIContext } from 'stores/APIStore'
 
 export default function ProjectList() {
     const { apiState, getProjects } = useContext(APIContext)
-    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         const call = async () => {
@@ -23,18 +22,18 @@ export default function ProjectList() {
                         <h2 className='text-3xl  font-sans'>Projects</h2>
                         <p className='text-gray-400'>{apiState.projects?.length} projects</p>
                     </div>
-                    <Button
-                        size={'xl'}
-                        type={'white'}
-                        onClick={() => setShowModal(true)}
-                        className='text-white bg-white text-xs'
-                    >
-                        {'Create new project +'}
-                    </Button>
+                    <Link href='/upload'>
+                        <a>
+                            <Button
+                                size={'xl'}
+                                type={'white'}
+                                className='text-white bg-white text-xs'
+                            >
+                                {'Create new project +'}
+                            </Button>
+                        </a>
+                    </Link>
                 </div>
-                {showModal ?
-                    <Modal onClose={() => setShowModal(false)} />
-                : null}
                 <div className="flex items-center w-full mb-8">
                     <div className="flex border border-gray-200 rounded w-full h-12">
                         <input

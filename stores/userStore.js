@@ -30,15 +30,18 @@ const UserProvider = ({ children }) => {
             const req = new Requests()
             const res = await req.get('/users/')
 
-            if (res.data) {
+            if (res.data?.data?.id) {
+                
+                const userData = res.data.data
+
                 userDispatch(user => {
                     user.isLoading = false
                     user.isLoggedIn = true
-                    user.id = res.data.id
-                    user.email = res.data.email
-                    user.firstName = res.data.first_name
-                    user.lastName = res.data.last_name
-                    user.projectsReferences = res.data.projectsReferences
+                    user.id = userData.id
+                    user.email = userData.email
+                    user.firstName = userData.first_name
+                    user.lastName = userData.last_name
+                    user.projectsReferences = userData.projectsReferences ? userData.projectsReferences : []
                     user.errors = []
                 })
             }
