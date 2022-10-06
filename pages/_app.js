@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { UserProvider, APIProvider } from '~/stores'
-import { Navbar, LoginGuard } from '~/components'
+import { Navbar } from '~/components'
 import '~/styles/globals.css'
 
 function Main({ Component, pageProps }) {

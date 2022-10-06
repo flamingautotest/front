@@ -1,4 +1,4 @@
-[{
+const mockEndpointsJson = JSON.parse(`[{
 	"request": {
 		"path": "/",
 		"parameters": null,
@@ -48,7 +48,7 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}],
 		"method": "POST"
 	},
@@ -94,7 +94,7 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}],
 		"method": "GET"
 	},
@@ -161,13 +161,13 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}],
 		"method": "GET"
 	},
@@ -214,13 +214,13 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}],
 		"method": "DELETE"
 	},
@@ -237,13 +237,13 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}],
 		"method": "POST"
 	},
@@ -260,13 +260,13 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}],
 		"method": "POST"
 	},
@@ -283,13 +283,13 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}],
 		"method": "GET"
 	},
@@ -318,19 +318,19 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}, {
 			"Name": "databaseName",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The name for the specified database.\n"
+			"Description": "The name for the specified database."
 		}],
 		"method": "DELETE"
 	},
@@ -347,13 +347,13 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}],
 		"method": "POST"
 	},
@@ -370,13 +370,13 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}],
 		"method": "GET"
 	},
@@ -407,19 +407,19 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}, {
 			"Name": "name",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The name for the specified user.\n"
+			"Description": "The name for the specified user."
 		}],
 		"method": "DELETE"
 	},
@@ -436,13 +436,13 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}],
 		"method": "POST"
 	},
@@ -464,13 +464,13 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "instanceId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The instance ID for the specified database instance.\n"
+			"Description": "The instance ID for the specified database instance."
 		}],
 		"method": "GET"
 	},
@@ -489,7 +489,7 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}],
 		"method": "GET"
 	},
@@ -552,13 +552,13 @@
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The account ID of the owner of the specified instance.\n"
+			"Description": "The account ID of the owner of the specified instance."
 		}, {
 			"Name": "flavorId",
 			"Required": true,
 			"In": "path",
 			"Type": "string",
-			"Description": "The flavor ID for the specified flavor.\n"
+			"Description": "The flavor ID for the specified flavor."
 		}],
 		"method": "GET"
 	},
@@ -580,4 +580,6 @@
 			}
 		}
 	}]
-}]
+}]`)
+
+export default mockEndpointsJson

@@ -1,56 +1,21 @@
 import { createContext } from "react"
 import { useImmer } from 'use-immer'
 import { Requests } from '~/utils'
+import { useMockData } from '~/hooks'
 
 // mockdata
-const projects = [{
-    id : '1',
-    name : 'test1',
-    creation_date : 'dateString',
-    frequency: '15 minutes',
-    last_execution : {
-        status: 'success',
-        date: 'datestring'
-    }
-}, {
-    id : '2',
-    name : 'test2',
-    creation_date : 'dateString',
-    frequency: '15 minutes',
-    last_execution : {
-        status: 'failure',
-        date: 'datestring'
-    }
-},{
-    id : '3',
-    name : 'test3',
-    creation_date : 'dateString',
-    frequency: '15 minutes',
-    last_execution : {
-        status: 'failure',
-        date: 'datestring'
-    }
-},{
-    id : '4',
-    name : 'test4',
-    creation_date : 'dateString',
-    frequency: '4 minutes',
-    last_execution : {
-        status: 'warning',
-        date: 'datestring'
-    }
-},]
-
-
 const defaultState = {
     isLoading: false,
     errors: [],
     projects: [],
+    tests: [],
+    endpoints: [], 
 }
 
 const APIContext = createContext()
 
 const APIProvider = ({ children }) => {
+    const { mockData, getMockData } = useMockData()
     const [apiState, apiDispatch] = useImmer({ ...defaultState })
     const requests = new Requests()
 
@@ -76,15 +41,20 @@ const APIProvider = ({ children }) => {
 
     async function getProjects(userId) {
 		try {
-            // TODO: uncomment when plug api
-            // if (!userId) return []
+            if (!userId) return []
 
             apiDispatch(api => { api.isLoading = true })
+
+            const projects = await getMockData('projects')
+            const tests = await getMockData('tests')
+            const endpoints = await getMockData('endpoints')
 
             // TODO: make request for projects
             apiDispatch(api => {
                 api.isLoading = false
                 api.projects = projects
+                api.tests = tests
+                api.endpoints = endpoints
             })
 
             return projects

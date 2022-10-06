@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useContext, useEffect } from 'react'
+import { APIContext, UserContext } from '~/stores'
 import { Footer, LoginGuard } from '~/components'
 import { joinClassNames } from '~/utils'
 
@@ -7,44 +9,15 @@ export default function ProjectDetail() {
     const router = useRouter()
     // TODO: use to load test suites
     const { projectId } = router.query
+    const { apiState, getProjects } = useContext(APIContext)
+    const { userState } = useContext(UserContext)
 
-    const testSuites = [{
-        id : '1',
-        name : 'test1',
-        creation_date : 'dateString',
-        frequency: '15 minutes',
-        last_execution : {
-            status: 'success',
-            date: 'datestring'
+    useEffect(() => {
+        if (userState.isLoggedIn) {
+            const call = async () => await getProjects(userState.id)
+            call()
         }
-    }, {
-        id : '2',
-        name : 'test2',
-        creation_date : 'dateString',
-        frequency: '15 minutes',
-        last_execution : {
-            status: 'failure',
-            date: 'datestring'
-        }
-    },{
-        id : '3',
-        name : 'test3',
-        creation_date : 'dateString',
-        frequency: '15 minutes',
-        last_execution : {
-            status: 'failure',
-            date: 'datestring'
-        }
-    },{
-        id : '4',
-        name : 'test4',
-        creation_date : 'dateString',
-        frequency: '4 minutes',
-        last_execution : {
-            status: 'warning',
-            date: 'datestring'
-        }
-    }]
+    }, [userState])
 
     return (
         <LoginGuard>
@@ -79,7 +52,7 @@ export default function ProjectDetail() {
                         </tr>
                     </thead>
                     <tbody>
-                        {testSuites.map(testSuite => (
+                        {apiState.tests.map(testSuite => (
                             <Link key={testSuite.id} href={`/projects/${projectId}/suite/${testSuite.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{testSuite.name}</td>

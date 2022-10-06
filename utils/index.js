@@ -1,5 +1,6 @@
 export { default as constants } from './constants'
 export { default as joinClassNames } from './joinClassNames'
 export { default as jwt } from './jwt'
-export { default as mockData } from './mockData'
 export { default as Requests } from './Requests'
+export { default as mockProjectsJson } from './mock/mockProjects'
+export { default as mockEndpointsJson } from './mock/mockEndpoints'

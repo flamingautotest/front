@@ -1,18 +1,18 @@
 import { useContext, useEffect } from 'react'
 import { Button, Footer, LoginGuard } from '~/components'
+import { APIContext, UserContext } from '~/stores'
 import Link from 'next/link'
-import { APIContext } from 'stores/APIStore'
 
 export default function ProjectList() {
     const { apiState, getProjects } = useContext(APIContext)
+    const { userState } = useContext(UserContext)
 
     useEffect(() => {
-        const call = async () => {
-            await getProjects()
+        if (userState.isLoggedIn) {
+            const call = async () => await getProjects(userState.id)
+            call()
         }
-
-        call()
-    }, [])
+    }, [userState])
 
     return (
         <LoginGuard>
