@@ -10,6 +10,10 @@ module.exports = {
 			colors: {
 				'cyan': '#ECFEFF',
 				'pink': '#FECDD3',
+				'red': '#FF3344',
+				'green': '#10E5A5',
+				'yellow': '#FFCB1F',
+				'blue': '#4281FD',
 			},
 		},
 	},

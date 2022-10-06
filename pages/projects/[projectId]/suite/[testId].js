@@ -30,7 +30,7 @@ export default function TestSuite() {
             id: tests.length + 1,
             name: 'New Test',
             description: 'This is a new test',
-            method: 'GET',
+            method: 'DELETE',
         }
         setTests([...tests, newMockTest])
         setCurrentTest(newMockTest)
