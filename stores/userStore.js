@@ -1,6 +1,6 @@
 import { createContext, useEffect } from 'react'
 import { useImmer } from 'use-immer'
-import { jwt, Requests, mockData } from '~/utils'
+import { jwt, Requests } from '~/utils'
 
 const defaultState = {
     isLoading: true,
@@ -18,7 +18,7 @@ const UserContext = createContext()
 const UserProvider = ({ children }) => {
     const [userState, userDispatch] = useImmer({ ...defaultState })
 
-    async function loginUser() {        
+    async function loginUser() {
         try {
             userDispatch(user => { user.isLoading = true })
 

@@ -15,7 +15,7 @@ const defaultState = {
 const APIContext = createContext()
 
 const APIProvider = ({ children }) => {
-    const { mockData, getMockData } = useMockData()
+    const { getMockData } = useMockData()
     const [apiState, apiDispatch] = useImmer({ ...defaultState })
     const requests = new Requests()
 

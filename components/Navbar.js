@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { Button } from '~/components'
 import { UserContext } from '~/stores'
-import { jwt } from '~/utils'
 import Link from 'next/link'
 
 export default function Navbar() {
