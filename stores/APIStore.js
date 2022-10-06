@@ -56,8 +56,11 @@ const APIProvider = ({ children }) => {
 
     async function makeRequest(path, method = 'get', data = {}) {
 		try {
-            const realPath = path.startsWith('/') ? path : `/${path}`
+            if (method !== 'get' || method !== 'post' || method !== 'patch' || method !== 'delete') return []
+
             apiDispatch(api => { api.isLoading = true })
+
+            const realPath = path.startsWith('/') ? path : `/${path}`
             const response = await requests[method](realPath, data)
             return response.data
         } catch (err) {
@@ -71,8 +74,11 @@ const APIProvider = ({ children }) => {
         }
 	}
 
-    async function getProjects(path, method = 'get', data = {}) {
+    async function getProjects(userId) {
 		try {
+            // TODO: uncomment when plug api
+            // if (!userId) return []
+
             apiDispatch(api => { api.isLoading = true })
 
             // TODO: make request for projects
@@ -85,7 +91,7 @@ const APIProvider = ({ children }) => {
         } catch (err) {
             console.error('[stores/APIStore/getProjects]', err)
 
-            const errors = [...apiState.errors, `Network error: failed to request ${path}`]
+            const errors = [...apiState.errors, `Network error: failed to request projects`]
             apiDispatch(api => {
                 api.isLoading = false
                 api.errors = errors

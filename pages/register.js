@@ -3,11 +3,11 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { UserContext } from '~/stores'
 import { Input, Button, Notification, Footer } from '~/components'
-import { Requests } from '~/utils'
+import { Requests, jwt } from '~/utils'
 
 export default function Register() {
     const router = useRouter()
-    const { userState } = useContext(UserContext)
+    const { userState, loginUser } = useContext(UserContext)
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     const [firstName, setfirstName] = useState('')
@@ -27,15 +27,21 @@ export default function Register() {
             return
         }
 
-        const req = new Requests()
-
         try {
-            await req.post('/users/register/', {
+            jwt.removeJWT()
+            const req = new Requests()
+
+            const res = await req.post('/users/register/', {
                 first_name: firstName,
                 last_name: lastName,
                 email: email,
                 password: password
             })
+
+            if (res.data?.data?.length) {
+                jwt.setJWT(res.data.data)
+                loginUser()
+            }
 
             setSuccess('Successfully registered')
         } catch (err) {

@@ -1,16 +1,5 @@
 const data = [
     {
-        key: 'projectsReferences',
-        data: {
-            projectsReferences: [
-                {
-                    projectId: "b3fb3fee-ed9f-5872-a202-55d7014c5af0",
-                    projectName: "Mon api"
-                },
-            ]
-        }
-    },
-    {
         key: 'projects',
         data: [
             {
