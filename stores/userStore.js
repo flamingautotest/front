@@ -3,7 +3,7 @@ import { useImmer } from 'use-immer'
 import { jwt, Requests, mockData } from '~/utils'
 
 const defaultState = {
-    isLoading: false,
+    isLoading: true,
     isLoggedIn: false,
     id: '',
     email: '',
@@ -32,8 +32,8 @@ const UserProvider = ({ children }) => {
 
             if (res.data) {
                 userDispatch(user => {
-                    user.isLoggedIn = true
                     user.isLoading = false
+                    user.isLoggedIn = true
                     user.id = res.data.id
                     user.email = res.data.email
                     user.firstName = res.data.first_name

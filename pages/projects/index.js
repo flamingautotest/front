@@ -16,23 +16,21 @@ export default function ProjectList() {
     }, [])
 
     return (
-        <LoginGuard required={true}>
+        <LoginGuard>
             <div className='w-full mt-10'>
                 <div className='flex w-full justify-between items-start mb-16'>
                     <div>
                         <h2 className='text-3xl  font-sans'>Projects</h2>
                         <p className='text-gray-400'>{apiState.projects?.length} projects</p>
                     </div>
-                    <div>
-                        <Button
-                            size={'xl'}
-                            type={'white'}
-                            onClick={() => setShowModal(true)}
-                            className='text-white bg-white text-xs'
-                        >
-                            {'Create new project +'}
-                        </Button>
-                    </div>
+                    <Button
+                        size={'xl'}
+                        type={'white'}
+                        onClick={() => setShowModal(true)}
+                        className='text-white bg-white text-xs'
+                    >
+                        {'Create new project +'}
+                    </Button>
                 </div>
                 {showModal ?
                     <Modal onClose={() => setShowModal(false)} />

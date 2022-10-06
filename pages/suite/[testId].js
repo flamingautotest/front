@@ -1,33 +1,45 @@
-import { TestItem, TestEditor, Footer, LoginGuard } from '~/components'
+import { TestItem, TestEditor, Footer, LoginGuard, Button } from '~/components'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
+// TODO: fetch testsuite data from API using testId instead of this
+const mockTestList = [
+    {
+        id: 1,
+        name: 'Test 1',
+        description: 'This is a test',
+        method: 'POST',
+    },
+    {   
+        id: 2,
+        name: 'Test 2',
+        description: 'This is a test',
+        method: 'GET',
+    },
+]
+
 export default function TestSuite() {
+    const [tests, setTests] = useState(mockTestList)
     const [currentTest, setCurrentTest] = useState(null)
     const router = useRouter()
     const { testId } = router.query
 
-    // TODO: fetch testsuite data from API using testId instead of this
-    const mockTestList = [
-        {
-            id: 1,
-            name: 'Test 1',
-            description: 'This is a test',
-            method: 'POST',
-        },
-        {   
-            id: 2,
-            name: 'Test 2',
-            description: 'This is a test',
+    const addNewMockTest = () => {
+        const newMockTest = {
+            id: tests.length + 1,
+            name: 'New Test',
+            description: 'This is a new test',
             method: 'GET',
-        },
-    ]
+        }
+        setTests([...tests, newMockTest])
+        setCurrentTest(newMockTest)
+    }
 
     return (
-        <LoginGuard required={true}>
+        <LoginGuard>
             <div className='w-full flex flex-row justify-between'>
                 <div className='w-1/2 flex flex-col'>
-                    {mockTestList.map(test => (
+                    {tests.map(test => (
                         <TestItem
                             key={test.id}
                             name={test.name}
@@ -35,6 +47,16 @@ export default function TestSuite() {
                             onClick={() => setCurrentTest(test)}
                         />
                     ))}
+                    <div className='w-full text-center mt-4'>
+                        <Button
+                            size={'xl'}
+                            type={'white'}
+                            onClick={() => addNewMockTest()}
+                            className='text-white bg-white text-xs'
+                        >
+                            {'Add new test +'}
+                        </Button>
+                    </div>
                 </div>
                 <div className='w-1/2'>
                     <TestEditor selected={currentTest} />

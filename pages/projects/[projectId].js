@@ -46,7 +46,7 @@ export default function ProjectDetail() {
     }]
 
     return (
-        <LoginGuard required={true}>
+        <LoginGuard>
             <div className='w-full mt-10'>
                 <div className='flex mb-16'>
                     <div>

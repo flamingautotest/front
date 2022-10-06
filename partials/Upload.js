@@ -7,7 +7,7 @@ export default function Upload() {
     const { userState } = useContext(UserContext)
 
     return (
-        <LoginGuard required={true}>
+        <LoginGuard>
             <form className='flex flex-col pt-28 items-center justify-center w-60 mx-auto'>
                 <h1 className='text-xl mb-10'>Hello {userState.firstName} {userState.lastName} !</h1>
                 <InputFile

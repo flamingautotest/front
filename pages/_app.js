@@ -14,9 +14,7 @@ function Main({ Component, pageProps }) {
 				</Head>
 				<Navbar />
 				<div className='max-w-screen-xl px-4 w-full mx-auto'>
-					<LoginGuard>
-						<Component {...pageProps} />
-					</LoginGuard>
+					<Component {...pageProps} />
 				</div>
 			</UserProvider>
 		</APIProvider>

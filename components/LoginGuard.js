@@ -3,17 +3,21 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 
 export default function LoginGuard(props) {
-    const [lastState, setLastState] = useState(false)
     const { userState } = useContext(UserContext)
 	const router = useRouter()
-    const required = props.required || false
+
+    const allowedRoutes = ['/login', '/register', '/']
 
     useEffect(() => {
-        if ((!required && lastState !== userState.isLoggedIn) || required && !userState.isLoggedIn) {
-            setLastState(userState.isLoggedIn)
+        console.log('isLoggedIn', userState.isLoggedIn)
+        console.log('isLoading', userState.isLoading)
+        console.log('route', router.route)
+
+        if (!userState.isLoggedIn && !userState.isLoading && !allowedRoutes.includes(router.route)) {
+            console.log('oui')
             router.push('/')
         }
-    }, [userState])
+    }, [userState, router.route])
 
     return props.children
 }
