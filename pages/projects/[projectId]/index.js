@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { APIContext, UserContext } from '~/stores'
-import { Footer, LoginGuard } from '~/components'
+import { Footer, LoginGuard, Button, Modal } from '~/components'
 import { joinClassNames } from '~/utils'
 
 export default function ProjectDetail() {
@@ -11,6 +11,7 @@ export default function ProjectDetail() {
     const { projectId } = router.query
     const { apiState, getProjects } = useContext(APIContext)
     const { userState } = useContext(UserContext)
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         if (userState.isLoggedIn) {
@@ -21,17 +22,29 @@ export default function ProjectDetail() {
 
     return (
         <LoginGuard>
+            {showModal ?
+                <Modal onClose={() => setShowModal(false)} />
+            : null}
+
             <div className='w-full mt-10'>
-                <div className='flex mb-8 sm:mb-16'>
+                <div className='flex w-full justify-between items-start mb-16'>
                     <div>
                         <Link href='/projects'>
-                            <a className='text-blue-500'>
+                            <a className='text-blue'>
                                 {'< Back'}
                             </a>
                         </Link>
                         {/* TODO: make this dynamic */}
                         <h2 className='text-3xl font-sans'>Project name</h2>
                     </div>
+                    <Button
+                        size={'xl'}
+                        type={'white'}
+                        onClick={() => setShowModal(true)}
+                        className='text-white bg-white text-xs'
+                    >
+                        {'Create new test suite +'}
+                    </Button>
                 </div>
                 <div className="flex items-center w-full mb-8">
                     <div className="flex border border-gray-200 rounded w-full h-12">

@@ -43,7 +43,7 @@ export default function TestSuite() {
                     <div className='flex mb-16 mt-10'>
                         <div>
                             <Link href={`/projects/${projectId}`}>
-                                <a className='text-blue-500'>
+                                <a className='text-blue'>
                                     {'< Back'}
                                 </a>
                             </Link>
