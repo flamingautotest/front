@@ -9,10 +9,6 @@ export default function LoginGuard(props) {
     const allowedRoutes = ['/login', '/register', '/']
 
     useEffect(() => {
-        console.log('isLoggedIn', userState.isLoggedIn)
-        console.log('isLoading', userState.isLoading)
-        console.log('route', router.route)
-
         if (!userState.isLoggedIn && !userState.isLoading && !allowedRoutes.includes(router.route)) {
             console.log('oui')
             router.push('/')

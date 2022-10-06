@@ -1,6 +1,7 @@
 import { TestItem, TestEditor, Footer, LoginGuard, Button } from '~/components'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import Link from 'next/link'
 
 // TODO: fetch testsuite data from API using testId instead of this
 const mockTestList = [
@@ -22,7 +23,7 @@ export default function TestSuite() {
     const [tests, setTests] = useState(mockTestList)
     const [currentTest, setCurrentTest] = useState(null)
     const router = useRouter()
-    const { testId } = router.query
+    const { projectId, testId } = router.query
 
     const addNewMockTest = () => {
         const newMockTest = {
@@ -39,6 +40,16 @@ export default function TestSuite() {
         <LoginGuard>
             <div className='w-full flex flex-row justify-between'>
                 <div className='w-1/2 flex flex-col'>
+                    <div className='flex mb-16 mt-10'>
+                        <div>
+                            <Link href={`/projects/${projectId}`}>
+                                <a className='text-blue-500'>
+                                    {'< Back'}
+                                </a>
+                            </Link>
+                            <h2 className='text-3xl  font-sans'>Test suites</h2>
+                        </div>
+                    </div>
                     {tests.map(test => (
                         <TestItem
                             key={test.id}

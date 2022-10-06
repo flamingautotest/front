@@ -78,7 +78,7 @@ export default function ProjectDetail() {
                     </thead>
                     <tbody>
                         {testSuites.map(testSuite => (
-                            <Link key={testSuite.id} href={`/suite/${testSuite.id}`}>                
+                            <Link key={testSuite.id} href={`/projects/${projectId}/suite/${testSuite.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600' >
                                     <td>{testSuite.name}</td>
                                     <td>{testSuite.creation_date}</td>
