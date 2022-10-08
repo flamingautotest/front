@@ -66,9 +66,10 @@ export default function EndpointSelector(props) {
         >
             <div
                 ref={modalBox}
-                className='relative z-20 max-w-3xl w-full px-2 flex flex-row mt-[15vh]'
+                className='relative z-20 max-w-3xl w-full px-2 flex flex-row items-end mt-[15vh]'
             >
                 <div ref={inputBox} className='relative w-full'>
+                    <p className='text-xl mb-10 text-white w-full text-center'>Which endpoint do you wish to test ?</p>
                     <Input
                         name={'search'}
                         type={'text'}
@@ -94,7 +95,7 @@ export default function EndpointSelector(props) {
                         ))}
                     </div>
                 </div>
-                <footer className='my-6 px-8 text-center'>
+                <footer className='mt-6 px-8 text-center'>
                     <Button
                         type={'primary'}
                         size={'m'}
