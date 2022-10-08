@@ -16,7 +16,6 @@ export default function TestSuite() {
         if (userState.isLoggedIn && projectId && testSuiteId) {
             const call = async () => {
                 await makeRequest({
-                    mock: false,
                     path: `/projects/${projectId}/suites/${testSuiteId}/`,
                     modifier: (state, response) => {
                         state.tests = response

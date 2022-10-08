@@ -86,11 +86,6 @@ export default function ProjectDetail() {
                         )) : null}
                     </tbody>
                 </table>
-                <div className='w-full flex justify-center text-gray-400'>
-                    <p className='mr-12'>Rows per page:</p>
-                    <p className='mr-12'>1-5 of 13</p>
-                    <p className='text-2xl'>{'<   >'}</p>
-                </div>
                 <Footer />
             </div>
         </LoginGuard>
