@@ -1,20 +1,21 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import joinClassNames from 'utils/joinClassNames'
-import { Button } from '~/components'
+import { Button, Input } from '~/components'
 
 export default function Modal(props) {
+    const [testSuiteTitle, setTestSuiteTitle] = useState('')
+    const [testSuiteUrl, setTestSuiteUrl] = useState('')
     const modalBox = useRef()
 
     const {
-        title = 'New test suite',
-        content = 'TODO: add new testsuite name and domain and other params inputs',
         onClose = () => {},
         className = '',
     } = props
 
     const handleClose = (e) => {
         const { left, right, top, bottom } = modalBox.current.getBoundingClientRect()
-        if (e.clientX < left || e.clientX > right || e.clientY < top || e.clientY > bottom) onClose()
+        if (e.clientX > left && e.clientX < right && e.clientY > top && e.clientY < bottom) return
+        onClose({ title: testSuiteTitle, url: testSuiteUrl })
     }
 
     return (
@@ -31,26 +32,46 @@ export default function Modal(props) {
                 className='relative z-20 max-w-3xl w-full bg-white rounded-xl shadow-2xl px-2'
             >
                 <header className='my-6 px-8'>
-                    <p className='text-3xl font-medium'>{title}</p>
+                    <p className='text-3xl font-medium'>New test suite</p>
                 </header>
-                <hr></hr>
+                
                 <div className='my-6 px-8'>
-                    <p>{content}</p>
+                    <Input
+                        label={'Project name'}
+                        name={'title'}
+                        type={'text'}
+                        placeholder={'ie: preprod user test suite'}
+                        required={true}
+                        value={testSuiteTitle}
+                        className={'w-full mt-5'}
+                        onChange={(e) => setTestSuiteTitle(e.target.value)}
+                    />
+                    <Input
+                        label={'Endpoint URL'}
+                        name={'url'}
+                        type={'text'}
+                        placeholder={'ie: https://api.example.com/'}
+                        required={true}
+                        value={testSuiteUrl}
+                        className={'w-full mt-5'}
+                        onChange={(e) => setTestSuiteUrl(e.target.value)}
+                    />
                 </div>
-                    <hr></hr>
+                
                 <footer className='my-6 px-8 text-end'>
                     <Button
                         className={'mr-4'}
                         type={'secondary'}
                         size={'m'}
-                        onClick={onClose}
+                        onClick={() => onClose()}
                     >
                         Cancel
                     </Button>
                     <Button
                         type={'primary'}
                         size={'m'}
-                        onClick={onClose}
+                        disabled={!testSuiteTitle.length > 0 || !testSuiteUrl.length > 0}
+                        onClick={() => onClose({ title: testSuiteTitle, url: testSuiteUrl })}
                     >
                         Save
                     </Button>
