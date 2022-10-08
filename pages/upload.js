@@ -14,13 +14,16 @@ export default function Upload() {
     const [file, setFile] = useState({})
 
     const submitNewProject = async (name, file) => {
-        const encodedFile = btoa(file)
+        const formData = new FormData()
+        const encodedFile = window.btoa(formData)
+        formData.append('file', encodedFile)
+
         await makeRequest({
             method: 'post',
             path: '/projects/',
             data: {
                 title : name,
-                file : encodedFile,
+                file : formData,
             }
         })
     }
