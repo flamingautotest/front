@@ -20,7 +20,7 @@ export default function TestSuite() {
                 const testsMock = await getMockData('tests')
                 const endpointsMock = await getMockData('endpoints')
                 await makeRequest({
-                    mock: true,
+                    mock: false,
                     path: `/projects/${projectId}/test-suites/${testSuiteId}`,
                     modifier: state => {
                         // TODO: replace with response from API
