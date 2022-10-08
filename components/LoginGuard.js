@@ -12,7 +12,7 @@ export default function LoginGuard(props) {
         if (!userState.isLoggedIn && !userState.isLoading && !allowedRoutes.includes(router.route)) {
             router.push('/')
         }
-    }, [userState, router.route])
+    }, [userState, router, allowedRoutes])
 
     return props.children
 }

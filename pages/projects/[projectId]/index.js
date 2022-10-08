@@ -24,14 +24,14 @@ export default function ProjectDetail() {
             }
             call()
         }
-    }, [userState, showModal])
+    }, [userState, showModal, makeRequest])
 
     useEffect(() => {
         const list = apiState.projects.find(p => p.id === projectId)
         if (list?.test_suite_references?.length > 0) {
             setTestSuiteList(list.test_suite_references)
         }
-    }, [apiState.projects])
+    }, [apiState.projects, projectId])
 
     const submitNewSuite = async ({ title, url }) => {
         if (title.length > 0 && url.length > 0) {

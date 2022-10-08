@@ -58,7 +58,7 @@ export default function TestSuite() {
                                 </a>
                             </Link>
                             {/* TODO: make this dynamic */}
-                            <h2 className='text-3xl  font-sans'>{`${apiState.projects.find(p => p.id === projectId).title} > ${apiState.tests.title}`}</h2>
+                            <h2 className='text-3xl  font-sans'>{`${apiState.projects?.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'} > ${apiState.tests.title}`}</h2>
                         </div>
                     </div>
                     {apiState.tests?.actions?.length ? apiState.tests.actions.map((test, index) => (

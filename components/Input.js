@@ -22,7 +22,7 @@ export default function Input(props) {
         if (instaFocus) {
             inputRef.current.focus()
         }
-    }, [])
+    }, [instaFocus])
     
     return (
         <div className={joinClassNames('flex flex-col justify-start items-start', className)}>

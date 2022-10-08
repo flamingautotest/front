@@ -19,7 +19,7 @@ export default function ProjectList() {
             }
             call()
         }
-    }, [userState])
+    }, [userState, makeRequest])
 
     return (
         <LoginGuard>
