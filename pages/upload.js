@@ -1,26 +1,35 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useContext, useState } from 'react'
-import { UserContext } from '~/stores'
+import { UserContext,APIContext } from '~/stores'
 import { InputFile, Button, LoginGuard, Input } from '~/components'
 
 export default function Upload() {
     const { userState } = useContext(UserContext)
     const router = useRouter()
+    const { apiState, makeRequest } = useContext(APIContext)
+
     const [projectName, setProjectName] = useState('')
     const [projectUrl, setProjectUrl] = useState('')
     const [file, setFile] = useState({})
 
-    const submitNewProject = () => {
-        // TODO: add API call + verification
-        router.push('/projects')
+    const submitNewProject = async (name, file) => {
+        const encodedFile = btoa(file)
+        await makeRequest({
+            method: 'post',
+            path: '/projects/',
+            data: {
+                title : name,
+                file : encodedFile,
+            }
+        })
     }
 
     return (
         <LoginGuard>
             <form className='flex flex-col pt-28 items-center justify-center max-w-sm w-full text-center mx-auto'>
                 <h1 className='text-xl mb-10'>Hello {userState.firstName} {userState.lastName} !</h1>
-                <p className='text-xl my-10'>To begin, first give your project a name, specify it's url and upload your swagger file</p>
+                <p className='text-xl my-10'>To begin, first give your project a name, specify its url and upload your swagger file</p>
                 <Input
                     label={'Project name'}
                     name={'name'}
@@ -30,16 +39,6 @@ export default function Upload() {
                     value={projectName}
                     className={'w-full mt-5'}
                     onChange={(e) => setProjectName(e.target.value)}
-                />
-                <Input
-                    label={'Project URL'}
-                    name={'url'}
-                    type={'text'}
-                    placeholder={'https://api.example.com/v1'}
-                    required={true}
-                    value={projectUrl}
-                    className={'w-full mt-5'}
-                    onChange={(e) => setProjectUrl(e.target.value)}
                 />
                 <InputFile
                     label={'To begin, first give your project a name and upload your swagger file'}
@@ -64,7 +63,10 @@ export default function Upload() {
                         className={'mt-8 mx-1'}
                         type={'primary'}
                         size={'m'}
-                        onClick={() => submitNewProject()}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            submitNewProject()
+                        }}
                         disabled={(file.name && projectName.length > 0) ? false : true}
                     >
                         {'Next step'}
