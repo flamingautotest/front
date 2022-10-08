@@ -13,7 +13,6 @@ export default function ProjectList() {
                 await makeRequest({
                     path: '/projects/',
                     modifier: (state, response) => {
-                        console.log('response', response)
                         state.projects = response
                     }
                 })
