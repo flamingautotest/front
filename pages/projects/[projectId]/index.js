@@ -33,15 +33,12 @@ export default function ProjectDetail() {
         }
     }, [apiState.projects])
 
-    const submitNewSuite = async (name, url) => {
-        if (name.length > 0 && url.length > 0){
+    const submitNewSuite = async ({ title, url }) => {
+        if (title.length > 0 && url.length > 0) {
             await makeRequest({
                 method: 'post',
-                path: `/projects/${projectId}`,
-                data: {
-                    title : name,
-                    url : url,
-                }
+                path: `/projects/${projectId}/suites/`,
+                data: { title, url, actions: [] }
             })
         }
         setShowModal(false)
@@ -50,7 +47,7 @@ export default function ProjectDetail() {
     return (
         <LoginGuard>
             {showModal ?
-                <Modal onClose={() => submitNewSuite} />
+                <Modal onClose={submitNewSuite} />
             : null}
 
             <div className='w-full mt-10'>
