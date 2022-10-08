@@ -10,7 +10,7 @@ export default function Upload() {
     const [projectName, setProjectName] = useState('')
     const [file, setFile] = useState({})
 
-    const submitNewProject = async (name, file) => {
+    const submitNewProject = async () => {
         const formData = new FormData()
         const encodedFile = window.btoa(file)
         formData.append('file', encodedFile)
@@ -19,7 +19,7 @@ export default function Upload() {
             method: 'post',
             path: '/projects/',
             data: {
-                title : name,
+                title : projectName,
                 file : formData,
             }
         })
@@ -45,7 +45,10 @@ export default function Upload() {
                     name={'upload'}
                     required={true}
                     className={'w-full mt-5'}
-                    onChange={(e) => setFile(e.target.files[0])}
+                    onChange={(e) => {
+                        console.log('e', e.target.files)
+                        setFile(e.target.files[0])
+                    }}
                 />
                 <div className='w-full mt-10 flex flex-row justify-center items-center'>
                     <Link href='/projects'>
