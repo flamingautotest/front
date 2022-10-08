@@ -6,16 +6,13 @@ import { InputFile, Button, LoginGuard, Input } from '~/components'
 
 export default function Upload() {
     const { userState } = useContext(UserContext)
-    const router = useRouter()
-    const { apiState, makeRequest } = useContext(APIContext)
-
+    const { makeRequest } = useContext(APIContext)
     const [projectName, setProjectName] = useState('')
-    const [projectUrl, setProjectUrl] = useState('')
     const [file, setFile] = useState({})
 
     const submitNewProject = async (name, file) => {
         const formData = new FormData()
-        const encodedFile = window.btoa(formData)
+        const encodedFile = window.btoa(file)
         formData.append('file', encodedFile)
 
         await makeRequest({
