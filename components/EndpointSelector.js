@@ -36,7 +36,7 @@ export default function EndpointSelector(props) {
         const modalCoords = modalBox.current.getBoundingClientRect()
         const resultCoords = resultBox.current.getBoundingClientRect()
         if (e.clientX > modalCoords.left && e.clientX < modalCoords.right && e.clientY > modalCoords.top && e.clientY < modalCoords.bottom) return
-        if (e.clientX > resultCoords.left && e.clientX < resultCoords.right && e.clientY > resultCoords.top && e.clientY < resultCoords.bottom) return
+        if (showResults && e.clientX > resultCoords.left && e.clientX < resultCoords.right && e.clientY > resultCoords.top && e.clientY < resultCoords.bottom) return
         onClose(selectedEndpoint)
     }
 
