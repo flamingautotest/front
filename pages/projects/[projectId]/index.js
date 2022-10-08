@@ -33,10 +33,24 @@ export default function ProjectDetail() {
         }
     }, [apiState.projects])
 
+    const submitNewSuite = async (name, url) => {
+        if (name.length > 0 && url.length > 0){
+            await makeRequest({
+                method: 'post',
+                path: `/projects/${projectId}`,
+                data: {
+                    title : name,
+                    url : url,
+                }
+            })
+        }
+        setShowModal(false)
+    }
+
     return (
         <LoginGuard>
             {showModal ?
-                <Modal onClose={() => setShowModal(false)} />
+                <Modal onClose={() => submitNewSuite} />
             : null}
 
             <div className='w-full mt-10'>
