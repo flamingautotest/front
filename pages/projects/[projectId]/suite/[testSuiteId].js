@@ -33,8 +33,7 @@ export default function TestSuite() {
     }, [userState])
 
     const addNewMockTest = (data) => {
-        console.log("state", apiState.tests)
-        console.log("data", data)
+        if (Object.keys(data).length <= 0) return
 
         makeRequest({
             path: `/projects/${projectId}/test-suites/${testSuiteId}/tests`,

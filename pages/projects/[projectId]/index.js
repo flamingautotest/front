@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { APIContext, UserContext } from '~/stores'
 import { Footer, LoginGuard, Button, Modal } from '~/components'
-import { joinClassNames } from '~/utils'
 import { useMockData } from '~/hooks'
 
 export default function ProjectDetail() {

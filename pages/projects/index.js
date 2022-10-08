@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default function ProjectList() {
     const { getMockData } = useMockData()
-    const { apiState, getProjects, makeRequest } = useContext(APIContext)
+    const { apiState, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
 
     useEffect(() => {
