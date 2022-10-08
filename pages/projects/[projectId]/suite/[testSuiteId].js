@@ -3,29 +3,24 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { UserContext, APIContext } from '~/stores'
-import { useMockData } from '~/hooks'
 
 export default function TestSuite() {
     const router = useRouter()
     const { projectId, testSuiteId } = router.query
-    const { getMockData } = useMockData()
     const { userState } = useContext(UserContext)
     const { apiState, makeRequest } = useContext(APIContext)
     const [currentTest, setCurrentTest] = useState(null)
     const [endpointModal, setEndpointModal] = useState(false)
 
     useEffect(() => {
-        if (userState.isLoggedIn && projectId) {
+        if (userState.isLoggedIn && projectId && testSuiteId) {
             const call = async () => {
-                const testsMock = await getMockData('tests')
-                const endpointsMock = await getMockData('endpoints')
                 await makeRequest({
                     mock: false,
-                    path: `/projects/${projectId}/test-suites/${testSuiteId}`,
-                    modifier: state => {
-                        // TODO: replace with response from API
-                        state.tests = testsMock
-                        state.endpoints = endpointsMock
+                    path: `/projects/${projectId}/suites/${testSuiteId}/`,
+                    modifier: (state, response) => {
+                        console.log(response)
+                        state.tests = response
                     }
                 })
             }
@@ -37,12 +32,11 @@ export default function TestSuite() {
         if (Object.keys(data).length <= 0) return
 
         makeRequest({
-            path: `/projects/${projectId}/test-suites/${testSuiteId}/tests`,
-            method: 'POST',
-            data: data,
+            path: `/projects/${projectId}/suites/${testSuiteId}/`,
+            method: 'patch',
+            data: [...apiState.tests.actions, data],
             modifier: state => {
-                // TODO: replace with response from API
-                state.tests.testActions = [...apiState.tests.testActions, data]
+                state.tests.actions = [...apiState.tests.actions, data]
             }
         })
     }
@@ -69,7 +63,7 @@ export default function TestSuite() {
                             <h2 className='text-3xl  font-sans'>{`Project name > Test suite name`}</h2>
                         </div>
                     </div>
-                    {apiState.tests?.testActions?.length && apiState.tests.testActions.map((test, index) => (
+                    {apiState.tests?.actions?.length && apiState.tests.actions.map((test, index) => (
                         <TestItem
                             key={index}
                             name={test.description}

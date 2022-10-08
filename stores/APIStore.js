@@ -6,7 +6,7 @@ const defaultState = {
     isLoading: false,
     errors: [],
     projects: [],
-    tests: [],
+    tests: {},
     endpoints: [],
 }
 
