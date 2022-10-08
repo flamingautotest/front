@@ -5,24 +5,47 @@ import { UserContext,APIContext } from '~/stores'
 import { InputFile, Button, LoginGuard, Input } from '~/components'
 
 export default function Upload() {
+    const router = useRouter()
     const { userState } = useContext(UserContext)
     const { makeRequest } = useContext(APIContext)
     const [projectName, setProjectName] = useState('')
     const [file, setFile] = useState({})
 
-    const submitNewProject = async () => {
-        const formData = new FormData()
-        const encodedFile = window.btoa(file)
-        formData.append('file', encodedFile)
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader()
+            fileReader.readAsDataURL(file)
 
-        await makeRequest({
-            method: 'post',
-            path: '/projects/',
-            data: {
-                title : projectName,
-                file : formData,
+            fileReader.onload = () => {
+                resolve(fileReader.result)
+            }
+
+            fileReader.onerror = (error) => {
+                reject(error)
             }
         })
+    }
+
+    const submitNewProject = async () => {
+        try {
+            const encodedFile = await convertBase64(file)
+    
+            await makeRequest({
+                method: 'post',
+                path: '/projects/',
+                data: {
+                    title : projectName,
+                    file : encodedFile.replace(/^data:.*;base64,/, '')
+                },
+                modifier(state, response) {
+                    state.projects = [...state.projects, response]
+                }
+            })
+
+            router.push('/')
+        } catch (error) {
+            console.log('[upload/submitNewProject', error)
+        }
     }
 
     return (
