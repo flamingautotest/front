@@ -1,11 +1,9 @@
 import { useContext, useEffect } from 'react'
 import { Button, Footer, LoginGuard } from '~/components'
 import { APIContext, UserContext } from '~/stores'
-import { useMockData } from '~/hooks'
 import Link from 'next/link'
 
 export default function ProjectList() {
-    const { getMockData } = useMockData()
     const { apiState, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
 

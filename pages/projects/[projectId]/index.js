@@ -3,12 +3,10 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { APIContext, UserContext } from '~/stores'
 import { Footer, LoginGuard, Button, Modal } from '~/components'
-import { useMockData } from '~/hooks'
 
 export default function ProjectDetail() {
     const router = useRouter()
     const { projectId } = router.query
-    const { getMockData } = useMockData()
     const { apiState, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
     const [showModal, setShowModal] = useState(false)
