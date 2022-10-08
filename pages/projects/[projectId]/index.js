@@ -48,7 +48,7 @@ export default function ProjectDetail() {
                             </a>
                         </Link>
                         {/* TODO: make this dynamic */}
-                        <h2 className='text-3xl font-sans'>Project name</h2>
+                        <h2 className='text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId).title}</h2>
                     </div>
                     <Button
                         size={'xl'}
@@ -76,14 +76,14 @@ export default function ProjectDetail() {
                         </tr>
                     </thead>
                     <tbody>
-                        {!apiState.isLoading && testSuiteList.map(testSuite => (
+                        {!apiState.isLoading ? testSuiteList.map(testSuite => (
                             <Link key={testSuite.id} href={`/projects/${projectId}/suite/${testSuite.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{testSuite.id}</td>
                                     <td>{testSuite.title}</td>
                                 </tr>
                             </Link>
-                        ))}
+                        )) : null}
                     </tbody>
                 </table>
                 <div className='w-full flex justify-center text-gray-400'>

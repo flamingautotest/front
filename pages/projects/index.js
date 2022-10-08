@@ -59,15 +59,15 @@ export default function ProjectList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {apiState.projects && apiState.projects.map(project => (
+                        {(!apiState.isLoading && apiState.projects) ? apiState.projects.map(project => (
                             <Link key={project.id} href={`/projects/${project.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{project.id}</td>
                                     <td>{project.title}</td>
-                                    <td>{project.test_suite_references.length}</td>
+                                    <td>{project.test_suite_references?.length ? project.test_suite_references.length : '0'}</td>
                                 </tr>
                             </Link>
-                        ))}
+                        )) : null}
                     </tbody>
                 </table>
                 <div className='w-full flex justify-center text-gray-400'>

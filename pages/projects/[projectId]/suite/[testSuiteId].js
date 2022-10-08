@@ -59,17 +59,17 @@ export default function TestSuite() {
                                 </a>
                             </Link>
                             {/* TODO: make this dynamic */}
-                            <h2 className='text-3xl  font-sans'>{`Project name > Test suite name`}</h2>
+                            <h2 className='text-3xl  font-sans'>{`${apiState.projects.find(p => p.id === projectId).title} > ${apiState.tests.title}`}</h2>
                         </div>
                     </div>
-                    {apiState.tests?.actions?.length && apiState.tests.actions.map((test, index) => (
+                    {apiState.tests?.actions?.length ? apiState.tests.actions.map((test, index) => (
                         <TestItem
                             key={index}
                             name={test.description}
                             method={test.request.method}
                             onClick={() => setCurrentTest(test)}
                         />
-                    ))}
+                    )) : null}
                     <div className='w-full text-center mt-4'>
                         <Button
                             size={'xl'}
