@@ -45,10 +45,7 @@ export default function Upload() {
                     name={'upload'}
                     required={true}
                     className={'w-full mt-5'}
-                    onChange={(e) => {
-                        console.log('e', e.target.files)
-                        setFile(e.target.files[0])
-                    }}
+                    onChange={(e) => setFile(e.target.files[0])}
                 />
                 <div className='w-full mt-10 flex flex-row justify-center items-center'>
                     <Link href='/projects'>
