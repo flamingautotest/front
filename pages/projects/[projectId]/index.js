@@ -67,30 +67,18 @@ export default function ProjectDetail() {
                 <table className='w-full m-0 mb-8 sm:mb-16'>
                     <thead className='h-16 border-gray-200 border-b text-gray-600 text-xs sm:text-base'>
                         <tr>
-                        <th className='text-left'>Name</th>
-                        <th className='text-left'>Creation date</th>
-                        <th className='text-left'>frequency</th>
-                        <th className='text-left'>Status</th>
+                            <th className='text-left'>Id</th>
+                            <th className='text-left'>Name</th>
+                            <th className='text-left'>Actions count</th>
                         </tr>
                     </thead>
                     <tbody>
                         {apiState.testSuites.map(testSuite => (
                             <Link key={testSuite.id} href={`/projects/${projectId}/suite/${testSuite.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
+                                    <td>{testSuite.id}</td>
                                     <td>{testSuite.name}</td>
-                                    <td>{testSuite.creation_date}</td>
-                                    <td>{testSuite.frequency}</td>
-                                    <td className='flex items-center m-top mt-4'>
-                                    <p className={ 
-                                    joinClassNames(
-                                        'border-gray-200 border text-xs p-0.5 mr-1.5 rounded',
-                                        testSuite.last_execution.status == 'warning' ? 'text-red-900':'',
-                                        testSuite.last_execution.status == 'success' ? 'text-sky-900':'',
-                                        testSuite.last_execution.status == 'failure' ? 'text-amber-400':'',
-
-                                    )
-                                    }>{testSuite.last_execution.status}</p>
-                                     {testSuite.last_execution.date}</td>
+                                    <td>{testSuite.testActionsList.length}</td>
                                 </tr>
                             </Link>
                         ))}

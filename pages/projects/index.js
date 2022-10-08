@@ -56,20 +56,18 @@ export default function ProjectList() {
                 <table className='w-full m-0 mb-16'>
                     <thead className='h-16 border-gray-200 border-b text-gray-600'>
                         <tr>
+                        <th className='text-left'>Id</th>
                         <th className='text-left'>Name</th>
-                        <th className='text-left'>Creation date</th>
-                        <th className='text-left'>frequency</th>
-                        <th className='text-left'>Status</th>
+                        <th className='text-left'>Suite counts</th>
                         </tr>
                     </thead>
                     <tbody>
                         {apiState.projects && apiState.projects.map(project => (
                             <Link key={project.id} href={`/projects/${project.id}`}>                
-                                <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600' >
+                                <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
+                                    <td>{project.id}</td>
                                     <td>{project.name}</td>
-                                    <td>{project.creation_date}</td>
-                                    <td>{project.frequency}</td>
-                                    <td className='flex items-center m-top mt-4'><p className='border-gray-200 border text-xs p-0.5 mr-1.5 rounded'>{project.last_execution.status}</p> {project.last_execution.date}</td>
+                                    <td>{project.testSuitesReferences.length}</td>
                                 </tr>
                             </Link>
                         ))}

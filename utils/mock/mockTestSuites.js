@@ -1,8 +1,7 @@
-const mockProjectsJson = JSON.parse(`[{
+const mockTestSuitesJson = JSON.parse(`[{
 	"id": 1,
 	"name": "Mon api",
-	"projectEndpointsListId": 1,
-	"testSuitesReferences": [{
+	"testActionsList": [{
 			"testSuiteId": 12,
 			"testSuiteName": "User tests"
 		},
@@ -13,8 +12,7 @@ const mockProjectsJson = JSON.parse(`[{
 }, {
 	"id": 2,
 	"name": "Mon api",
-	"projectEndpointsListId": 1,
-	"testSuitesReferences": [{
+	"testActionsList": [{
 			"testSuiteId": 12,
 			"testSuiteName": "User tests"
 		},
@@ -25,8 +23,7 @@ const mockProjectsJson = JSON.parse(`[{
 },{
 	"id": 3,
 	"name": "Mon api",
-	"projectEndpointsListId": 1,
-	"testSuitesReferences": [{
+	"testActionsList": [{
 			"testSuiteId": 12,
 			"testSuiteName": "User tests"
 		},
@@ -37,8 +34,7 @@ const mockProjectsJson = JSON.parse(`[{
 },{
 	"id": 4,
 	"name": "Mon api",
-	"projectEndpointsListId": 1,
-	"testSuitesReferences": [{
+	"testActionsList": [{
 			"testSuiteId": 12,
 			"testSuiteName": "User tests"
 		},
@@ -48,4 +44,4 @@ const mockProjectsJson = JSON.parse(`[{
 		}]
 }]`)
 
-export default mockProjectsJson
+export default mockTestSuitesJson
