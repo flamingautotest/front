@@ -78,7 +78,7 @@ export default function ProjectDetail() {
                             <Link key={testSuite.id} href={`/projects/${projectId}/suite/${testSuite.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{testSuite.id}</td>
-                                    <td>{testSuite.name}</td>
+                                    <td>{testSuite.title}</td>
                                     <td>{testSuite.testActionsList.length}</td>
                                 </tr>
                             </Link>
