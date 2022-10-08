@@ -7,7 +7,6 @@ const defaultState = {
     errors: [],
     projects: [],
     tests: [],
-    testSuites: [],
     endpoints: [],
 }
 

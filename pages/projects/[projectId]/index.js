@@ -10,22 +10,28 @@ export default function ProjectDetail() {
     const { apiState, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
     const [showModal, setShowModal] = useState(false)
+    const [testSuiteList, setTestSuiteList] = useState([])
 
     useEffect(() => {
-        if (userState.isLoggedIn && projectId.length) {
+        if (userState.isLoggedIn) {
             const call = async () => {
                 await makeRequest({
-                    mock: false,
-                    path: `/projects/${projectId}/`,
-                    // TODO: replace with response from API
+                    path: '/projects/',
                     modifier: (state, response) => {
-                        state.testSuites = response
+                        state.projects = response
                     }
                 })
             }
             call()
         }
     }, [userState])
+
+    useEffect(() => {
+        const list = apiState.projects.find(p => p.id === projectId)
+        if (list?.test_suite_references.length > 0) {
+            setTestSuiteList(list.test_suite_references)
+        }
+    }, [apiState.projects])
 
     return (
         <LoginGuard>
@@ -67,16 +73,14 @@ export default function ProjectDetail() {
                         <tr>
                             <th className='text-left'>Id</th>
                             <th className='text-left'>Name</th>
-                            <th className='text-left'>Actions count</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {apiState.testSuites.map(testSuite => (
+                        {!apiState.isLoading && testSuiteList.map(testSuite => (
                             <Link key={testSuite.id} href={`/projects/${projectId}/suite/${testSuite.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{testSuite.id}</td>
                                     <td>{testSuite.title}</td>
-                                    <td>{testSuite.testActionsList.length}</td>
                                 </tr>
                             </Link>
                         ))}
