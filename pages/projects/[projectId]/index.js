@@ -28,7 +28,7 @@ export default function ProjectDetail() {
 
     useEffect(() => {
         const list = apiState.projects.find(p => p.id === projectId)
-        if (list?.test_suite_references.length > 0) {
+        if (list?.test_suite_references?.length > 0) {
             setTestSuiteList(list.test_suite_references)
         }
     }, [apiState.projects])
@@ -48,7 +48,7 @@ export default function ProjectDetail() {
                             </a>
                         </Link>
                         {/* TODO: make this dynamic */}
-                        <h2 className='text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId).title}</h2>
+                        <h2 className='text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'}</h2>
                     </div>
                     <Button
                         size={'xl'}
