@@ -1,9 +1,7 @@
 import { createContext } from "react"
 import { useImmer } from 'use-immer'
 import { Requests } from '~/utils'
-import { useMockData } from '~/hooks'
 
-// mockdata
 const defaultState = {
     isLoading: false,
     errors: [],
@@ -16,7 +14,6 @@ const defaultState = {
 const APIContext = createContext()
 
 const APIProvider = ({ children }) => {
-    const { getMockData } = useMockData()
     const [apiState, apiDispatch] = useImmer({ ...defaultState })
 
     async function makeRequest({
