@@ -65,7 +65,7 @@ export default function ProjectDetail() {
                         </tr>
                     </thead>
                     <tbody>
-                        {apiState.tests.map(testSuite => (
+                        {apiState.testSuites.map(testSuite => (
                             <Link key={testSuite.id} href={`/projects/${projectId}/suite/${testSuite.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{testSuite.name}</td>

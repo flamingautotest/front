@@ -9,7 +9,8 @@ const defaultState = {
     errors: [],
     projects: [],
     tests: [],
-    endpoints: [], 
+    testSuites: [],
+    endpoints: [],
 }
 
 const APIContext = createContext()
@@ -34,7 +35,7 @@ const APIProvider = ({ children }) => {
             const requests = new Requests()
             const realPath = path.startsWith('/') ? path : `/${path}`
             const response = await requests[method](realPath, data)
-            
+
             if (response.data?.data) {
                 apiDispatch((state, response) => modifier(state, response))
                 apiDispatch(api => {
@@ -86,13 +87,67 @@ const APIProvider = ({ children }) => {
         }
 	}
 
+    // mock function - use makeRequest for prod
     async function getTestSuites(userId, projectId) {
+		try {
+            if (!userId || !projectId) return []
+
+            apiDispatch(api => { api.isLoading = true })
+
+            const testSuites = await getMockData('testSuites')
+
+            // TODO: make request for test suites using projectId param
+            apiDispatch(api => {
+                api.isLoading = false
+                api.testSuites = testSuites
+            })
+        } catch (err) {
+            console.error('[stores/APIStore/getTestSuites]', err)
+
+            const errors = [...apiState.errors, `Network error: failed to request test suites`]
+            apiDispatch(api => {
+                api.isLoading = false
+                api.errors = errors
+            })
+        }
+	}
+
+    // mock function - use makeRequest for prod
+    async function getEndpoints(userId, projectId) {
 		try {
             if (!userId) return []
 
             apiDispatch(api => { api.isLoading = true })
 
+            const endpoints = await getMockData('endpoints')
+            console.log('getEndpoints', endpoints)
+
+            // TODO: make request for test suites using projectId param
+            apiDispatch(api => {
+                api.isLoading = false
+                api.endpoints = endpoints
+            })
+        } catch (err) {
+            console.error('[stores/APIStore/getTestSuites]', err)
+
+            const errors = [...apiState.errors, `Network error: failed to request test suites`]
+            apiDispatch(api => {
+                api.isLoading = false
+                api.errors = errors
+            })
+        }
+	}
+
+    // mock function - use makeRequest for prod
+    async function getTests(userId, projectId, testSuiteId) {
+		try {
+            if (!userId || !projectId || !testSuiteId) return []
+
+            
+            apiDispatch(api => { api.isLoading = true })
+            
             const tests = await getMockData('tests')
+            console.log('getTests', tests)
 
             // TODO: make request for test suites using projectId param
             apiDispatch(api => {
@@ -100,7 +155,7 @@ const APIProvider = ({ children }) => {
                 api.tests = tests
             })
         } catch (err) {
-            console.error('[stores/APIStore/getTestSuites]', err)
+            console.error('[stores/APIStore/getTests]', err)
 
             const errors = [...apiState.errors, `Network error: failed to request test suites`]
             apiDispatch(api => {
@@ -116,7 +171,9 @@ const APIProvider = ({ children }) => {
             apiDispatch,
             makeRequest,
             getProjects,
-            getTestSuites
+            getTestSuites,
+            getEndpoints,
+            getTests
         }}>
             {children}
         </APIContext.Provider>

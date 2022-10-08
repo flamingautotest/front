@@ -1,43 +1,40 @@
-import { TestItem, TestEditor, Footer, LoginGuard, Button } from '~/components'
+import { TestItem, TestEditor, Footer, LoginGuard, Button, EndpointSelector } from '~/components'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
-
-// TODO: fetch testsuite data from API using testId instead of this
-const mockTestList = [
-    {
-        id: 1,
-        name: 'Test 1',
-        description: 'This is a test',
-        method: 'POST',
-    },
-    {   
-        id: 2,
-        name: 'Test 2',
-        description: 'This is a test',
-        method: 'GET',
-    },
-]
+import { UserContext, APIContext } from '~/stores'
 
 export default function TestSuite() {
-    const [tests, setTests] = useState(mockTestList)
+    const { userState } = useContext(UserContext)
+    const { apiState, getEndpoints, getTests } = useContext(APIContext)
+    const [endpointModal, setEndpointModal] = useState(false)
     const [currentTest, setCurrentTest] = useState(null)
     const router = useRouter()
-    const { projectId, testId } = router.query
+    const { projectId, testSuiteId } = router.query
 
-    const addNewMockTest = () => {
-        const newMockTest = {
-            id: tests.length + 1,
-            name: 'New Test',
-            description: 'This is a new test',
-            method: 'DELETE',
+    useEffect(() => {
+        if (userState.isLoggedIn) {
+            const call = async () => {
+                await getEndpoints(userState.id, projectId)
+                await getTests(userState.id, projectId, testSuiteId)
+            }
+            call()
         }
-        setTests([...tests, newMockTest])
-        setCurrentTest(newMockTest)
+    }, [userState])
+
+    const addNewMockTest = (data) => {
+        console.log(data)
     }
 
     return (
         <LoginGuard>
+            {endpointModal ?
+                <EndpointSelector onClose={data => {
+                    addNewMockTest(data)
+                    setEndpointModal(false)
+                }} />
+            : null}
+
             <div className='w-full flex flex-row justify-between'>
                 <div className='w-1/2 flex flex-col'>
                     <div className='flex mb-16 mt-10'>
@@ -51,11 +48,11 @@ export default function TestSuite() {
                             <h2 className='text-3xl  font-sans'>{`Project name > Test suite name`}</h2>
                         </div>
                     </div>
-                    {tests.map(test => (
+                    {apiState.tests?.testActions?.length && apiState.tests.testActions.map((test, index) => (
                         <TestItem
-                            key={test.id}
-                            name={test.name}
-                            method={test.method}
+                            key={index}
+                            name={test.description}
+                            method={test.request.method}
                             onClick={() => setCurrentTest(test)}
                         />
                     ))}
@@ -63,7 +60,7 @@ export default function TestSuite() {
                         <Button
                             size={'xl'}
                             type={'white'}
-                            onClick={() => addNewMockTest()}
+                            onClick={() => setEndpointModal(true)}
                             className='text-white bg-white text-xs'
                         >
                             {'Add new test +'}

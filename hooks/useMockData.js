@@ -1,4 +1,4 @@
-import { mockProjectsJson, mockEndpointsJson } from '~/utils'
+import { mockProjectsJson, mockTestsJson, mockEndpointsJson } from '~/utils'
 
 export default function useMockData() {
     const mockData = [
@@ -7,12 +7,16 @@ export default function useMockData() {
             data: mockProjectsJson,
         },
         {
-            key: 'enpoints',
+            key: 'endpoints',
             data: mockEndpointsJson,
         },
         {
             key: 'tests',
-            data: mockProjectsJson,
+            data: mockTestsJson,
+        },
+        {
+            key: 'testSuites',
+            data: mockProjectsJson, // TODO: mock test suites list
         }
     ]
     
