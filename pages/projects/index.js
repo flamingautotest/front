@@ -1,15 +1,25 @@
 import { useContext, useEffect } from 'react'
 import { Button, Footer, LoginGuard } from '~/components'
 import { APIContext, UserContext } from '~/stores'
+import { useMockData } from '~/hooks'
 import Link from 'next/link'
 
 export default function ProjectList() {
-    const { apiState, getProjects } = useContext(APIContext)
+    const { getMockData } = useMockData()
+    const { apiState, getProjects, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
 
     useEffect(() => {
         if (userState.isLoggedIn) {
-            const call = async () => await getProjects(userState.id)
+            const call = async () => {
+                const projectsMock = await getMockData('projects')
+                await makeRequest({
+                    path: '/projects',
+                    modifier: state => {
+                        state.projects = projectsMock
+                    }
+                })
+            }
             call()
         }
     }, [userState])

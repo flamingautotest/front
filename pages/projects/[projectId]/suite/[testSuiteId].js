@@ -3,20 +3,29 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { UserContext, APIContext } from '~/stores'
+import { useMockData } from '~/hooks'
 
 export default function TestSuite() {
-    const { userState } = useContext(UserContext)
-    const { apiState, getEndpoints, getTests } = useContext(APIContext)
-    const [endpointModal, setEndpointModal] = useState(false)
-    const [currentTest, setCurrentTest] = useState(null)
     const router = useRouter()
     const { projectId, testSuiteId } = router.query
+    const { getMockData } = useMockData()
+    const { userState } = useContext(UserContext)
+    const { apiState, makeRequest } = useContext(APIContext)
+    const [currentTest, setCurrentTest] = useState(null)
+    const [endpointModal, setEndpointModal] = useState(false)
 
     useEffect(() => {
-        if (userState.isLoggedIn) {
+        if (userState.isLoggedIn && projectId.length) {
             const call = async () => {
-                await getEndpoints(userState.id, projectId)
-                await getTests(userState.id, projectId, testSuiteId)
+                const testsMock = await getMockData('tests')
+                const endpointsMock = await getMockData('endpoints')
+                await makeRequest({
+                    path: `/projects/${projectId}/test-suites/${testSuiteId}`,
+                    modifier: state => {
+                        state.tests = testsMock
+                        state.endpoints = endpointsMock
+                    }
+                })
             }
             call()
         }

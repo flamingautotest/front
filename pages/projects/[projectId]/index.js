@@ -4,18 +4,27 @@ import { useContext, useEffect, useState } from 'react'
 import { APIContext, UserContext } from '~/stores'
 import { Footer, LoginGuard, Button, Modal } from '~/components'
 import { joinClassNames } from '~/utils'
+import { useMockData } from '~/hooks'
 
 export default function ProjectDetail() {
     const router = useRouter()
-    // TODO: use to load test suites
     const { projectId } = router.query
-    const { apiState, getTestSuites } = useContext(APIContext)
+    const { getMockData } = useMockData()
+    const { apiState, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
     const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
-        if (userState.isLoggedIn) {
-            const call = async () => await getTestSuites(userState.id, projectId)
+        if (userState.isLoggedIn && projectId.length) {
+            const call = async () => {
+                const testSuitesMock = await getMockData('testSuites')
+                await makeRequest({
+                    path: `/projects/${projectId}/test-suites`,
+                    modifier: state => {
+                        state.testSuites = testSuitesMock
+                    }
+                })
+            }
             call()
         }
     }, [userState])
