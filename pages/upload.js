@@ -5,10 +5,11 @@ import { UserContext } from '~/stores'
 import { InputFile, Button, LoginGuard, Input } from '~/components'
 
 export default function Upload() {
+    const { userState } = useContext(UserContext)
     const router = useRouter()
     const [projectName, setProjectName] = useState('')
+    const [projectUrl, setProjectUrl] = useState('')
     const [file, setFile] = useState({})
-    const { userState } = useContext(UserContext)
 
     const submitNewProject = () => {
         // TODO: add API call + verification
@@ -19,16 +20,26 @@ export default function Upload() {
         <LoginGuard>
             <form className='flex flex-col pt-28 items-center justify-center max-w-sm w-full text-center mx-auto'>
                 <h1 className='text-xl mb-10'>Hello {userState.firstName} {userState.lastName} !</h1>
-                <p className='text-xl my-10'>To begin, first give your project a name and upload your swagger file</p>
+                <p className='text-xl my-10'>To begin, first give your project a name, specify it's url and upload your swagger file</p>
                 <Input
                     label={'Project name'}
                     name={'name'}
                     type={'text'}
-                    placeholder={'Ex: API v1 preprod'}
+                    placeholder={'API v1 preprod'}
                     required={true}
                     value={projectName}
                     className={'w-full mt-5'}
                     onChange={(e) => setProjectName(e.target.value)}
+                />
+                <Input
+                    label={'Project URL'}
+                    name={'url'}
+                    type={'text'}
+                    placeholder={'https://api.example.com/v1'}
+                    required={true}
+                    value={projectUrl}
+                    className={'w-full mt-5'}
+                    onChange={(e) => setProjectUrl(e.target.value)}
                 />
                 <InputFile
                     label={'To begin, first give your project a name and upload your swagger file'}
