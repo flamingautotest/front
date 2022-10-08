@@ -23,7 +23,8 @@ const APIProvider = ({ children }) => {
         data = {},
     }) {
 		try {
-            if (method !== 'get' && method !== 'post' && method !== 'patch' && method !== 'delete') throw new Error('Invalid method')
+            const _method = method.toLowerCase()
+            if (_method !== 'get' && _method !== 'post' && _method !== 'patch' && _method !== 'delete') throw new Error('Invalid method')
             if (!path.length) throw new Error('No path provided')
             if (typeof modifier !== 'function') throw new Error('Invalid modifier')
 

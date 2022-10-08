@@ -20,6 +20,7 @@ export default function ProjectDetail() {
                 const testSuitesMock = await getMockData('testSuites')
                 await makeRequest({
                     path: `/projects/${projectId}/test-suites`,
+                    // TODO: replace with response from API
                     modifier: state => {
                         state.testSuites = testSuitesMock
                     }

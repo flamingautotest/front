@@ -15,13 +15,14 @@ export default function TestSuite() {
     const [endpointModal, setEndpointModal] = useState(false)
 
     useEffect(() => {
-        if (userState.isLoggedIn && projectId.length) {
+        if (userState.isLoggedIn && projectId) {
             const call = async () => {
                 const testsMock = await getMockData('tests')
                 const endpointsMock = await getMockData('endpoints')
                 await makeRequest({
                     path: `/projects/${projectId}/test-suites/${testSuiteId}`,
                     modifier: state => {
+                        // TODO: replace with response from API
                         state.tests = testsMock
                         state.endpoints = endpointsMock
                     }
@@ -32,13 +33,24 @@ export default function TestSuite() {
     }, [userState])
 
     const addNewMockTest = (data) => {
-        console.log(data)
+        console.log("state", apiState.tests)
+        console.log("data", data)
+
+        makeRequest({
+            path: `/projects/${projectId}/test-suites/${testSuiteId}/tests`,
+            method: 'POST',
+            data: data,
+            modifier: state => {
+                // TODO: replace with response from API
+                state.tests.testActions = [...apiState.tests.testActions, data]
+            }
+        })
     }
 
     return (
         <LoginGuard>
             {endpointModal ?
-                <EndpointSelector onClose={data => {
+                <EndpointSelector data={apiState.endpoints} onClose={data => {
                     addNewMockTest(data)
                     setEndpointModal(false)
                 }} />

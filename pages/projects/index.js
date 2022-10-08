@@ -16,6 +16,7 @@ export default function ProjectList() {
                 await makeRequest({
                     path: '/projects',
                     modifier: state => {
+                        // TODO: replace with response from API
                         state.projects = projectsMock
                     }
                 })

@@ -1,6 +1,8 @@
+import { useEffect, useRef } from 'react'
 import { joinClassNames } from '~/utils'
 
 export default function Input(props) {
+    const inputRef = useRef()
     const {
         type = 'text',
         label = '',
@@ -12,8 +14,16 @@ export default function Input(props) {
         disabled = false,
         className = '',
         error = false,
+        autoComplete = 'off',
+        instaFocus = false,
     } = props
 
+    useEffect(() => {
+        if (instaFocus) {
+            inputRef.current.focus()
+        }
+    }, [])
+    
     return (
         <div className={joinClassNames('flex flex-col justify-start items-start', className)}>
             {
@@ -36,6 +46,8 @@ export default function Input(props) {
                     placeholder={placeholder}
                     required={required}
                     disabled={disabled}
+                    autoComplete={autoComplete}
+                    ref={inputRef}
                     className={joinClassNames(
                         'focus:ring-indigo-500 w-full focus-visible:ring-indigo-500 border-2 focus:border-indigo-500 focus-visible:border-indigo-500 block px-4 py-3 sm:text-sm border-gray-300 rounded-md appearance-none',
                         error ? 'border-red-500' : '',

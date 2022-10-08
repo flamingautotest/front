@@ -19,7 +19,7 @@ export default function useMockData() {
             data: mockTestSuitesJson,
         }
     ]
-    
+
     async function getMockData(key) {
         try {
             const res = mockData.find(item => item.key === key)
