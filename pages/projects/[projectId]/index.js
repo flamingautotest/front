@@ -24,7 +24,7 @@ export default function ProjectDetail() {
             }
             call()
         }
-    }, [userState])
+    }, [userState, showModal])
 
     useEffect(() => {
         const list = apiState.projects.find(p => p.id === projectId)

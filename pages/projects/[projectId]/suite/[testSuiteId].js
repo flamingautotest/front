@@ -19,7 +19,6 @@ export default function TestSuite() {
                     mock: false,
                     path: `/projects/${projectId}/suites/${testSuiteId}/`,
                     modifier: (state, response) => {
-                        console.log(response)
                         state.tests = response
                     }
                 })
