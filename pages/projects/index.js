@@ -12,13 +12,10 @@ export default function ProjectList() {
     useEffect(() => {
         if (userState.isLoggedIn) {
             const call = async () => {
-                const projectsMock = await getMockData('projects')
                 await makeRequest({
-                    mock: false,
                     path: '/projects/',
-                    modifier: state => {
-                        // TODO: replace with response from API
-                        state.projects = projectsMock
+                    modifier: (state, response) => {
+                        state.projects = response
                     }
                 })
             }

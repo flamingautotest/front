@@ -12,17 +12,16 @@ export default function ProjectDetail() {
     const { apiState, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
     const [showModal, setShowModal] = useState(false)
-    console.log(projectId)
+
     useEffect(() => {
         if (userState.isLoggedIn && projectId.length) {
             const call = async () => {
-                const testSuitesMock = await getMockData('testSuites')
                 await makeRequest({
                     mock: false,
                     path: `/projects/${projectId}/`,
                     // TODO: replace with response from API
-                    modifier: state => {
-                        state.testSuites = testSuitesMock
+                    modifier: (state, response) => {
+                        state.testSuites = response
                     }
                 })
             }

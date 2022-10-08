@@ -41,7 +41,7 @@ const APIProvider = ({ children }) => {
                 const requests = new Requests()
                 const realPath = path.startsWith('/') ? path : `/${path}`
                 const response = await requests[method](realPath, data)
-    
+
                 if (response.data?.data) {
                     apiDispatch((state, response) => modifier(state, response))
                     apiDispatch(api => {
