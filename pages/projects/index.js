@@ -68,7 +68,7 @@ export default function ProjectList() {
                             <Link key={project.id} href={`/projects/${project.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{project.id}</td>
-                                    <td>{project.name}</td>
+                                    <td>{project.title}</td>
                                     <td>{project.testSuitesReferences.length}</td>
                                 </tr>
                             </Link>

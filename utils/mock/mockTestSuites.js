@@ -1,6 +1,6 @@
 const mockTestSuitesJson = JSON.parse(`[{
 	"id": 1,
-	"name": "Mon api",
+	"title": "Mon api",
 	"testActionsList": [{
 			"testSuiteId": 12,
 			"testSuiteName": "User tests"
@@ -11,7 +11,7 @@ const mockTestSuitesJson = JSON.parse(`[{
 		}]
 }, {
 	"id": 2,
-	"name": "Mon api",
+	"title": "Mon api",
 	"testActionsList": [{
 			"testSuiteId": 12,
 			"testSuiteName": "User tests"
@@ -22,7 +22,7 @@ const mockTestSuitesJson = JSON.parse(`[{
 		}]
 },{
 	"id": 3,
-	"name": "Mon api",
+	"title": "Mon api",
 	"testActionsList": [{
 			"testSuiteId": 12,
 			"testSuiteName": "User tests"
@@ -33,7 +33,7 @@ const mockTestSuitesJson = JSON.parse(`[{
 		}]
 },{
 	"id": 4,
-	"name": "Mon api",
+	"title": "Mon api",
 	"testActionsList": [{
 			"testSuiteId": 12,
 			"testSuiteName": "User tests"
