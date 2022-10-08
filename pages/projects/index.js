@@ -13,6 +13,7 @@ export default function ProjectList() {
                 await makeRequest({
                     path: '/projects/',
                     modifier: (state, response) => {
+                        console.log('response', response)
                         state.projects = response
                     }
                 })
@@ -64,7 +65,7 @@ export default function ProjectList() {
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{project.id}</td>
                                     <td>{project.title}</td>
-                                    <td>{project.testSuitesReferences.length}</td>
+                                    <td>{project.test_suite_references.length}</td>
                                 </tr>
                             </Link>
                         ))}

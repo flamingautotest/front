@@ -43,7 +43,7 @@ const APIProvider = ({ children }) => {
                 const response = await requests[method](realPath, data)
 
                 if (response.data?.data) {
-                    apiDispatch((state, response) => modifier(state, response))
+                    apiDispatch((state) => modifier(state, response.data.data))
                     apiDispatch(api => {
                         api.isLoading = false
                         api.errors = []
