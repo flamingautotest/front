@@ -14,6 +14,7 @@ export default function ProjectList() {
             const call = async () => {
                 const projectsMock = await getMockData('projects')
                 await makeRequest({
+                    mock: true,
                     path: '/projects',
                     modifier: state => {
                         // TODO: replace with response from API
