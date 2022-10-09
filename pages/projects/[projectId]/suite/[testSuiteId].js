@@ -63,6 +63,21 @@ export default function TestSuite() {
         })
     }
 
+    const deleteSuite = async () => {
+        const cancel = confirm('Are you sure you want to delete this test suite?')
+        if (!cancel) return
+
+        await makeRequest({
+            method: 'delete',
+            path: `/projects/${projectId}/suites/${testSuiteId}/`,
+            modifier: (state) => {
+                const newState = state.projects[state.projects.findIndex(p => p.id === projectId)].test_suite_references.filter(s => s.id !== testSuiteId)
+                state.projects[state.projects.findIndex(p => p.id === projectId)].test_suite_references = newState
+            }
+        })
+        router.push(`/projects/${projectId}`)
+    }
+
     const updateSuiteTitle = async () => {
         if (isModified){
             await makeRequest({
