@@ -30,6 +30,15 @@ const UserProvider = ({ children }) => {
             const req = new Requests()
             const res = await req.get('/users/')
 
+            if (res?.error?.length > 0) {
+                jwt.removeJWT()
+                userDispatch(user => {
+                    user.isLoading = false
+                    user.isLoggedIn = false
+                })
+                return
+            }
+
             if (res.data?.data?.id) {
                 
                 const userData = res.data.data
