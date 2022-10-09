@@ -12,7 +12,7 @@ export default function Notification(props) {
     return (
         <div className={joinClassNames(
             'w-full p-5 text-base text-white rounded-md',
-            isError ? 'bg-red-500' : 'bg-green-500',
+            isError ? 'bg-red' : 'bg-green',
             className,
         )}>
             {text}

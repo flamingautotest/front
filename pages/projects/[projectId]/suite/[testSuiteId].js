@@ -21,22 +21,32 @@ export default function TestSuite() {
                         state.tests = response
                     }
                 })
+                await makeRequest({
+                    path: `/projects/${projectId}/endpoints/`,
+                    modifier: (state, response) => {
+                        state.endpoints = [...response]
+                    }
+                })
             }
             call()
         }
-    }, [userState])
+    }, [userState, makeRequest, projectId, testSuiteId])
 
     const addNewMockTest = (data) => {
         if (Object.keys(data).length <= 0) return
 
-        makeRequest({
-            path: `/projects/${projectId}/suites/${testSuiteId}/`,
-            method: 'patch',
-            data: [...apiState.tests.actions, data],
-            modifier: state => {
-                state.tests.actions = [...apiState.tests.actions, data]
-            }
-        })
+        console.log('data', data)
+        console.log('state', apiState.tests.actions)
+        console.log('updated state', [...apiState.tests.actions, data])
+
+        // makeRequest({
+        //     path: `/projects/${projectId}/suites/${testSuiteId}/`,
+        //     method: 'patch',
+        //     data: [...apiState.tests.actions, data],
+        //     modifier: state => {
+        //         state.tests.actions = [...apiState.tests.actions, data]
+        //     }
+        // })
     }
 
     return (

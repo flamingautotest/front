@@ -16,13 +16,13 @@ export default function EndpointSelector(props) {
 
     useEffect(() => {
         setInputHeight(inputBox.current.offsetHeight)
-    }, [inputBox.current])
+    }, [])
 
     useEffect(() => {
         modalBox.current.addEventListener('keyup', e => {
             if (e.key === 'Escape') onClose({})
         })
-    }, [])
+    }, [onClose])
 
 
     const fuse = new Fuse(data, {

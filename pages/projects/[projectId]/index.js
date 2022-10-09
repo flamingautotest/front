@@ -19,6 +19,8 @@ export default function ProjectDetail() {
                     path: '/projects/',
                     modifier: (state, response) => {
                         state.projects = response
+                        state.tests = {}
+                        state.endpoints = []
                     }
                 })
             }
