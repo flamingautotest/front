@@ -92,6 +92,16 @@ export default function TestSuite() {
         return setIsModified(true)
     }
 
+    const runTestSuite = async () => {
+        const cancel = confirm('Are you sure you want to run this suite ?')
+        if (!cancel) return
+
+        await makeRequest({
+            path: `/projects/${projectId}/suites/${testSuiteId}/generate/`,
+            method: 'put'
+        })
+    }
+
     return (
         <LoginGuard>
             {endpointModal ?
@@ -103,8 +113,8 @@ export default function TestSuite() {
 
             <div className='w-full flex flex-row justify-between'>
                 <div className='w-[48%] flex flex-col'>
-                    <div className='flex mb-16 mt-10'>
-                        <div>
+                    <div className='flex flex-col mb-16 mt-10'>
+                        <div className='w-full flex flex-row justify-between items-center'>
                             <Link href={`/projects/${projectId}`}>
                                 <a className='text-blue'>
                                     {'< Back'}
@@ -118,7 +128,9 @@ export default function TestSuite() {
                             >
                                 {'delete suite'}
                             </Button>
-                            <div className='flex flex-row justify-center items-center mt-8'>
+                        </div>
+                        <div className='w-full flex flex-row justify-between items-center mt-8'>
+                            <div className='flex flex-row justify-start items-center'>
                                 {isModified ?
                                     <div className='flex flex-row items-center justify-center'>
                                         <Input
@@ -152,6 +164,13 @@ export default function TestSuite() {
                                     {'update name'}
                                 </Button>
                             </div>
+                            <Button
+                                size={'s'}
+                                type={'white'}
+                                onClick={() => runTestSuite()}
+                            >
+                                Run test suite
+                            </Button>
                         </div>
                     </div>
                     {apiState.tests?.actions?.length ? apiState.tests.actions.map((test, index) => (
