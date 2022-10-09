@@ -9,8 +9,10 @@ export default function ProjectDetail() {
     const { projectId } = router.query
     const { apiState, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
+    const  [isModified, setIsModified]  = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [testSuiteList, setTestSuiteList] = useState([])
+    const [projectName, setProjectName] = useState('')
 
     useEffect(() => {
         if (userState.isLoggedIn) {
@@ -59,6 +61,34 @@ export default function ProjectDetail() {
         })
         router.push('/')
     }
+    const updateProjectTitle = async ({}) => {
+        if (isModified){
+            await makeRequest({
+                method: 'patch',
+                path: `/projects/${projectId}/`,
+                data: {
+                    title : projectName
+                }
+            })
+            return setIsModified(!isModified)
+        }
+        return setIsModified(!isModified)
+    }
+    const maybeRenderTitleEdit = () => {
+        if (isModified) {
+            return(
+                <input
+                    type="text"
+                    className="mt-8 block w-full px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    placeholder="New Name:"
+                    onChange={(e) => setProjectName(e.target.value)}
+                />
+            )
+        }
+        return(
+            <h2 className=' mt-8 text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'}</h2>
+        )
+    }
     return (
         <LoginGuard>
             {showModal ?
@@ -74,7 +104,17 @@ export default function ProjectDetail() {
                             </a>
                         </Link>
                         {/* TODO: make this dynamic */}
-                        <h2 className='text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'}</h2>
+                        <div className='flex'>
+                            {maybeRenderTitleEdit()}
+                            <Button
+                            size={'s'}
+                            type={'warning'}
+                            onClick={() => updateProjectTitle()}
+                            className='text-blue bg-white text-xs mt-10'
+                        >
+                            {'update name'}
+                        </Button>
+                        </div>
                     </div>
                     <div>
                         <Button

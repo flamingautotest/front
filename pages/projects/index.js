@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Button, Footer, LoginGuard } from '~/components'
 import { APIContext, UserContext } from '~/stores'
 import Link from 'next/link'
@@ -6,7 +6,6 @@ import Link from 'next/link'
 export default function ProjectList() {
     const { apiState, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
-
     useEffect(() => {
         if (userState.isLoggedIn) {
             const call = async () => {
