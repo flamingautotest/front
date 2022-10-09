@@ -33,7 +33,13 @@ export default function ProjectDetail() {
         }
     }, [apiState.projects, projectId])
 
-    const submitNewSuite = async ({ title, url }) => {
+    const submitNewSuite = async (data) => {
+        if (Object.keys(data).length <= 0) {
+            setShowModal(false)
+            return
+        }
+
+        const { title, url } = data
         if (title.length > 0 && url.length > 0) {
             await makeRequest({
                 method: 'post',
@@ -41,6 +47,7 @@ export default function ProjectDetail() {
                 data: { title, url, actions: [] }
             })
         }
+
         setShowModal(false)
     }
 

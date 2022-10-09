@@ -79,7 +79,7 @@ export default function EndpointSelector(props) {
                         onChange={(e) => handleInput(e.target.value)}
                         instaFocus={true}
                     />
-                    <div ref={resultBox} style={{ top: `calc(${inputHeight}px - 1.25rem)` }} className='absolute w-full h-[50vh] left-0 overflow-auto'>
+                    <div ref={resultBox} style={{ top: `${inputHeight}px` }} className='absolute w-full h-[50vh] left-0 overflow-auto'>
                         {showResults && filteredEndpoints.map(({ item }, index) => (
                             <div
                                 key={index}

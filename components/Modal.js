@@ -63,7 +63,7 @@ export default function Modal(props) {
                         className={'mr-4'}
                         type={'secondary'}
                         size={'m'}
-                        onClick={() => onClose()}
+                        onClick={() => onClose({})}
                     >
                         Cancel
                     </Button>
