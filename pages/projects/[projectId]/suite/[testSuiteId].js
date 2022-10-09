@@ -26,7 +26,8 @@ export default function TestSuite() {
                 await makeRequest({
                     path: `/projects/${projectId}/suites/${testSuiteId}/`,
                     modifier: (state, response) => {
-                        state.tests = response
+                        const _response = { ...response, actions: response.actions.map((r, i) => ({ ...r, id: i })) }
+                        state.tests = _response
                     }
                 })
                 await makeRequest({
@@ -44,7 +45,7 @@ export default function TestSuite() {
         setSuiteName(apiState.tests.title)
     }, [apiState.tests])
 
-    const addNewTest = (data) => {
+    const addNewTest = async (data) => {
         if (Object.keys(data).length <= 0) return
 
         const newState = {
@@ -52,7 +53,7 @@ export default function TestSuite() {
             actions: [...apiState.tests.actions, data]
         }
 
-        makeRequest({
+        await makeRequest({
             path: `/projects/${projectId}/suites/${testSuiteId}/`,
             method: 'patch',
             data: newState,
@@ -60,21 +61,6 @@ export default function TestSuite() {
                 state.tests = newState
             }
         })
-    }
-
-    const deleteSuite = async () => {
-        const cancel = confirm('Are you sure you want to delete this test suite?')
-        if (!cancel) return
-
-        await makeRequest({
-            method: 'delete',
-            path: `/projects/${projectId}/suites/${testSuiteId}/`,
-            modifier: (state) => {
-                const newState = state.projects[state.projects.findIndex(p => p.id === projectId)].test_suite_references.filter(s => s.id !== testSuiteId)
-                state.projects[state.projects.findIndex(p => p.id === projectId)].test_suite_references = newState
-            }
-        })
-        router.push(`/projects/${projectId}`)
     }
 
     const updateSuiteTitle = async () => {
@@ -109,7 +95,7 @@ export default function TestSuite() {
     return (
         <LoginGuard>
             {endpointModal ?
-                <EndpointSelector data={apiState.endpoints} onClose={data => {
+                <EndpointSelector data={apiState.endpoints} projectId={projectId} onClose={data => {
                     addNewTest(data)
                     setEndpointModal(false)
                 }} />
@@ -188,7 +174,11 @@ export default function TestSuite() {
                     </div>
                 </div>
                 <div className='w-1/2'>
-                    <TestEditor selected={currentTest} />
+                    <TestEditor
+                        selected={currentTest}
+                        projectId={projectId}
+                        testSuiteId={testSuiteId}
+                    />
                 </div>
             </div>
             <Footer className={'bottom-0'}/>

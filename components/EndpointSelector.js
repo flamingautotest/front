@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Fuse from 'fuse.js'
-import joinClassNames from 'utils/joinClassNames'
+import { joinClassNames } from '~/utils'
 import { Button, Input } from '~/components'
 
 export default function EndpointSelector(props) {
@@ -12,7 +12,7 @@ export default function EndpointSelector(props) {
     const modalBox = useRef()
     const resultBox = useRef()
     const inputBox = useRef()
-    const { onClose = () => {}, data = [], className = '' } = props
+    const { onClose = () => {}, data = [], className = '', projectId = '' } = props
 
     useEffect(() => {
         setInputHeight(inputBox.current.offsetHeight)
@@ -23,7 +23,6 @@ export default function EndpointSelector(props) {
             if (e.key === 'Escape') onClose({})
         })
     }, [onClose])
-
 
     const fuse = new Fuse(data, {
         keys: [
@@ -44,14 +43,17 @@ export default function EndpointSelector(props) {
         setSelectedEndpoint({})
         setInputValue(value)
         const result = fuse.search(value).sort((p1, p2) => p1.refIndex > p2.refIndex)
-        console.log(result)
         setFilteredEndpoints(result)
         setshowResults(true)
     }
 
     const handleSelect = endpoint => {
         handleInput(endpoint.request.path)
-        setSelectedEndpoint(endpoint)
+        const payload = {
+            ...endpoint,
+            expected_response: endpoint.suggested_responses[0]
+        }
+        setSelectedEndpoint(payload)
         setshowResults(false)
     }
 
