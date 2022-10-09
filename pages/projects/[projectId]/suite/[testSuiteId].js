@@ -39,6 +39,14 @@ export default function TestSuite() {
         })
     }
 
+    const deleteSuite = async ({}) => {
+        await makeRequest({
+            method: 'delete',
+            path: `/projects/${projectId}/suites/${testSuiteId}/`,
+        })
+        router.push('/')
+    }
+
     return (
         <LoginGuard>
             {endpointModal ?
@@ -57,6 +65,14 @@ export default function TestSuite() {
                                     {'< Back'}
                                 </a>
                             </Link>
+                            <Button
+                                size={'s'}
+                                type={'warning'}
+                                onClick={() => deleteSuite()}
+                                className='text-red bg-white text-xs'
+                            >
+                                {'delete suite'}
+                            </Button>
                             {/* TODO: make this dynamic */}
                             <h2 className='text-3xl  font-sans'>{`${apiState.projects?.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'} > ${apiState.tests.title}`}</h2>
                         </div>

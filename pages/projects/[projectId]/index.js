@@ -24,7 +24,7 @@ export default function ProjectDetail() {
             }
             call()
         }
-    }, [userState, showModal, makeRequest])
+    }, [userState, showModal])
 
     useEffect(() => {
         const list = apiState.projects.find(p => p.id === projectId)
@@ -43,7 +43,13 @@ export default function ProjectDetail() {
         }
         setShowModal(false)
     }
-
+    const deleteProjects = async ({}) => {
+        await makeRequest({
+            method: 'delete',
+            path: `/projects/${projectId}/`,
+        })
+        router.push('/')
+    }
     return (
         <LoginGuard>
             {showModal ?
@@ -61,14 +67,24 @@ export default function ProjectDetail() {
                         {/* TODO: make this dynamic */}
                         <h2 className='text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'}</h2>
                     </div>
-                    <Button
-                        size={'xl'}
-                        type={'white'}
-                        onClick={() => setShowModal(true)}
-                        className='text-white bg-white text-xs'
-                    >
-                        {'Create new test suite +'}
-                    </Button>
+                    <div>
+                        <Button
+                            size={'xl'}
+                            type={'white'}
+                            onClick={() => setShowModal(true)}
+                            className='text-white bg-white text-xs'
+                        >
+                            {'Create new test suite +'}
+                        </Button>
+                        <Button
+                            size={'s'}
+                            type={'warning'}
+                            onClick={() => deleteProjects()}
+                            className='text-red bg-white text-xs'
+                        >
+                            {'delete project'}
+                        </Button>
+                    </div>
                 </div>
                 <div className="flex items-center w-full mb-8">
                     <div className="flex border border-gray-200 rounded w-full h-12">
