@@ -40,10 +40,27 @@ export default function TestEditor(props) {
         const newValue = { ...newParams[index], value: data }
         newParams[index] = newValue
         setEditedTest({ ...editedTest, request: { ...editedTest.request, parameters: newParams } })
+        setHasEdited(true)
     }
 
-    const saveEdited = () => {
+    const saveEdited = async () => {
+        if (selected === null) return
 
+        const newState = {
+            ...apiState.tests,
+            actions: [...apiState.tests.actions.map(a => a.id === selected.id ? editedTest : a)]
+        }
+
+        await makeRequest({
+            path: `/projects/${projectId}/suites/${testSuiteId}/`,
+            method: 'patch',
+            data: newState,
+            modifier: state => {
+                state.tests = newState
+            }
+        })
+
+        setHasEdited(false)
     }
 
     const deleteTest = async () => {
