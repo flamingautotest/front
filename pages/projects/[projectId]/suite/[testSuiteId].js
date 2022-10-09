@@ -38,7 +38,7 @@ export default function TestSuite() {
         }
     }, [userState, projectId, testSuiteId])
 
-    const addNewMockTest = (data) => {
+    const addNewTest = (data) => {
         if (Object.keys(data).length <= 0) return
 
         const newState = {
@@ -71,7 +71,7 @@ export default function TestSuite() {
         <LoginGuard>
             {endpointModal ?
                 <EndpointSelector data={apiState.endpoints} onClose={data => {
-                    addNewMockTest(data)
+                    addNewTest(data)
                     setEndpointModal(false)
                 }} />
             : null}
