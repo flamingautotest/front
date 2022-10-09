@@ -16,13 +16,13 @@ export default function EndpointSelector(props) {
 
     useEffect(() => {
         setInputHeight(inputBox.current.offsetHeight)
-    }, [inputBox.current])
+    }, [])
 
     useEffect(() => {
         modalBox.current.addEventListener('keyup', e => {
             if (e.key === 'Escape') onClose({})
         })
-    }, [])
+    }, [onClose])
 
 
     const fuse = new Fuse(data, {
@@ -79,7 +79,7 @@ export default function EndpointSelector(props) {
                         onChange={(e) => handleInput(e.target.value)}
                         instaFocus={true}
                     />
-                    <div ref={resultBox} style={{ top: `calc(${inputHeight}px - 1.25rem)` }} className='absolute w-full h-[50vh] left-0 overflow-auto'>
+                    <div ref={resultBox} style={{ top: `${inputHeight}px` }} className='absolute w-full h-[50vh] left-0 overflow-auto'>
                         {showResults && filteredEndpoints.map(({ item }, index) => (
                             <div
                                 key={index}

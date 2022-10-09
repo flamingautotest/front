@@ -16,25 +16,43 @@ export default function TestSuite() {
         if (userState.isLoggedIn && projectId && testSuiteId) {
             const call = async () => {
                 await makeRequest({
+                    path: '/projects/',
+                    modifier: (state, response) => {
+                        console.log('response', response)
+                        state.projects = response
+                    }
+                })
+                await makeRequest({
                     path: `/projects/${projectId}/suites/${testSuiteId}/`,
                     modifier: (state, response) => {
                         state.tests = response
                     }
                 })
+                await makeRequest({
+                    path: `/projects/${projectId}/endpoints/`,
+                    modifier: (state, response) => {
+                        state.endpoints = [...response]
+                    }
+                })
             }
             call()
         }
-    }, [userState])
+    }, [userState, projectId, testSuiteId])
 
     const addNewMockTest = (data) => {
         if (Object.keys(data).length <= 0) return
 
+        const newState = {
+            ...apiState.tests,
+            actions: [...apiState.tests.actions, data]
+        }
+
         makeRequest({
             path: `/projects/${projectId}/suites/${testSuiteId}/`,
             method: 'patch',
-            data: [...apiState.tests.actions, data],
+            data: newState,
             modifier: state => {
-                state.tests.actions = [...apiState.tests.actions, data]
+                state.tests = newState
             }
         })
     }
@@ -74,7 +92,7 @@ export default function TestSuite() {
                                 {'delete suite'}
                             </Button>
                             {/* TODO: make this dynamic */}
-                            <h2 className='text-3xl  font-sans'>{`${apiState.projects?.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'} > ${apiState.tests.title}`}</h2>
+                            <h2 className='text-3xl  font-sans'>{`${(!apiState.isLoading && apiState.projects?.find(p => p.id === projectId)?.title) ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'} > ${apiState.tests.title}`}</h2>
                         </div>
                     </div>
                     {apiState.tests?.actions?.length ? apiState.tests.actions.map((test, index) => (
