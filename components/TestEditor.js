@@ -39,11 +39,10 @@ export default function TestEditor(props) {
                                 <div key={index} className='flex flex-row'>
                                     <div className='flex flex-col my-2 py-4 border-b-gray-200 border-b w-full'>
                                         <p className='text-black'>{test.title}<span className='text-gray-500'>: {test.type}</span></p>
-                                        <p className='text-black'>{test.description}</p>
                                         <Input
                                             name={test.title}
                                             type={'text'}
-                                            placeholder={''}
+                                            placeholder={test.description}
                                             value={test.value}
                                             className={'w-full mt-2'}
                                             onChange={(e) => handleRequestEdit(e.target.value, index)}
