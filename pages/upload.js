@@ -45,7 +45,7 @@ export default function Upload() {
 
             router.push('/')
         } catch (error) {
-            console.log('[upload/submitNewProject', error)
+            console.error('[upload/submitNewProject', error)
         }
     }
 

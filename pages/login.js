@@ -40,7 +40,7 @@ export default function Login() {
             }
         } catch (err) {
             setError('Network error. Try again later.')
-            console.log(err)
+            console.error(err)
         }
     }
 
