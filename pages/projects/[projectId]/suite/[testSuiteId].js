@@ -18,7 +18,6 @@ export default function TestSuite() {
                 await makeRequest({
                     path: '/projects/',
                     modifier: (state, response) => {
-                        console.log('response', response)
                         state.projects = response
                     }
                 })
@@ -75,7 +74,7 @@ export default function TestSuite() {
             : null}
 
             <div className='w-full flex flex-row justify-between'>
-                <div className='w-1/2 flex flex-col'>
+                <div className='w-[48%] flex flex-col'>
                     <div className='flex mb-16 mt-10'>
                         <div>
                             <Link href={`/projects/${projectId}`}>

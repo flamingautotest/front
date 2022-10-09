@@ -1,27 +1,29 @@
+import { joinClassNames } from '~/utils'
+
 export default function MethodLabel(props) {
-    const { type } = props
+    const { type, className } = props
 
     const getColor = () => {
         switch (type.toLowerCase()) {
             case 'get':
-                return 'border-green'
+                return 'text-green border-green'
             case 'post':
-                return 'border-yellow'
+                return 'text-yellow border-yellow'
             case 'put':
-                return 'border-blue'
+                return 'text-blue border-blue'
             case 'delete':
-                return 'border-red'
+                return 'text-red border-red'
             case 'patch':
-                return 'border-gray-600'
+                return 'text-gray-600 border-gray-600'
             default:
-                return 'border-gray-600'
+                return 'text-gray-600 border-gray-600'
         }
     }
 
     const color = getColor()
 
     return (
-        <div className={`px-2 w-fit border-2 ${color} rounded`}>
+        <div className={joinClassNames(`px-2 w-fit border-2 ${color} rounded`, className)}>
             {type}
         </div>
     )
