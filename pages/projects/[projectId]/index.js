@@ -88,7 +88,7 @@ export default function ProjectDetail() {
             : null}
 
             <div className='w-full mt-10'>
-                <div className='flex w-full justify-between items-start mb-16'>
+                <div className='sm:flex w-full justify-between items-start mb-16'>
                     <div>
                         <Link href='/projects'>
                             <a className='text-blue'>
@@ -149,7 +149,7 @@ export default function ProjectDetail() {
                         </Button>
                     </div>
                 </div>
-                <div className="flex items-center w-full mb-8">
+                <div className="sm:flex items-center w-full mb-8">
                     <div className="flex border border-gray-200 rounded w-full h-12">
                         <input
                             type="text"

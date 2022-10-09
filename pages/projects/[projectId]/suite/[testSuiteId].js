@@ -114,7 +114,7 @@ export default function TestSuite() {
                                 size={'s'}
                                 type={'warning'}
                                 onClick={() => deleteSuite()}
-                                className='text-red bg-white text-xs'
+                                className='text-red bg-white text-xs float-right'
                             >
                                 {'delete suite'}
                             </Button>
