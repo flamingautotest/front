@@ -56,7 +56,7 @@ export default function Register() {
 
     return (
         <div>
-            <form className='flex flex-col pt-11 items-center justify-center w-60 mx-auto'>
+            <form className='flex flex-col pt-11 items-center justify-center w-60 mx-auto pb-20'>
                 <h1 className='text-xl w-full text-center font-bold mb-4'>Register to AutoTest</h1>
                 <Notification
                     text={error}
