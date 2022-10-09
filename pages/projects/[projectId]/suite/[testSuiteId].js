@@ -1,4 +1,4 @@
-import { TestItem, TestEditor, Footer, LoginGuard, Button, EndpointSelector } from '~/components'
+import { TestItem, TestEditor, Footer, LoginGuard, Button, EndpointSelector, Input } from '~/components'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -11,9 +11,8 @@ export default function TestSuite() {
     const { apiState, makeRequest } = useContext(APIContext)
     const [currentTest, setCurrentTest] = useState(null)
     const [endpointModal, setEndpointModal] = useState(false)
-    const [isNameModified, setIsNameModified] = useState(false)
-    const [projectName, setProjectName] = useState('')
-
+    const [isModified, setIsModified] = useState(false)
+    const [suiteName, setSuiteName] = useState('')
 
     useEffect(() => {
         if (userState.isLoggedIn && projectId && testSuiteId) {
@@ -41,6 +40,10 @@ export default function TestSuite() {
         }
     }, [userState, projectId, testSuiteId])
 
+    useEffect(() => {
+        setSuiteName(apiState.tests.title)
+    }, [apiState.tests])
+
     const addNewTest = (data) => {
         if (Object.keys(data).length <= 0) return
 
@@ -59,7 +62,7 @@ export default function TestSuite() {
         })
     }
 
-    const deleteSuite = async ({}) => {
+    const deleteSuite = async () => {
         const cancel = confirm('Are you sure you want to delete this test suite?')
         if (!cancel) return
 
@@ -74,39 +77,33 @@ export default function TestSuite() {
         router.push(`/projects/${projectId}`)
     }
 
-    const updateSuiteTitle = async ({}) => {
+    const updateSuiteTitle = async () => {
         if (isModified){
-            const newState = {
-                ...apiState.tests,
-                title: [...apiState.tests.actions, projectName]
-            }
             await makeRequest({
                 path: `/projects/${projectId}/suites/${testSuiteId}/`,
                 method: 'patch',
-                data: newState,
-                modifier: state => {
-                    state.tests = newState
+                data: {
+                    title: suiteName
+                },
+                modifier: (state) => {
+                    const projects = Array.from(apiState.projects)
+                    const projectIndex = projects.findIndex(p => p.id === projectId)
+                    const newValue = projects[projectIndex].test_suite_references.map(s => s.id === testSuiteId ? { ...s, title: suiteName } : s)
+
+                    projects[projectIndex] = {
+                        ...projects[projectIndex],
+                        test_suite_references: newValue
+                    }
+
+                    state.projects = projects
+                    state.tests.title = suiteName
                 }
             })
-            return setIsModified(!isModified)
-        }
-        return setIsModified(!isModified)
-    }
 
-    const maybeRenderTitleEdit = () => {
-        if (isModified) {
-            return(
-                <input
-                    type="text"
-                    className="mt-8 block w-full px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    placeholder="New Name:"
-                    onChange={(e) => setProjectName(e.target.value)}
-                />
-            )
+            return setIsModified(false)
         }
-        return(
-            <h2 className='text-3xl  font-sans'>{`${(!apiState.isLoading && apiState.projects?.find(p => p.id === projectId)?.title) ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'} > ${apiState.tests.title}`}</h2>
-        )
+
+        return setIsModified(true)
     }
 
     return (
@@ -135,16 +132,38 @@ export default function TestSuite() {
                             >
                                 {'delete suite'}
                             </Button>
-                            {/* TODO: make this dynamic */}
-                            <div className='flex'>
-                                {maybeRenderTitleEdit()}
+                            <div className='flex flex-row justify-center items-center mt-8'>
+                                {isModified ?
+                                    <div className='flex flex-row items-center justify-center'>
+                                        <Input
+                                            type="text"
+                                            className=""
+                                            placeholder="New name"
+                                            value={suiteName}
+                                            onChange={(e) => setSuiteName(e.target.value)}
+                                        />
+                                        <Button
+                                            className={'h-10 mt-0 mx-1'}
+                                            type={'white'}
+                                            size={'s'}
+                                            onClick={() => {
+                                                setIsModified(false)
+                                                setSuiteName(apiState.tests.title)
+                                            }}
+                                        >
+                                            {'Cancel'}
+                                        </Button>
+                                    </div>
+                                :
+                                    <h2 className='text-3xl font-sans'>{`${(!apiState.isLoading && apiState.projects?.find(p => p.id === projectId)?.title) ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'} > ${apiState.tests.title}`}</h2>
+                                }
                                 <Button
                                     size={'s'}
                                     type={'warning'}
                                     onClick={() => updateSuiteTitle()}
-                                    className='text-blue bg-white text-xs mt-10'
-                                    >
-                                        {'update name'}
+                                    className='text-blue bg-white text-xs py-0'
+                                >
+                                    {'update name'}
                                 </Button>
                             </div>
                         </div>

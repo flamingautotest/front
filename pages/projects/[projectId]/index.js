@@ -95,7 +95,6 @@ export default function ProjectDetail() {
                                 {'< Back'}
                             </a>
                         </Link>
-                        {/* TODO: make this dynamic */}
                         <div className='flex flex-row justify-center items-center mt-8'>
                             {isModified ?
                                 <div className='flex flex-row items-center justify-center'>
