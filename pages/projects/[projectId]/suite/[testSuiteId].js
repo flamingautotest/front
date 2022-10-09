@@ -74,8 +74,8 @@ export default function TestSuite() {
                 }} />
             : null}
 
-            <div className='w-full flex flex-row justify-between'>
-                <div className='w-1/2 flex flex-col'>
+            <div className='w-full sm:flex flex-row justify-between'>
+                <div className='sm:w-1/2 flex flex-col'>
                     <div className='flex mb-16 mt-10'>
                         <div>
                             <Link href={`/projects/${projectId}`}>
@@ -87,7 +87,7 @@ export default function TestSuite() {
                                 size={'s'}
                                 type={'warning'}
                                 onClick={() => deleteSuite()}
-                                className='text-red bg-white text-xs'
+                                className='text-red bg-white text-xs float-right'
                             >
                                 {'delete suite'}
                             </Button>
@@ -114,7 +114,7 @@ export default function TestSuite() {
                         </Button>
                     </div>
                 </div>
-                <div className='w-1/2'>
+                <div className='sm:w-1/2'>
                     <TestEditor selected={currentTest} />
                 </div>
             </div>

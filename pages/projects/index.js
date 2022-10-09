@@ -26,7 +26,7 @@ export default function ProjectList() {
     return (
         <LoginGuard>
             <div className='w-full mt-10'>
-                <div className='flex w-full justify-between items-start mb-16'>
+                <div className='flex w-full justify-between items-start mb-8 sm:mb-16'>
                     <div>
                         <h2 className='text-3xl  font-sans'>Projects</h2>
                         <p className='text-gray-400'>{apiState.projects?.length} projects</p>
@@ -52,8 +52,8 @@ export default function ProjectList() {
                         />
                     </div>
                 </div>
-                <table className='w-full m-0 mb-16'>
-                    <thead className='h-16 border-gray-200 border-b text-gray-600'>
+                <table className='w-full m-0 sm:mb-16 whitespace-nowrap text-xs sm:text-base' >
+                    <thead className='h-16 border-gray-200 border-b text-gray-600 '>
                         <tr>
                         <th className='text-left'>Id</th>
                         <th className='text-left'>Name</th>
@@ -66,7 +66,7 @@ export default function ProjectList() {
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{project.id}</td>
                                     <td>{project.title}</td>
-                                    <td>{project.test_suite_references?.length ? project.test_suite_references.length : '0'}</td>
+                                    <td className='text-center'>{project.test_suite_references?.length ? project.test_suite_references.length : '0'}</td>
                                 </tr>
                             </Link>
                         )) : null}
