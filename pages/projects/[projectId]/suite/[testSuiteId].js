@@ -16,6 +16,13 @@ export default function TestSuite() {
         if (userState.isLoggedIn && projectId && testSuiteId) {
             const call = async () => {
                 await makeRequest({
+                    path: '/projects/',
+                    modifier: (state, response) => {
+                        console.log('response', response)
+                        state.projects = response
+                    }
+                })
+                await makeRequest({
                     path: `/projects/${projectId}/suites/${testSuiteId}/`,
                     modifier: (state, response) => {
                         state.tests = response
@@ -30,23 +37,24 @@ export default function TestSuite() {
             }
             call()
         }
-    }, [userState, makeRequest, projectId, testSuiteId])
+    }, [userState, projectId, testSuiteId])
 
     const addNewMockTest = (data) => {
         if (Object.keys(data).length <= 0) return
 
-        console.log('data', data)
-        console.log('state', apiState.tests.actions)
-        console.log('updated state', [...apiState.tests.actions, data])
+        const newState = {
+            ...apiState.tests,
+            actions: [...apiState.tests.actions, data]
+        }
 
-        // makeRequest({
-        //     path: `/projects/${projectId}/suites/${testSuiteId}/`,
-        //     method: 'patch',
-        //     data: [...apiState.tests.actions, data],
-        //     modifier: state => {
-        //         state.tests.actions = [...apiState.tests.actions, data]
-        //     }
-        // })
+        makeRequest({
+            path: `/projects/${projectId}/suites/${testSuiteId}/`,
+            method: 'patch',
+            data: newState,
+            modifier: state => {
+                state.tests = newState
+            }
+        })
     }
 
     return (
@@ -68,7 +76,7 @@ export default function TestSuite() {
                                 </a>
                             </Link>
                             {/* TODO: make this dynamic */}
-                            <h2 className='text-3xl  font-sans'>{`${apiState.projects?.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'} > ${apiState.tests.title}`}</h2>
+                            <h2 className='text-3xl  font-sans'>{`${(!apiState.isLoading && apiState.projects?.find(p => p.id === projectId)?.title) ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'} > ${apiState.tests.title}`}</h2>
                         </div>
                     </div>
                     {apiState.tests?.actions?.length ? apiState.tests.actions.map((test, index) => (
