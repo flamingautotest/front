@@ -51,7 +51,7 @@ export default function Login() {
     // TODO: add errors, loading, etc.
     return (
         <div>
-            <form className='flex flex-col pt-28 items-center justify-center w-60 mx-auto'>
+            <form className='flex flex-col pt-10 sm:pt-26 items-center justify-center w-60 mx-auto pb-0 sm:pb-20'>
                 <h1 className='text-xl w-full text-center font-bold mb-4'>Login to AutoTest</h1>
                 <Notification
                     text={error}
