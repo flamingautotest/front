@@ -54,13 +54,18 @@ export default function ProjectDetail() {
 
         setShowModal(false)
     }
+
     const deleteProjects = async ({}) => {
+        const cancel = confirm('Are you sure you want to delete this project?')
+        if (!cancel) return
+
         await makeRequest({
             method: 'delete',
             path: `/projects/${projectId}/`,
         })
-        router.push('/')
+        router.push('/projects')
     }
+
     const updateProjectTitle = async ({}) => {
         if (isModified){
             await makeRequest({
@@ -74,6 +79,7 @@ export default function ProjectDetail() {
         }
         return setIsModified(!isModified)
     }
+
     const maybeRenderTitleEdit = () => {
         if (isModified) {
             return(
@@ -89,6 +95,7 @@ export default function ProjectDetail() {
             <h2 className=' mt-8 text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'}</h2>
         )
     }
+
     return (
         <LoginGuard>
             {showModal ?

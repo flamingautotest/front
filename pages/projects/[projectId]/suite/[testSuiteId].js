@@ -57,11 +57,14 @@ export default function TestSuite() {
     }
 
     const deleteSuite = async ({}) => {
+        const cancel = confirm('Are you sure you want to delete this test suite?')
+        if (!cancel) return
+
         await makeRequest({
             method: 'delete',
             path: `/projects/${projectId}/suites/${testSuiteId}/`,
         })
-        router.push('/')
+        router.push(`/projects/${projectId}`)
     }
 
     return (
