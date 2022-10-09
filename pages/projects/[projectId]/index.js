@@ -118,9 +118,9 @@ export default function ProjectDetail() {
                             type={'warning'}
                             onClick={() => updateProjectTitle()}
                             className='text-blue bg-white text-xs mt-10'
-                        >
-                            {'update name'}
-                        </Button>
+                            >
+                                {'update name'}
+                            </Button>
                         </div>
                     </div>
                     <div>
