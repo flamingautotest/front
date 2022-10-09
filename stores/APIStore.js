@@ -48,7 +48,7 @@ const APIProvider = ({ children }) => {
                         api.errors = []
                     })
                 } else {
-                    console.error('[stores/APIStore/makeRequest]', err)
+                    console.error('[stores/APIStore/makeRequest] No data in response')
                     const errors = [...apiState.errors, `Network error: failed to request ${path}`]
     
                     apiDispatch(api => {
