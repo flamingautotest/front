@@ -2,14 +2,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { APIContext, UserContext } from '~/stores'
-import { Footer, LoginGuard, Button, Modal } from '~/components'
+import { Footer, LoginGuard, Button, NewSuiteModal, Input } from '~/components'
 
 export default function ProjectDetail() {
     const router = useRouter()
     const { projectId } = router.query
     const { apiState, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
-    const  [isModified, setIsModified]  = useState(false)
+    const [isModified, setIsModified]  = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [testSuiteList, setTestSuiteList] = useState([])
     const [projectName, setProjectName] = useState('')
@@ -29,12 +29,11 @@ export default function ProjectDetail() {
             call()
         }
     }, [userState, showModal])
-
+    
     useEffect(() => {
         const list = apiState.projects.find(p => p.id === projectId)
-        if (list?.test_suite_references?.length > 0) {
-            setTestSuiteList(list.test_suite_references)
-        }
+        if (list?.test_suite_references?.length > 0) setTestSuiteList(list.test_suite_references)
+        if (apiState.projects.find(p => p.id === projectId)?.title) setProjectName(apiState.projects.find(p => p.id === projectId).title)
     }, [apiState.projects, projectId])
 
     const submitNewSuite = async (data) => {
@@ -59,10 +58,7 @@ export default function ProjectDetail() {
         const cancel = confirm('Are you sure you want to delete this project?')
         if (!cancel) return
 
-        await makeRequest({
-            method: 'delete',
-            path: `/projects/${projectId}/`,
-        })
+        await makeRequest({ method: 'delete', path: `/projects/${projectId}/` })
         router.push('/projects')
     }
 
@@ -73,33 +69,22 @@ export default function ProjectDetail() {
                 path: `/projects/${projectId}/`,
                 data: {
                     title : projectName
+                },
+                modifier: (state, response) => {
+                    state.projects = state.projects.map(p => p.id === projectId ? response : p)
                 }
             })
-            return setIsModified(!isModified)
-        }
-        return setIsModified(!isModified)
-    }
 
-    const maybeRenderTitleEdit = () => {
-        if (isModified) {
-            return(
-                <input
-                    type="text"
-                    className="mt-8 block w-full px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    placeholder="New Name:"
-                    onChange={(e) => setProjectName(e.target.value)}
-                />
-            )
+            return setIsModified(false)
         }
-        return(
-            <h2 className=' mt-8 text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'}</h2>
-        )
+
+        return setIsModified(true)
     }
 
     return (
         <LoginGuard>
             {showModal ?
-                <Modal onClose={submitNewSuite} />
+                <NewSuiteModal onClose={submitNewSuite} />
             : null}
 
             <div className='w-full mt-10'>
@@ -111,16 +96,39 @@ export default function ProjectDetail() {
                             </a>
                         </Link>
                         {/* TODO: make this dynamic */}
-                        <div className='flex'>
-                            {maybeRenderTitleEdit()}
+                        <div className='flex flex-row justify-center items-center mt-8'>
+                            {isModified ?
+                                <div className='flex flex-row items-center justify-center'>
+                                    <Input
+                                        type="text"
+                                        className=""
+                                        placeholder="New name"
+                                        value={projectName}
+                                        onChange={(e) => setProjectName(e.target.value)}
+                                    />
+                                    <Button
+                                        className={'h-10 mt-0 mx-1'}
+                                        type={'white'}
+                                        size={'s'}
+                                        onClick={() => {
+                                            setIsModified(false)
+                                            setProjectName(apiState.projects.find(p => p.id === projectId).title)
+                                        }}
+                                    >
+                                        {'Cancel'}
+                                    </Button>
+                                </div>
+                            :
+                                <h2 className='text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'}</h2>
+                            }
                             <Button
-                            size={'s'}
-                            type={'warning'}
-                            onClick={() => updateProjectTitle()}
-                            className='text-blue bg-white text-xs mt-10'
-                        >
-                            {'update name'}
-                        </Button>
+                                size={'s'}
+                                type={'warning'}
+                                onClick={() => updateProjectTitle()}
+                                className='text-blue bg-white text-xs py-0'
+                            >
+                                {'update name'}
+                            </Button>
                         </div>
                     </div>
                     <div>
@@ -136,7 +144,7 @@ export default function ProjectDetail() {
                             size={'s'}
                             type={'warning'}
                             onClick={() => deleteProjects()}
-                            className='text-red bg-white text-xs'
+                            className={'text-red bg-white text-xs'}
                         >
                             {'delete project'}
                         </Button>

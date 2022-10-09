@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import joinClassNames from 'utils/joinClassNames'
 import { Button, Input } from '~/components'
 
-export default function Modal(props) {
+export default function NewSuiteModal(props) {
     const [testSuiteTitle, setTestSuiteTitle] = useState('')
     const [testSuiteUrl, setTestSuiteUrl] = useState('')
     const modalBox = useRef()
@@ -11,6 +11,12 @@ export default function Modal(props) {
         onClose = () => {},
         className = '',
     } = props
+
+    useEffect(() => {
+        modalBox.current.addEventListener('keyup', e => {
+            if (e.key === 'Escape') onClose({})
+        })
+    }, [onClose])
 
     const handleClose = (e) => {
         const { left, right, top, bottom } = modalBox.current.getBoundingClientRect()
@@ -45,6 +51,7 @@ export default function Modal(props) {
                         value={testSuiteTitle}
                         className={'w-full mt-5'}
                         onChange={(e) => setTestSuiteTitle(e.target.value)}
+                        instaFocus={true}
                     />
                     <Input
                         label={'Endpoint URL'}

@@ -63,6 +63,10 @@ export default function TestSuite() {
         await makeRequest({
             method: 'delete',
             path: `/projects/${projectId}/suites/${testSuiteId}/`,
+            modifier: (state) => {
+                const newState = state.projects[state.projects.findIndex(p => p.id === projectId)].test_suite_references.filter(s => s.id !== testSuiteId)
+                state.projects[state.projects.findIndex(p => p.id === projectId)].test_suite_references = newState
+            }
         })
         router.push(`/projects/${projectId}`)
     }
