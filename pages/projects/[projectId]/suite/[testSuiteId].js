@@ -215,7 +215,7 @@ export default function TestSuite() {
                     />
                 </div>
             </div>
-            <Footer className={'bottom-0'}/>
+            <Footer />
         </LoginGuard>
     )
 }

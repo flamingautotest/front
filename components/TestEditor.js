@@ -87,7 +87,7 @@ export default function TestEditor(props) {
     }
 
     return (
-        <div className='w-full h-[75vh] bg-gray-100 relative'>
+        <div className='w-full bg-gray-100 relative'>
             {editedTest === null ? (
                 <div className='w-full h-full flex flex-col items-center justify-center text-2xl'>No test selected</div>
             ) : (
@@ -146,7 +146,7 @@ export default function TestEditor(props) {
                             ) : null}
                         </>
                     ) : null}
-                    <div className='absolute w-full px-12 py-6 bg-gray-400 bottom-0 left-0 flex flex-row justify-end items-center'>
+                    <div className='w-full px-12 py-6 bg-gray-400 bottom-0 left-0 flex flex-row justify-end items-center'>
                         <Button
                             type='secondary'
                             className='mr-4'
