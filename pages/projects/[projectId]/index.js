@@ -33,7 +33,7 @@ export default function ProjectDetail() {
     useEffect(() => {
         const list = apiState.projects.find(p => p.id === projectId)
         if (list?.test_suite_references?.length > 0) setTestSuiteList(list.test_suite_references)
-        if (apiState.projects.find(p => p.id === projectId)?.title) setProjectName(apiState.projects.find(p => p.id === projectId).title)
+        if (apiState.projects.find(p => p.id === projectId)?.name) setProjectName(apiState.projects.find(p => p.id === projectId).name)
     }, [apiState.projects, projectId])
 
     const submitNewSuite = async (data) => {
@@ -111,14 +111,14 @@ export default function ProjectDetail() {
                                         size={'s'}
                                         onClick={() => {
                                             setIsModified(false)
-                                            setProjectName(apiState.projects.find(p => p.id === projectId).title)
+                                            setProjectName(apiState.projects.find(p => p.id === projectId).name)
                                         }}
                                     >
                                         {'Cancel'}
                                     </Button>
                                 </div>
                             :
-                                <h2 className='text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId)?.title ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'}</h2>
+                                <h2 className='text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId)?.name ? apiState.projects.find(p => p.id === projectId).name : 'Loading...'}</h2>
                             }
                             <Button
                                 size={'s'}
@@ -170,7 +170,7 @@ export default function ProjectDetail() {
                             <Link key={testSuite.id} href={`/projects/${projectId}/suite/${testSuite.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{testSuite.id}</td>
-                                    <td>{testSuite.title}</td>
+                                    <td>{testSuite.name}</td>
                                 </tr>
                             </Link>
                         )) : null}

@@ -42,7 +42,7 @@ export default function TestSuite({children}) {
     }, [userState, projectId, testSuiteId])
 
     useEffect(() => {
-        setSuiteName(apiState.tests.title)
+        setSuiteName(apiState.tests.name)
     }, [apiState.tests])
 
     const addNewTest = async (data) => {
@@ -97,7 +97,7 @@ export default function TestSuite({children}) {
                     }
 
                     state.projects = projects
-                    state.tests.title = suiteName
+                    state.tests.name = suiteName
                 }
             })
 
@@ -161,14 +161,14 @@ export default function TestSuite({children}) {
                                             size={'s'}
                                             onClick={() => {
                                                 setIsModified(false)
-                                                setSuiteName(apiState.tests.title)
+                                                setSuiteName(apiState.tests.name)
                                             }}
                                         >
                                             {'Cancel'}
                                         </Button>
                                     </div>
                                 :
-                                    <h2 className='text-3xl font-sans'>{`${(!apiState.isLoading && apiState.projects?.find(p => p.id === projectId)?.title) ? apiState.projects.find(p => p.id === projectId).title : 'Loading...'} > ${apiState.tests.title}`}</h2>
+                                    <h2 className='text-3xl font-sans'>{`${(!apiState.isLoading && apiState.projects?.find(p => p.id === projectId)?.name) ? apiState.projects.find(p => p.id === projectId).name : 'Loading...'} > ${apiState.tests.name}`}</h2>
                                 }
                                 <Button
                                     size={'s'}
