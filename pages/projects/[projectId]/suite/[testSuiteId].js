@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { UserContext, APIContext } from '~/stores'
 
-export default function TestSuite() {
+export default function TestSuite({children}) {
     const router = useRouter()
     const { projectId, testSuiteId } = router.query
     const { userState } = useContext(UserContext)
@@ -126,8 +126,8 @@ export default function TestSuite() {
                 }} />
             : null}
 
-            <div className='w-full flex flex-row justify-between'>
-                <div className='w-[48%] flex flex-col'>
+            <div className='w-full flex md:flex-row justify-between h-full flex-col'>
+                <div className='w-full md:w-[48%] flex flex-col'>
                     <div className='flex flex-col mb-16 mt-10'>
                         <div className='w-full flex flex-row justify-between items-center'>
                             <Link href={`/projects/${projectId}`}>
@@ -207,7 +207,7 @@ export default function TestSuite() {
                         </Button>
                     </div>
                 </div>
-                <div className='w-1/2'>
+                <div className='md:w-1/2 w-full mt-4 md:mt-0'>
                     <TestEditor
                         selected={currentTest}
                         projectId={projectId}
@@ -215,7 +215,7 @@ export default function TestSuite() {
                     />
                 </div>
             </div>
-            <Footer />
+            <Footer className='bottom-auto'/>
         </LoginGuard>
     )
 }

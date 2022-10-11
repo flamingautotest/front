@@ -91,7 +91,7 @@ export default function TestEditor(props) {
             {editedTest === null ? (
                 <div className='w-full h-full flex flex-col items-center justify-center text-2xl'>No test selected</div>
             ) : (
-                <div className='w-full h-full py-10 px-12 flex flex-col'>
+                <div className='w-full h-full py-5 px-7 md:py-10 md:px-12 flex flex-col'>
                     <p className='text-xl mb-4 font-bold'>{editedTest.description}</p>
                     <div className='flex flex-row w-full justify-start items-center mb-8'>
                         <MethodLabel
@@ -146,7 +146,7 @@ export default function TestEditor(props) {
                             ) : null}
                         </>
                     ) : null}
-                    <div className='w-full px-12 py-6 bg-gray-400 bottom-0 left-0 flex flex-row justify-end items-center'>
+                    <div className='w-full px-12 py-6 bg-gray-400 bottom-0 left-0 flex flex-row sm:justify-center md:justify-end items-center'>
                         <Button
                             type='secondary'
                             className='mr-4'
