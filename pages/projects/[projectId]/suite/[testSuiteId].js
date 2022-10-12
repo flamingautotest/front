@@ -13,7 +13,6 @@ export default function TestSuite({children}) {
     const [endpointModal, setEndpointModal] = useState(false)
     const [isModified, setIsModified] = useState(false)
     const [suiteName, setSuiteName] = useState('')
-
     useEffect(() => {
         if (userState.isLoggedIn && projectId && testSuiteId) {
             const call = async () => {
@@ -193,6 +192,7 @@ export default function TestSuite({children}) {
                             key={index}
                             name={test.description}
                             method={test.request.method}
+                            status={test.exec_status}
                             onClick={() => setCurrentTest(test)}
                         />
                     )) : null}

@@ -22,7 +22,7 @@ export default function ProjectList() {
         }
     }, [userState])
 
-
+    console.log(apiState)
     return (
         <LoginGuard>
             <div className='w-full mt-10'>
