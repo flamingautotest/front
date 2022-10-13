@@ -38,7 +38,8 @@ const APIProvider = ({ children }) => {
                 })
             } else {
                 const requests = new Requests()
-                const realPath = path.startsWith('/') ? path : `/${path}`
+                const prefixedPath = path.startsWith('/') ? path : `/${path}`
+                const realPath = path.endsWith('/') ? path : `${path}/`
                 const response = await requests[method](realPath, data)
 
                 if (response.data?.data) {
