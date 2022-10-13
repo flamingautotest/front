@@ -17,7 +17,7 @@ export default function Card(props) {
             }
         >
             {/* <img src={image} alt='' className='w-32 object-contain'/> */}
-            <div className='w-52 md:h-auto h-100 bg-zinc-500 w-full hidden lg:block'></div>
+            <div className='m:w-52 md:h-auto h-100 bg-zinc-500 w-full hidden lg:block'></div>
             <div className='flex-col p-6 w-full'>
                 <h3 className='text-xl mb-4'>{title}</h3>
                 <p className='pb-5'>{text}</p>
