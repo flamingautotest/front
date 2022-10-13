@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { UserContext, APIContext } from '~/stores'
 
-export default function TestSuite({children}) {
+export default function TestSuite() {
     const router = useRouter()
     const { projectId, testSuiteId } = router.query
     const { userState } = useContext(UserContext)

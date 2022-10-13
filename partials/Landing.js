@@ -50,7 +50,7 @@ export default function Landing() {
                     </div>
                 </div>
             </div>
-            <Footer className={'-bottom-20'} />
+            <Footer className={'-bottom-24'} />
         </>
     )
 }
