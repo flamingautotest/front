@@ -25,7 +25,7 @@ export default function TestSuite() {
                 await makeRequest({
                     path: `/projects/${projectId}/suites/${testSuiteId}/`,
                     modifier: (state, response) => {
-                        const _response = { ...response, actions: response.actions.map((r, i) => ({ ...r, id: i })) }
+                        const _response = { ...response, actions: response.actions?.map((r, i) => ({ ...r, id: i })) }
                         state.tests = _response
                     }
                 })
@@ -43,7 +43,6 @@ export default function TestSuite() {
     useEffect(() => {
         setSuiteName(apiState.tests.name)
     }, [apiState.tests])
-
     const addNewTest = async (data) => {
         if (Object.keys(data).length <= 0) return
 
@@ -75,6 +74,48 @@ export default function TestSuite() {
             }
         })
         router.push(`/projects/${projectId}`)
+    }
+
+    async function moveUp(index) {
+        const tempTable = Array.from(apiState.tests.actions)
+        if (index > 0) {
+          var el = tempTable[index];
+          tempTable[index] = tempTable[index - 1];
+          tempTable[index - 1] = el;
+        }
+        const newState = {
+            ...apiState.tests,
+            actions: tempTable
+        }
+        await makeRequest({
+            path: `/projects/${projectId}/suites/${testSuiteId}/`,
+            method: 'patch',
+            data: newState,
+            modifier: state => {
+                state.tests = newState
+            }
+        })
+    }
+    
+    async function moveDown(index) {
+        const tempTable = Array.from(apiState.tests.actions)
+        if (index < tempTable.length - 1) {
+          var el = tempTable[index];
+          tempTable[index] = tempTable[index + 1];
+          tempTable[index + 1] = el;
+        }
+        const newState = {
+            ...apiState.tests,
+            actions: tempTable
+        }
+        await makeRequest({
+            path: `/projects/${projectId}/suites/${testSuiteId}/`,
+            method: 'patch',
+            data: newState,
+            modifier: state => {
+                state.tests = newState
+            }
+        })
     }
 
     const updateSuiteTitle = async () => {
@@ -186,14 +227,20 @@ export default function TestSuite() {
                                 Run test suite
                             </Button>
                         </div>
+                        {apiState?.tests?.exec_status ? 
+                            <p className='mt-12 text-lg'>Status: {apiState?.tests?.exec_status}</p> 
+                            : <></>
+                        }
                     </div>
                     {apiState.tests?.actions?.length ? apiState.tests.actions.map((test, index) => (
+
                         <TestItem
                             key={index}
                             name={test.description}
                             method={test.request.method}
-                            status={test.exec_status}
                             onClick={() => setCurrentTest(test)}
+                            moveUp={() => moveUp(index)}
+                            moveDown={() => moveDown(index)}
                         />
                     )) : null}
                     <div className='w-full text-center mt-4'>
