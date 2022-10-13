@@ -123,7 +123,7 @@ export default function TestEditor(props) {
                     {(editedTest !== null && editedTest?.expected_response) ? (
                         <>
                             <p className='text-xl font-bold text-black my-6'>Response</p>
-                            <p className='text-black'>Status: <span>{editedTest.expected_response.status_code}</span></p>
+                            <p className='text-black'>Status: <Input type={'text'} placeholder={editedTest.expected_response.status_code}/></p>
                             {editedTest.expected_response.json ? (
                                 <div className='w-full mt-2'>
                                     {jsonFormatError ? <p className='text-red'>JSON syntax error. Please check your syntax.</p> : null}
