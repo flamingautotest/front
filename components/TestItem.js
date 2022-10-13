@@ -1,7 +1,7 @@
 import { MethodLabel } from '~/components'
 
 export default function TestItem(props) {
-    const { method, name, onClick, status } = props
+    const { method, name, onClick} = props
 
     return (
         <div
@@ -12,12 +12,6 @@ export default function TestItem(props) {
                 <MethodLabel type={method} />
             </div>
             <p className='ml-6'>{name}</p>
-
-            {status ? 
-                <p className='ml-6'>Status: {status}</p> 
-                : <></>
-            }
-            
         </div>
     )
 }

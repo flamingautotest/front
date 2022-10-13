@@ -43,7 +43,6 @@ export default function TestSuite() {
     useEffect(() => {
         setSuiteName(apiState.tests.name)
     }, [apiState.tests])
-
     const addNewTest = async (data) => {
         if (Object.keys(data).length <= 0) return
 
@@ -186,13 +185,17 @@ export default function TestSuite() {
                                 Run test suite
                             </Button>
                         </div>
+                        {apiState?.tests?.exec_status ? 
+                            <p className='mt-12 text-lg'>Status: {apiState?.tests?.exec_status}</p> 
+                            : <></>
+                        }
                     </div>
                     {apiState.tests?.actions?.length ? apiState.tests.actions.map((test, index) => (
+
                         <TestItem
                             key={index}
                             name={test.description}
                             method={test.request.method}
-                            status={test.exec_status}
                             onClick={() => setCurrentTest(test)}
                         />
                     )) : null}
