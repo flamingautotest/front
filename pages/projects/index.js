@@ -30,6 +30,12 @@ export default function ProjectList() {
 
     useEffect(() => {
         if (apiState.projects.length) {
+            setFilteredProjects(apiState.projects)
+        }
+    }, [apiState.projects])
+
+    useEffect(() => {
+        if (apiState.projects.length) {
             if (searchInput.length) {
                 const fuse = new Fuse(apiState.projects, {
                     keys: ['name', 'id']

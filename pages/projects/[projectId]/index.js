@@ -34,7 +34,10 @@ export default function ProjectDetail() {
     
     useEffect(() => {
         const list = apiState.projects.find(p => p.id === projectId)
-        if (list?.test_suite_references?.length > 0) setTestSuiteList(list.test_suite_references)
+        if (list?.test_suite_references?.length > 0) {
+            setTestSuiteList(list.test_suite_references)
+            setFilteredTestSuites(list.test_suite_references)
+        }
         if (apiState.projects.find(p => p.id === projectId)?.name) setProjectName(apiState.projects.find(p => p.id === projectId).name)
     }, [apiState.projects, projectId])
 
