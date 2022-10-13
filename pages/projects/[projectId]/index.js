@@ -31,6 +31,7 @@ export default function ProjectDetail() {
     }, [userState, showModal])
     
     useEffect(() => {
+        console.log('apiState.projects', apiState.projects)
         const list = apiState.projects.find(p => p.id === projectId)
         if (list?.test_suite_references?.length > 0) setTestSuiteList(list.test_suite_references)
         if (apiState.projects.find(p => p.id === projectId)?.name) setProjectName(apiState.projects.find(p => p.id === projectId).name)
@@ -42,12 +43,12 @@ export default function ProjectDetail() {
             return
         }
 
-        const { title, url } = data
-        if (title.length > 0 && url.length > 0) {
+        const { name, url } = data
+        if (name.length > 0 && url.length > 0) {
             await makeRequest({
                 method: 'post',
                 path: `/projects/${projectId}/suites/`,
-                data: { title, url, actions: [] }
+                data: { name, url, actions: [] }
             })
         }
 
@@ -68,7 +69,7 @@ export default function ProjectDetail() {
                 method: 'patch',
                 path: `/projects/${projectId}/`,
                 data: {
-                    title : projectName
+                    name : projectName
                 },
                 modifier: (state, response) => {
                     state.projects = state.projects.map(p => p.id === projectId ? response : p)

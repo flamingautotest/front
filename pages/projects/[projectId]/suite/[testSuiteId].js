@@ -83,12 +83,12 @@ export default function TestSuite() {
                 path: `/projects/${projectId}/suites/${testSuiteId}/`,
                 method: 'patch',
                 data: {
-                    title: suiteName
+                    name: suiteName
                 },
                 modifier: (state) => {
                     const projects = Array.from(apiState.projects)
                     const projectIndex = projects.findIndex(p => p.id === projectId)
-                    const newValue = projects[projectIndex].test_suite_references.map(s => s.id === testSuiteId ? { ...s, title: suiteName } : s)
+                    const newValue = projects[projectIndex].test_suite_references.map(s => s.id === testSuiteId ? { ...s, name: suiteName } : s)
 
                     projects[projectIndex] = {
                         ...projects[projectIndex],

@@ -1,11 +1,15 @@
 import { useContext, useEffect, useState } from 'react'
 import { Button, Footer, LoginGuard } from '~/components'
 import { APIContext, UserContext } from '~/stores'
+import Fuse from 'fuse.js'
 import Link from 'next/link'
 
 export default function ProjectList() {
+    const [searchInput, setSearchInput] = useState('')
+    const [filteredProjects, setFilteredProjects] = useState([])
     const { apiState, makeRequest } = useContext(APIContext)
     const { userState } = useContext(UserContext)
+
     useEffect(() => {
         if (userState.isLoggedIn) {
             const call = async () => {
@@ -22,7 +26,11 @@ export default function ProjectList() {
         }
     }, [userState])
 
-    console.log(apiState)
+    useEffect(() => {
+        if (apiState.projects.length) {
+            setFilteredProjects(apiState.projects)
+        }
+    }, [searchInput])
     return (
         <LoginGuard>
             <div className='w-full mt-10'>
@@ -66,7 +74,7 @@ export default function ProjectList() {
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{project.id}</td>
                                     <td>{project.name}</td>
-                                    <td className='text-center'>{project.test_suite_references?.length ? project.test_suite_references.length : '0'}</td>
+                                    <td>{project.test_suite_references?.length ? project.test_suite_references.length : '0'}</td>
                                 </tr>
                             </Link>
                         )) : null}

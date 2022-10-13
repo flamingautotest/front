@@ -21,7 +21,7 @@ export default function NewSuiteModal(props) {
     const handleClose = (e) => {
         const { left, right, top, bottom } = modalBox.current.getBoundingClientRect()
         if (e.clientX > left && e.clientX < right && e.clientY > top && e.clientY < bottom) return
-        onClose({ title: testSuiteTitle, url: testSuiteUrl })
+        onClose({ name: testSuiteTitle, url: testSuiteUrl })
     }
 
     return (
@@ -44,7 +44,7 @@ export default function NewSuiteModal(props) {
                 <div className='my-6 px-8'>
                     <Input
                         label={'Project name'}
-                        name={'title'}
+                        name={'name'}
                         type={'text'}
                         placeholder={'ie: preprod user test suite'}
                         required={true}
@@ -78,7 +78,7 @@ export default function NewSuiteModal(props) {
                         type={'primary'}
                         size={'m'}
                         disabled={!testSuiteTitle.length > 0 || !testSuiteUrl.length > 0}
-                        onClick={() => onClose({ title: testSuiteTitle, url: testSuiteUrl })}
+                        onClick={() => onClose({ name: testSuiteTitle, url: testSuiteUrl })}
                     >
                         Save
                     </Button>

@@ -35,8 +35,8 @@ export default function Upload() {
                 method: 'post',
                 path: '/projects/',
                 data: {
-                    title : projectName,
-                    file : encodedFile.replace(/^data:.*;base64,/, '')
+                    name: projectName,
+                    file: encodedFile.replace(/^data:.*;base64,/, '')
                 },
                 modifier(state, response) {
                     state.projects = [...state.projects, response]
