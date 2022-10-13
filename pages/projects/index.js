@@ -21,6 +21,8 @@ export default function ProjectList() {
                         state.endpoints = []
                     }
                 })
+
+                setFilteredProjects(apiState.projects)
             }
             call()
         }
@@ -28,9 +30,18 @@ export default function ProjectList() {
 
     useEffect(() => {
         if (apiState.projects.length) {
-            setFilteredProjects(apiState.projects)
+            if (searchInput.length) {
+                const fuse = new Fuse(apiState.projects, {
+                    keys: ['name', 'id']
+                })
+                const result = fuse.search(searchInput)
+                setFilteredProjects(result.map(r => r.item))
+            } else {
+                setFilteredProjects(apiState.projects)
+            }
         }
     }, [searchInput])
+
     return (
         <LoginGuard>
             <div className='w-full mt-10'>
@@ -57,6 +68,8 @@ export default function ProjectList() {
                             type="text"
                             className="block w-full px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             placeholder="Search..."
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
                         />
                     </div>
                 </div>
@@ -69,7 +82,7 @@ export default function ProjectList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {(!apiState.isLoading && apiState.projects) ? apiState.projects.map(project => (
+                        {(!apiState.isLoading && apiState.projects && filteredProjects.length) ? filteredProjects.map(project => (
                             <Link key={project.id} href={`/projects/${project.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{project.id}</td>

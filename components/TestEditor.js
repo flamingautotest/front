@@ -146,7 +146,7 @@ export default function TestEditor(props) {
                             ) : null}
                         </>
                     ) : null}
-                    <div className='w-full px-12 py-6 bg-gray-400 bottom-0 left-0 flex flex-row sm:justify-center md:justify-end items-center'>
+                    <div className='w-full pt-6 bottom-0 left-0 flex flex-row sm:justify-center md:justify-end items-center'>
                         <Button
                             type='secondary'
                             className='mr-4'

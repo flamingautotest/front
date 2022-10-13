@@ -13,6 +13,8 @@ export default function ProjectDetail() {
     const [showModal, setShowModal] = useState(false)
     const [testSuiteList, setTestSuiteList] = useState([])
     const [projectName, setProjectName] = useState('')
+    const [searchInput, setSearchInput] = useState('')
+    const [filteredTestSuites, setFilteredTestSuites] = useState([])
 
     useEffect(() => {
         if (userState.isLoggedIn) {
@@ -31,7 +33,6 @@ export default function ProjectDetail() {
     }, [userState, showModal])
     
     useEffect(() => {
-        console.log('apiState.projects', apiState.projects)
         const list = apiState.projects.find(p => p.id === projectId)
         if (list?.test_suite_references?.length > 0) setTestSuiteList(list.test_suite_references)
         if (apiState.projects.find(p => p.id === projectId)?.name) setProjectName(apiState.projects.find(p => p.id === projectId).name)
@@ -81,6 +82,20 @@ export default function ProjectDetail() {
 
         return setIsModified(true)
     }
+
+    useEffect(() => {
+        if (testSuiteList.length) {
+            if (searchInput.length) {
+                const fuse = new Fuse(testSuiteList, {
+                    keys: ['name', 'id']
+                })
+                const result = fuse.search(searchInput)
+                setFilteredTestSuites(result.map(r => r.item))
+            } else {
+                setFilteredTestSuites(testSuiteList)
+            }
+        }
+    }, [searchInput])
 
     return (
         <LoginGuard>
@@ -156,6 +171,8 @@ export default function ProjectDetail() {
                             type="text"
                             className="block w-full px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             placeholder="Search..."
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
                         />
                     </div>
                 </div>
@@ -167,7 +184,7 @@ export default function ProjectDetail() {
                         </tr>
                     </thead>
                     <tbody>
-                        {!apiState.isLoading ? testSuiteList.map(testSuite => (
+                        {(!apiState.isLoading && testSuiteList.length && filteredTestSuites.length) ? filteredTestSuites.map(testSuite => (
                             <Link key={testSuite.id} href={`/projects/${projectId}/suite/${testSuite.id}`}>                
                                 <tr className='h-16 cursor-pointer border-gray-200 border-b text-gray-600 text-xs sm:text-base' >
                                     <td>{testSuite.id}</td>

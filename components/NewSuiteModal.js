@@ -43,7 +43,7 @@ export default function NewSuiteModal(props) {
                 
                 <div className='my-6 px-8'>
                     <Input
-                        label={'Project name'}
+                        label={'Test suite name'}
                         name={'name'}
                         type={'text'}
                         placeholder={'ie: preprod user test suite'}
