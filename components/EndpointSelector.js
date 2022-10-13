@@ -12,7 +12,7 @@ export default function EndpointSelector(props) {
     const modalBox = useRef()
     const resultBox = useRef()
     const inputBox = useRef()
-    const { onClose = () => {}, data = [], className = '', projectId = '' } = props
+    const { onClose = () => {}, data = [], className = '' } = props
 
     useEffect(() => {
         setInputHeight(inputBox.current.offsetHeight)
