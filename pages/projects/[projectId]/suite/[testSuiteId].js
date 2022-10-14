@@ -43,6 +43,7 @@ export default function TestSuite() {
 
     useEffect(() => {
         setSuiteName(apiState.tests.name)
+        setExecStatus(apiState.tests.exec_status)
     }, [apiState.tests])
 
     const addNewTest = async (data) => {
@@ -230,8 +231,8 @@ export default function TestSuite() {
                                 Run test suite
                             </Button>
                         </div>
-                        {apiState?.tests?.exec_status ? 
-                            <p className='mt-12 text-lg'>Status: {apiState?.tests?.exec_status}</p> 
+                        {execStatus ? 
+                            <p className='mt-12 text-lg'>Status: {execStatus}</p> 
                             : <></>
                         }
                     </div>
