@@ -63,6 +63,7 @@ export default function Upload() {
                     value={projectName}
                     className={'w-full mt-5'}
                     onChange={(e) => setProjectName(e.target.value)}
+                    instaFocus={true}
                 />
                 <InputFile
                     label={'To begin, first give your project a name and upload your swagger file'}

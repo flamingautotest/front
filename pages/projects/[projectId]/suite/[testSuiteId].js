@@ -168,6 +168,10 @@ export default function TestSuite() {
             path: `/projects/${projectId}/suites/${testSuiteId}/generate/`,
             method: 'put'
         })
+
+        if (apiState?.tests?.exec_status?.length > 0) {
+            setExecStatus(apiState.tests.exec_status)
+        }
     }
 
     return (
