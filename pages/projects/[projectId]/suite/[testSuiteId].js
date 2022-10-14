@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { UserContext, APIContext } from '~/stores'
+import PictoIllustration from '~/assets/icons8-crayon-100.png'
+import Image from 'next/image'
 
 export default function TestSuite() {
     const router = useRouter()
@@ -83,15 +85,18 @@ export default function TestSuite() {
 
     async function moveUp(index) {
         const tempTable = Array.from(apiState.tests.actions)
+
         if (index > 0) {
-          var el = tempTable[index];
-          tempTable[index] = tempTable[index - 1];
-          tempTable[index - 1] = el;
+            var el = tempTable[index];
+            tempTable[index] = tempTable[index - 1];
+            tempTable[index - 1] = el;
         }
+
         const newState = {
             ...apiState.tests,
             actions: tempTable
         }
+
         await makeRequest({
             path: `/projects/${projectId}/suites/${testSuiteId}/`,
             method: 'patch',
@@ -104,15 +109,18 @@ export default function TestSuite() {
     
     async function moveDown(index) {
         const tempTable = Array.from(apiState.tests.actions)
+
         if (index < tempTable.length - 1) {
           var el = tempTable[index];
           tempTable[index] = tempTable[index + 1];
           tempTable[index + 1] = el;
         }
+
         const newState = {
             ...apiState.tests,
             actions: tempTable
         }
+
         await makeRequest({
             path: `/projects/${projectId}/suites/${testSuiteId}/`,
             method: 'patch',
@@ -200,33 +208,23 @@ export default function TestSuite() {
                                             value={suiteName}
                                             onChange={(e) => setSuiteName(e.target.value)}
                                         />
-                                        <Button
-                                            className={'h-10 mt-0 mx-1'}
-                                            type={'white'}
-                                            size={'s'}
-                                            onClick={() => {
-                                                setIsModified(false)
-                                                setSuiteName(apiState.tests.name)
-                                            }}
-                                        >
-                                            {'Cancel'}
-                                        </Button>
                                     </div>
                                 :
-                                    <h2 className='text-3xl font-sans'>{`${(!apiState.isLoading && apiState.projects?.find(p => p.id === projectId)?.name) ? apiState.projects.find(p => p.id === projectId).name : 'Loading...'} > ${apiState.tests.name}`}</h2>
+                                    <h2 className='text-2xl font-sans w-9/12'>{`${(!apiState.isLoading && apiState.projects?.find(p => p.id === projectId)?.name) ? apiState.projects.find(p => p.id === projectId).name : 'Loading...'} > ${apiState.tests.name}`}</h2>
                                 }
                                 <Button
                                     size={'s'}
                                     type={'warning'}
                                     onClick={() => updateSuiteTitle()}
-                                    className='text-blue bg-white text-xs py-0'
+                                    className='text-blue bg-white text-xs opacity-40'
                                 >
-                                    {'update name'}
+                                    <Image width={'20px'} height={'20px'} className='' src={PictoIllustration} alt={'update name'} />
                                 </Button>
                             </div>
                             <Button
                                 size={'s'}
                                 type={'white'}
+                                className={'whitespace-nowrap'}
                                 onClick={() => runTestSuite()}
                             >
                                 Run test suite

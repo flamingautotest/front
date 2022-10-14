@@ -87,7 +87,7 @@ export default function TestEditor(props) {
     }
 
     return (
-        <div className='w-full bg-gray-100 relative h-full'>
+        <div className='w-full bg-gray-100 relative h-full rounded-xl'>
             {editedTest === null ? (
                 <div className='w-full h-full flex flex-col items-center justify-center text-2xl'>No test selected</div>
             ) : (

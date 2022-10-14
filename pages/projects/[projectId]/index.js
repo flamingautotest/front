@@ -1,7 +1,9 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { APIContext, UserContext } from '~/stores'
+import PictoIllustration from '~/assets/icons8-crayon-100.png'
 import { Footer, LoginGuard, Button, NewSuiteModal, Input } from '~/components'
 
 export default function ProjectDetail() {
@@ -124,17 +126,6 @@ export default function ProjectDetail() {
                                         value={projectName}
                                         onChange={(e) => setProjectName(e.target.value)}
                                     />
-                                    <Button
-                                        className={'h-10 mt-0 mx-1'}
-                                        type={'white'}
-                                        size={'s'}
-                                        onClick={() => {
-                                            setIsModified(false)
-                                            setProjectName(apiState.projects.find(p => p.id === projectId).name)
-                                        }}
-                                    >
-                                        {'Cancel'}
-                                    </Button>
                                 </div>
                             :
                                 <h2 className='text-3xl font-sans'>{apiState.projects.find(p => p.id === projectId)?.name ? apiState.projects.find(p => p.id === projectId).name : 'Loading...'}</h2>
@@ -143,9 +134,9 @@ export default function ProjectDetail() {
                                 size={'s'}
                                 type={'warning'}
                                 onClick={() => updateProjectTitle()}
-                                className='text-blue bg-white text-xs py-0'
+                                className='text-blue bg-white text-xs py-0 mt-4 opacity-40'
                             >
-                                {'update name'}
+                                <Image width={'20px'} height={'20px'} className='' src={PictoIllustration} alt={'update name'} />
                             </Button>
                         </div>
                     </div>
