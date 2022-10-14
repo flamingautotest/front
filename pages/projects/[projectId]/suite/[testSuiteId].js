@@ -13,6 +13,7 @@ export default function TestSuite() {
     const [endpointModal, setEndpointModal] = useState(false)
     const [isModified, setIsModified] = useState(false)
     const [suiteName, setSuiteName] = useState('')
+    const [execStatus, setExecStatus] = useState('')
 
     useEffect(() => {
         if (userState.isLoggedIn && projectId && testSuiteId) {
