@@ -1,4 +1,4 @@
-import { TestItem, TestEditor, Footer, LoginGuard, Button, EndpointSelector, Input } from '~/components'
+import { TestItem, TestEditor, Footer, LoginGuard, Button, EndpointSelector, Input, StatusLabel } from '~/components'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -197,7 +197,11 @@ export default function TestSuite() {
                                 {'delete suite'}
                             </Button>
                         </div>
-                        <div className='w-full flex flex-row justify-between items-center mt-8'>
+                        {execStatus ?
+                            <StatusLabel className='mt-1' type={execStatus} /> 
+                            : null
+                        }
+                        <div className='w-full flex flex-row justify-between items-center mt-2'>
                             <div className='flex flex-row justify-start items-center w-full'>
                                 {isModified ?
                                     <div className='flex flex-row items-center justify-center'>
@@ -230,10 +234,6 @@ export default function TestSuite() {
                                 Run test suite
                             </Button>
                         </div>
-                        {execStatus ? 
-                            <p className='mt-12 text-lg'>Status: {execStatus}</p> 
-                            : <></>
-                        }
                     </div>
                     {apiState.tests?.actions?.length ? apiState.tests.actions.map((test, index) => (
 
