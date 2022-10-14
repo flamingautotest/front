@@ -12,7 +12,7 @@ export default function Landing() {
                     <div className='lg:w-1/2 lg:pl-24 px-4 md:pl-12'>
                         <h1 className='text-2xl lg:text-4xl lg:whitespace-nowrap mb-5'><span className='text-gradient'>Automated</span> API Testing</h1>
                         <p className='text-gray-800'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                            An application providing an interface for developers to generate and monitor tests across all of their REST APIs.
                         </p>
                         <div className='flex items-center justify-start mt-5'>
                             <Link href='/register'>
