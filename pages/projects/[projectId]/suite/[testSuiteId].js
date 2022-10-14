@@ -13,6 +13,7 @@ export default function TestSuite() {
     const [endpointModal, setEndpointModal] = useState(false)
     const [isModified, setIsModified] = useState(false)
     const [suiteName, setSuiteName] = useState('')
+    const [execStatus, setExecStatus] = useState('')
     useEffect(() => {
         if (userState.isLoggedIn && projectId && testSuiteId) {
             const call = async () => {
@@ -42,6 +43,7 @@ export default function TestSuite() {
 
     useEffect(() => {
         setSuiteName(apiState.tests.name)
+        setExecStatus(apiState.tests.exec_status)
     }, [apiState.tests])
     const addNewTest = async (data) => {
         if (Object.keys(data).length <= 0) return
@@ -227,8 +229,8 @@ export default function TestSuite() {
                                 Run test suite
                             </Button>
                         </div>
-                        {apiState?.tests?.exec_status ? 
-                            <p className='mt-12 text-lg'>Status: {apiState?.tests?.exec_status}</p> 
+                        {execStatus ? 
+                            <p className='mt-12 text-lg'>Status: {execStatus}</p> 
                             : <></>
                         }
                     </div>
