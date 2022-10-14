@@ -13,6 +13,7 @@ export default function TestSuite() {
     const [endpointModal, setEndpointModal] = useState(false)
     const [isModified, setIsModified] = useState(false)
     const [suiteName, setSuiteName] = useState('')
+
     useEffect(() => {
         if (userState.isLoggedIn && projectId && testSuiteId) {
             const call = async () => {
@@ -43,6 +44,7 @@ export default function TestSuite() {
     useEffect(() => {
         setSuiteName(apiState.tests.name)
     }, [apiState.tests])
+
     const addNewTest = async (data) => {
         if (Object.keys(data).length <= 0) return
 
@@ -73,6 +75,7 @@ export default function TestSuite() {
                 state.projects[state.projects.findIndex(p => p.id === projectId)].test_suite_references = newState
             }
         })
+
         router.push(`/projects/${projectId}`)
     }
 
