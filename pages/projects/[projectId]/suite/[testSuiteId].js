@@ -198,7 +198,7 @@ export default function TestSuite() {
                             </Button>
                         </div>
                         <div className='w-full flex flex-row justify-between items-center mt-8'>
-                            <div className='flex flex-row justify-start items-center'>
+                            <div className='flex flex-row justify-start items-center w-full'>
                                 {isModified ?
                                     <div className='flex flex-row items-center justify-center'>
                                         <Input
@@ -210,7 +210,7 @@ export default function TestSuite() {
                                         />
                                     </div>
                                 :
-                                    <h2 className='text-2xl font-sans w-9/12'>{`${(!apiState.isLoading && apiState.projects?.find(p => p.id === projectId)?.name) ? apiState.projects.find(p => p.id === projectId).name : 'Loading...'} > ${apiState.tests.name}`}</h2>
+                                    <h2 className='text-2xl font-sans'>{`${(!apiState.isLoading && apiState.projects?.find(p => p.id === projectId)?.name) ? apiState.projects.find(p => p.id === projectId).name : 'Loading...'} > ${apiState.tests.name}`}</h2>
                                 }
                                 <Button
                                     size={'s'}
